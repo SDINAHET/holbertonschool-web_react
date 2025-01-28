@@ -192,3 +192,19 @@ Child html-webpack-plugin for "index.html":
     [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
     [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
 ℹ ｢wdm｣: Compiled successfully.
+
+
+npm audit
+found 0 vulnerabilities
+j'ai 57 vulnerabilities (1 low, 37 moderate, 17 high, 2 critical)
+
+
+
+fix
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
