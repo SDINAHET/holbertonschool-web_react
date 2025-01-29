@@ -1,35 +1,39 @@
-// Define the interface for the constructor arguments
+console.log("Script chargé !");
+
+// Interface pour le constructeur de la classe StudentClass
 interface StudentConstructor {
-	firstName: string;
-	lastName: string;
+  firstName: string;
+  lastName: string;
+}
+
+// Interface décrivant la classe StudentClass
+interface Student {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// Implémentation de la classe StudentClass
+class StudentClass implements Student {
+  firstName: string;
+  lastName: string;
+
+  constructor({ firstName, lastName }: StudentConstructor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
-  // Define the interface for the StudentClass
-  interface StudentClassInterface {
-	workOnHomework(): string;
-	displayName(): string;
+  workOnHomework(): string {
+    return "Currently working";
   }
 
-  // Implement the class StudentClass
-  class StudentClass implements StudentClassInterface {
-	firstName: string;
-	lastName: string;
-
-	constructor({ firstName, lastName }: StudentConstructor) {
-	  this.firstName = firstName;
-	  this.lastName = lastName;
-	}
-
-	workOnHomework(): string {
-	  return "Currently working";
-	}
-
-	displayName(): string {
-	  return this.firstName;
-	}
+  displayName(): string {
+    return this.firstName;
   }
+}
 
-  // Example usage
-  const student = new StudentClass({ firstName: "John", lastName: "Doe" });
-  console.log(student.displayName()); // Output: John
-  console.log(student.workOnHomework()); // Output: Currently working
+// Test de la classe
+const student = new StudentClass({ firstName: "John", lastName: "Doe" });
+
+console.log(student.displayName()); // John
+console.log(student.workOnHomework()); // Currently working
+
