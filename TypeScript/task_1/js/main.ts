@@ -1,30 +1,28 @@
-// Définir l'interface Teacher
+// console.log("Script chargé !");
+
+// Define the Teacher interface
 interface Teacher {
-	readonly firstName: string; // Peut uniquement être défini lors de l'initialisation
-	readonly lastName: string;  // Peut uniquement être défini lors de l'initialisation
-	fullTimeEmployee: boolean;
-	yearsOfExperience?: number; // Optionnel
-	location: string;
-	[key: string]: any; // Permet d'ajouter des propriétés dynamiques avec des noms de propriété comme chaînes
-  }
+  readonly firstName: string; // Can only be set during initialization
+  readonly lastName: string;  // Can only be set during initialization
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number; // Optional property
+  location: string;
+  [key: string]: any; // Allows additional attributes with any type
+}
 
-  // Exemple d'utilisation de l'interface Teacher
-  const teacher3: Teacher = {
-	firstName: "John",
-	lastName: "Doe",
-	fullTimeEmployee: false,
-	location: "London",
-	contract: false, // Propriété supplémentaire grâce à [key: string]: any
-  };
+// Create an object implementing the Teacher interface
+const teacher3: Teacher = {
+  firstName: 'John',
+  lastName: 'Doe',
+  fullTimeEmployee: false,
+  location: 'London',
+  contract: false, // Additional property
+};
 
-  // Afficher l'objet teacher3
-  console.log(teacher3);
+// Log the object to console
+console.log(teacher3);
 
-  // Résultat attendu :
-  // {
-  //   contract: false,
-  //   firstName: "John",
-  //   fullTimeEmployee: false,
-  //   lastName: "Doe",
-  //   location: "London"
-  // }
+// document.addEventListener("DOMContentLoaded", function() {
+//   console.log("Script chargé !");
+//   console.log(teacher3);
+// });
