@@ -1,57 +1,65 @@
-// Define the DirectorInterface interface
+// Define the DirectorInterface
 interface DirectorInterface {
-	workFromHome(): string;
-	getCoffeeBreak(): string;
-	workDirectorTasks(): string;
-  }
+    workFromHome(): string;
+    getCoffeeBreak(): string;
+    workDirectorTasks(): string;
+}
 
-  // Define the TeacherInterface interface
-  interface TeacherInterface {
-	workFromHome(): string;
-	getCoffeeBreak(): string;
-	workTeacherTasks(): string;
-  }
+// Define the TeacherInterface
+interface TeacherInterface {
+    workFromHome(): string;
+    getCoffeeBreak(): string;
+    workTeacherTasks(): string;
+}
 
-  // Implement the Director class
-  class Director implements DirectorInterface {
-	workFromHome(): string {
-	  return "Working from home";
-	}
+// Implement the Director class
+class Director implements DirectorInterface {
+    workFromHome(): string {
+        return "Working from home";
+    }
 
-	getCoffeeBreak(): string {
-	  return "Getting a coffee break";
-	}
+    getCoffeeBreak(): string {
+        return "Getting a coffee break";
+    }
 
-	workDirectorTasks(): string {
-	  return "Getting to director tasks";
-	}
-  }
+    workDirectorTasks(): string {
+        return "Getting to director tasks";
+    }
 
-  // Implement the Teacher class
-  class Teacher implements TeacherInterface {
-	workFromHome(): string {
-	  return "Cannot work from home";
-	}
+    toString(): string {
+        return "Director";
+    }
+}
 
-	getCoffeeBreak(): string {
-	  return "Cannot have a break";
-	}
+// Implement the Teacher class
+class Teacher implements TeacherInterface {
+    workFromHome(): string {
+        return "Cannot work from home";
+    }
 
-	workTeacherTasks(): string {
-	  return "Getting to work";
-	}
-  }
+    getCoffeeBreak(): string {
+        return "Cannot have a break";
+    }
 
-  // Function to create an employee
-  function createEmployee(salary: number | string): Director | Teacher {
-	if (typeof salary === "number" && salary < 500) {
-	  return new Teacher();
-	} else {
-	  return new Director();
-	}
-  }
+    workTeacherTasks(): string {
+        return "Getting to work";
+    }
 
-  // Example usage
-  console.log(createEmployee(200) instanceof Teacher); // Output: true
-  console.log(createEmployee(1000) instanceof Director); // Output: true
-  console.log(createEmployee("$500") instanceof Director); // Output: true
+    toString(): string {
+        return "Teacher";
+    }
+}
+
+// Function to create an Employee
+function createEmployee(salary: number | string): Director | Teacher {
+    if (typeof salary === "number" && salary < 500) {
+        return new Teacher();
+    }
+    return new Director();
+}
+
+// Expected results
+console.log(createEmployee(200).toString()); // Teacher
+console.log(createEmployee(1000).toString()); // Director
+console.log(createEmployee("$500").toString()); // Director
+

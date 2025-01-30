@@ -1,25 +1,26 @@
+// task_3/js/main.ts
+
 /// <reference path="./crud.d.ts" />
 
-import { RowID, RowElement } from './interface';
-import * as CRUD from './crud';
+import { RowID, RowElement } from "./interface";
+import * as CRUD from "./crud";
 
-// Create an object with type RowElement
+// Create an object of type RowElement
 const row: RowElement = {
-  firstName: 'Guillaume',
-  lastName: 'Salva',
+    firstName: "Guillaume",
+    lastName: "Salva",
 };
 
-// Insert the row and store the new RowID
+// Insert the row and get its ID
 const newRowID: RowID = CRUD.insertRow(row);
+console.log(`Inserted row ID: ${newRowID}`);
 
-// Update the row with an age field
+// Update the row
 const updatedRow: RowElement = {
-  ...row,
-  age: 23,
+    ...row,
+    age: 23,
 };
-
-// Call the updateRow function
 CRUD.updateRow(newRowID, updatedRow);
 
-// Call the deleteRow function
+// Delete the row
 CRUD.deleteRow(newRowID);

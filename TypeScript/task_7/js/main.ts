@@ -1,86 +1,94 @@
-// Define the DirectorInterface interface
+// Define the DirectorInterface
 interface DirectorInterface {
-	workFromHome(): string;
-	getCoffeeBreak(): string;
-	workDirectorTasks(): string;
-  }
+    workFromHome(): string;
+    getCoffeeBreak(): string;
+    workDirectorTasks(): string;
+}
 
-  // Define the TeacherInterface interface
-  interface TeacherInterface {
-	workFromHome(): string;
-	getCoffeeBreak(): string;
-	workTeacherTasks(): string;
-  }
+// Define the TeacherInterface
+interface TeacherInterface {
+    workFromHome(): string;
+    getCoffeeBreak(): string;
+    workTeacherTasks(): string;
+}
 
-  // Implement the Director class
-  class Director implements DirectorInterface {
-	workFromHome(): string {
-	  return "Working from home";
-	}
+// Implement the Director class
+class Director implements DirectorInterface {
+    workFromHome(): string {
+        return "Working from home";
+    }
 
-	getCoffeeBreak(): string {
-	  return "Getting a coffee break";
-	}
+    getCoffeeBreak(): string {
+        return "Getting a coffee break";
+    }
 
-	workDirectorTasks(): string {
-	  return "Getting to director tasks";
-	}
-  }
+    workDirectorTasks(): string {
+        return "Getting to director tasks";
+    }
 
-  // Implement the Teacher class
-  class Teacher implements TeacherInterface {
-	workFromHome(): string {
-	  return "Cannot work from home";
-	}
+    toString(): string {
+        return "Director";
+    }
+}
 
-	getCoffeeBreak(): string {
-	  return "Cannot have a break";
-	}
+// Implement the Teacher class
+class Teacher implements TeacherInterface {
+    workFromHome(): string {
+        return "Cannot work from home";
+    }
 
-	workTeacherTasks(): string {
-	  return "Getting to work";
-	}
-  }
+    getCoffeeBreak(): string {
+        return "Cannot have a break";
+    }
 
-  // Function to create an employee
-  function createEmployee(salary: number | string): Director | Teacher {
-	if (typeof salary === "number" && salary < 500) {
-	  return new Teacher();
-	} else {
-	  return new Director();
-	}
-  }
+    workTeacherTasks(): string {
+        return "Getting to work";
+    }
 
-  // Function to check if an employee is a Director
-  function isDirector(employee: Director | Teacher): employee is Director {
-	return (employee as Director).workDirectorTasks !== undefined;
-  }
+    toString(): string {
+        return "Teacher";
+    }
+}
 
-  // Function to execute work based on employee type
-  function executeWork(employee: Director | Teacher): void {
-	if (isDirector(employee)) {
-	  console.log(employee.workDirectorTasks());
-	} else {
-	  console.log(employee.workTeacherTasks());
-	}
-  }
+// Function to create an Employee
+function createEmployee(salary: number | string): Director | Teacher {
+    if (typeof salary === "number" && salary < 500) {
+        return new Teacher();
+    }
+    return new Director();
+}
 
-  // Example usage for createEmployee and executeWork
-  executeWork(createEmployee(200)); // Output: Getting to work
-  executeWork(createEmployee(1000)); // Output: Getting to director tasks
+// Function to check if an employee is a Director
+type Employee = Director | Teacher;
+function isDirector(employee: Employee): employee is Director {
+    return employee instanceof Director;
+}
 
-  // Define a string literal type for Subjects
-  type Subjects = 'Math' | 'History';
+// Function to execute work based on employee type
+function executeWork(employee: Employee): void {
+    if (isDirector(employee)) {
+        console.log(employee.workDirectorTasks());
+    } else {
+        console.log(employee.workTeacherTasks());
+    }
+}
 
-  // Function to teach a class based on the subject
-  function teachClass(todayClass: Subjects): string {
-	if (todayClass === 'Math') {
-	  return 'Teaching Math';
-	} else if (todayClass === 'History') {
-	  return 'Teaching History';
-	}
-  }
+// Define a String literal type for Subjects
+type Subjects = "Math" | "History";
 
-  // Example usage for teachClass
-  console.log(teachClass('Math')); // Output: Teaching Math
-  console.log(teachClass('History')); // Output: Teaching History
+// Function to teach a class
+function teachClass(todayClass: Subjects): string {
+    return `Teaching ${todayClass}`;
+}
+
+// Expected results
+// console.log(createEmployee(200).toString()); // Teacher
+// console.log(createEmployee(1000).toString()); // Director
+// console.log(createEmployee("$500").toString()); // Director
+
+// executeWork(createEmployee(200)); // Getting to work
+// executeWork(createEmployee(1000)); // Getting to director tasks
+
+console.log(teachClass("Math")); // Teaching Math
+console.log(teachClass("History")); // Teaching History
+
