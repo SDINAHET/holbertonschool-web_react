@@ -156,3 +156,71 @@ root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
 [11055:11055:0915/155046.555758:ERROR:zygote_host_impl_linux.cc(101)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_0#
 ```
+
+
+
+Task 1:
+
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1# ls
+js  package.json  public  webpack.config.js
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1# npm init -y
+Wrote to /mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1/package.json:
+
+{
+  "name": "task_1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Holberton Webpack task 1",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "main": "webpack.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1# npm install
+
+added 121 packages, and audited 122 packages in 1m
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1# npm run build
+
+> task_1@1.0.0 build
+> webpack --config webpack.config.js
+
+asset bundle.js 88.4 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 884 bytes 4 modules
+modules by path ./node_modules/lodash/*.js 13.9 KiB
+  ./node_modules/lodash/debounce.js 5.96 KiB [built] [code generated]
+  ./node_modules/lodash/isObject.js 733 bytes [built] [code generated]
+  ./node_modules/lodash/now.js 520 bytes [built] [code generated]
+  ./node_modules/lodash/toNumber.js 1.48 KiB [built] [code generated]
+  ./node_modules/lodash/_root.js 300 bytes [built] [code generated]
+  ./node_modules/lodash/_baseTrim.js 444 bytes [built] [code generated]
+  ./node_modules/lodash/isSymbol.js 682 bytes [built] [code generated]
+  ./node_modules/lodash/_freeGlobal.js 173 bytes [built] [code generated]
+  ./node_modules/lodash/_trimmedEndIndex.js 515 bytes [built] [code generated]
+  ./node_modules/lodash/_baseGetTag.js 792 bytes [built] [code generated]
+  + 4 modules
+./js/dashboard_main.js 708 bytes [built] [code generated]
+./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+webpack 5.101.3 compiled successfully in 5913 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1#
+```
+
