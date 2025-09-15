@@ -114,3 +114,45 @@ Puis lancer :
 npm run start
 ```
 
+terminal de commande
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack# ./create_empty_files.sh
+✓ task_1/js/dashboard_main.js
+✓ task_1/package.json
+✓ task_1/webpack.config.js
+✓ task_1/public/index.html
+✓ task_2/package.json
+✓ task_2/css/main.css
+✓ task_2/webpack.config.js
+✓ task_2/js/dashboard_main.js
+✓ task_2/public/index.html
+✓ task_3/modules/body/body.css
+✓ task_3/modules/body/body.js
+✓ task_3/modules/footer/footer.css
+✓ task_3/modules/footer/footer.js
+✓ task_3/modules/header/header.css
+✓ task_3/modules/header/header.js
+✓ task_3/package.json
+✓ task_3/webpack.config.js
+Tous les fichiers vides ont été créés.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack# cd task_0
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_0# np
+m install
+
+added 120 packages, and audited 121 packages in 16s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_0# npx webpack --mode development
+asset main.js 319 KiB [emitted] (name: main)
+runtime modules 937 bytes 4 modules
+cacheable modules 279 KiB
+  ./src/index.js 190 bytes [built] [code generated]
+  ./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+webpack 5.101.3 compiled successfully in 389 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_0# xdg-open dist/index.html
+[11055:11055:0915/155046.555758:ERROR:zygote_host_impl_linux.cc(101)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_0#
+```
