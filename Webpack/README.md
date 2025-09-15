@@ -224,3 +224,5 @@ webpack 5.101.3 compiled successfully in 5913 ms
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_1#
 ```
 
+![alt text](image.png)
+
