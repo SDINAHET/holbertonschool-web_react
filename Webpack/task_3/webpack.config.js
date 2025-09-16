@@ -18,11 +18,11 @@ module.exports = {
     clean: false                   // ne nettoie pas public à chaque build
   },
   devServer: {
-    static: { directory: path.resolve(__dirname, "public") },
+    contentBase: "./public",
     port: 8564,
-    open: true,
-    hot: false
-  },
+    open: true
+  }
+
   module: {
     rules: [
       { test: /\.css$/i, use: ["style-loader", "css-loader"] },
