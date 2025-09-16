@@ -315,3 +315,63 @@ webpack 5.101.3 compiled successfully in 21467 ms
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
 k/task_2#
 ```
+
+```bash
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Webpack Task 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!-- Content injected by JS -->
+    <script src="../js/dashboard_main.js"></script>
+  </body>
+</html>
+```
+
+
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2# npm install
+
+up to date, audited 478 packages in 7s
+
+73 packages are looking for funding
+  run `npm fund` for details
+
+25 vulnerabilities (1 moderate, 24 high)
+To address issues that do not require attention, run:
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2# npm run build
+
+> task_2@1.0.0 build
+> webpack
+
+asset bundle.js 159 KiB [emitted] [minimized] (name: main) 1 related asset
+asset assets/holberton-logo.jpg 10.3 KiB [emitted] [from: assets/holberton-logo.jpg] (auxiliary name: main)
+runtime modules 2.71 KiB 9 modules
+orphan modules 1.1 KiB [orphan] 1 module
+cacheable modules 821 KiB
+  modules by path ./node_modules/ 819 KiB
+    modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB
+      ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 2.42 KiB [built] [code generated]
+      + 5 modules
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 2.89 KiB
+      ./node_modules/css-loader/dist/runtime/noSourceMaps.js 64 bytes [built] [code generated]
+      + 2 modules
+    ./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+    ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+  ./js/dashboard_main.js + 1 modules 1.52 KiB [built] [code generated]
+  ./node_modules/css-loader/dist/cjs.js!./css/main.css 1.09 KiB [built] [code generated]
+  ./assets/holberton-logo.jpg 69 bytes [built] [code generated]
+webpack 5.101.3 compiled successfully in 18337 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2#
+```
