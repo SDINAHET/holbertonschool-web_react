@@ -288,4 +288,30 @@ resolve '../assets/holberton-logo.jpg' in '/mnt/d/Users/steph/Documents/5ème_tr
 webpack 5.101.3 compiled with 1 error in 9976 ms
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
 k/task_2#
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2# npm run build
+
+> task_2@1.0.0 build
+> webpack
+
+asset bundle.js 159 KiB [emitted] [minimized] (name: main) 1 related asset
+asset assets/holberton-logojpg 10.3 KiB [emitted] [from: assets/holberton-logo.jpg] (auxiliary name: main)
+runtime modules 2.71 KiB 9 modules
+orphan modules 1.1 KiB [orphan] 1 module
+cacheable modules 821 KiB
+  modules by path ./node_modules/ 819 KiB
+    modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB
+      ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 2.42 KiB [built] [code generated]
+      + 5 modules
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 2.89 KiB
+      ./node_modules/css-loader/dist/runtime/noSourceMaps.js 64 bytes [built] [code generated]
+      + 2 modules
+    ./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+    ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+  ./js/dashboard_main.js + 1 modules 1.52 KiB [built] [code generated]
+  ./node_modules/css-loader/dist/cjs.js!./css/main.css 1.09 KiB [built] [code generated]
+  ./assets/holberton-logo.jpg 68 bytes [built] [code generated]
+webpack 5.101.3 compiled successfully in 21467 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2#
 ```

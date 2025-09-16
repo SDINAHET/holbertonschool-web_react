@@ -15,3 +15,5 @@ Thumbs.db
 # Editor-specific files
 .vscode/
 .idea/
+
+/assets
