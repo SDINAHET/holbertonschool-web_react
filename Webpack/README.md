@@ -226,3 +226,66 @@ root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
 
 ![alt text](image.png)
 
+# Task2
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2# npm install
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+
+added 477 packages, and audited 478 packages in 1m
+
+73 packages are looking for funding
+  run `npm fund` for details
+
+25 vulnerabilities (1 moderate, 24 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2# npm run build
+
+> task_2@1.0.0 build
+> webpack
+
+assets by status 159 KiB [cached] 1 asset
+runtime modules 1.43 KiB 7 modules
+orphan modules 1.1 KiB [orphan] 1 module
+modules by path ./node_modules/ 819 KiB
+  modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB
+    ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 2.42 KiB [built] [code generated]
+    ./node_modules/style-loader/dist/runtime/styleDomAPI.js 1.5 KiB [built] [code generated]
+    + 4 modules
+  modules by path ./node_modules/css-loader/dist/runtime/*.js 2.89 KiB
+    ./node_modules/css-loader/dist/runtime/noSourceMaps.js 64 bytes [built] [code generated]
+    ./node_modules/css-loader/dist/runtime/api.js 2.25 KiB [built] [code generated]
+    ./node_modules/css-loader/dist/runtime/getUrl.js 597 bytes [built] [code generated]
+  ./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+  ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+./js/dashboard_main.js + 1 modules 1.52 KiB [built] [code generated]
+./node_modules/css-loader/dist/cjs.js!./css/main.css 1.09 KiB [built] [code generated]
+
+ERROR in ./css/main.css (./node_modules/css-loader/dist/cjs.js!./css/main.css) 5:36-92
+Module not found: Error: Can't resolve '../assets/holberton-logo.jpg' in '/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/css'
+resolve '../assets/holberton-logo.jpg' in '/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/css'
+  using description file: /mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/package.json (relative path: ./css)
+    using description file: /mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/package.json (relative path: ./assets/holberton-logo.jpg)
+      no extension
+        /mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/assets/holberton-logo.jpg doesn't exist
+      as directory
+        /mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_2/assets/holberton-logo.jpg doesn't exist
+ @ ./css/main.css 8:6-98 20:17-24 25:22-29 25:33-47 25:50-64 24:0-68 24:0-68
+ @ ./js/dashboard_main.js 3:0-25
+
+webpack 5.101.3 compiled with 1 error in 9976 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_2#
+```

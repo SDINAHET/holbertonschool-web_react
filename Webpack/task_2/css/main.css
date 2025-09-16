@@ -1,0 +1,16 @@
+/* Logo at the top */
+#logo {
+  width: 200px;
+  height: 200px;
+  background-image: url("../assets/holberton-logo.jpg");
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  margin-bottom: 16px;
+}
+
+/* Counter text to the right of the button and bold */
+.counter {
+  font-weight: bold;
+  margin-left: 10px;  /* sits on the right of the button */
+  vertical-align: middle;
+}
