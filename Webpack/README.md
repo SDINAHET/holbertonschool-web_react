@@ -375,3 +375,95 @@ webpack 5.101.3 compiled successfully in 18337 ms
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
 k/task_2#
 ```
+
+# Task3
+````bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_3# npm install
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+
+added 671 packages, and audited 672 packages in 1m
+
+112 packages are looking for funding
+  run `npm fund` for details
+
+25 vulnerabilities (1 moderate, 24 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_3# npm run build
+
+> task_3@1.0.0 build
+> webpack
+
+assets by path *.js 2.23 MiB
+  asset vendors.bundle.js 2.15 MiB [emitted] [big] (name: vendors) (id hint: vendors)
+  asset header.bundle.js 32.3 KiB [emitted] (name: header)
+  asset body.bundle.js 29.4 KiB [emitted] (name: body)
+  asset footer.bundle.js 28.5 KiB [emitted] (name: footer)
+asset assets/holberton-logo.jpg 23.1 KiB [emitted] [from: assets/holberton-logo.jpg] (auxiliary name: header)
+asset index.html 385 bytes [emitted]
+Entrypoint header [big] 2.18 MiB (23.1 KiB) = vendors.bundle.js 2.15 MiB header.bundle.js 32.3 KiB 1 auxiliary asset
+Entrypoint body [big] 2.17 MiB = vendors.bundle.js 2.15 MiB body.bundle.js 29.4 KiB
+Entrypoint footer [big] 2.17 MiB = vendors.bundle.js 2.15 MiB footer.bundle.js 28.5 KiB
+runtime modules 11.1 KiB 28 modules
+cacheable modules 826 KiB
+  modules by path ./node_modules/ 819 KiB
+    modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB 6 modules
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 3.33 KiB 3 modules
+    ./node_modules/jquery/dist/jquery.js 279 KiB [built] [code generated]
+    ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+  modules by path ./modules/ 6.98 KiB
+    modules by path ./modules/header/ 2.77 KiB 3 modules
+    modules by path ./modules/body/ 2.21 KiB 3 modules
+    modules by path ./modules/footer/ 1.99 KiB
+      ./modules/footer/footer.js 170 bytes [built] [code generated]
+      + 2 modules
+  ./assets/holberton-logo.jpg 69 bytes [built] [code generated]
+webpack 5.101.3 compiled successfully in 8736 ms
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_3# npm run start-dev
+
+> task_3@1.0.0 start-dev
+> webpack serve --config webpack.config.js --open
+
+<i> [webpack-dev-server] Project is running at:
+<i> [webpack-dev-server] Loopback: http://localhost:8564/, http://[::1]:8564/
+<i> [webpack-dev-server] On Your Network (IPv4): http://172.18.71.179:8564/
+<i> [webpack-dev-server] Content not from webpack is served from '/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_3/public' directory
+<i> [webpack-dev-middleware] wait until bundle finished: /
+assets by path *.js 2.52 MiB
+  asset vendors.bundle.js 2.43 MiB [emitted] [big] (name: vendors) (id hint: vendors)
+  asset header.bundle.js 33.2 KiB [emitted] (name: header)
+  asset body.bundle.js 30.3 KiB [emitted] (name: body)
+  asset footer.bundle.js 29.4 KiB [emitted] (name: footer)
+asset assets/holberton-logo.jpg 23.1 KiB [emitted] [from: assets/holberton-logo.jpg] (auxiliary name: header)
+asset index.html 385 bytes [emitted]
+Entrypoint header [big] 2.46 MiB (23.1 KiB) = vendors.bundle.js 2.43 MiB header.bundle.js 33.2 KiB 1 auxiliary asset
+Entrypoint body [big] 2.46 MiB = vendors.bundle.js 2.43 MiB body.bundle.js 30.3 KiB
+Entrypoint footer [big] 2.46 MiB = vendors.bundle.js 2.43 MiB footer.bundle.js 29.4 KiB
+runtime modules 11.2 KiB 31 modules
+cacheable modules 931 KiB
+  modules by path ./node_modules/ 924 KiB
+    modules by path ./node_modules/webpack-dev-server/client/ 84.8 KiB 8 modules
+    modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB 6 modules
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 3.33 KiB 3 modules
+    modules by path ./node_modules/webpack/hot/*.js 1.8 KiB 2 modules
+    + 4 modules
+  modules by path ./modules/ 6.98 KiB
+    modules by path ./modules/header/ 2.77 KiB 3 modules
+    modules by path ./modules/body/ 2.21 KiB 3 modules
+    modules by path ./modules/footer/ 1.99 KiB 3 modules
+  ./assets/holberton-logo.jpg 69 bytes [built] [code generated]
+webpack 5.101.3 compiled successfully in 10685 ms
+````
