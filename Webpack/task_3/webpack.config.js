@@ -14,19 +14,15 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
     filename: "[name].bundle.js",
     chunkFilename: "[name].bundle.js",
-    publicPath: "",
-    clean: false, // CleanWebpackPlugin will handle cleaning
+    publicPath: ""
+    // ✅ no "clean" on webpack 4
   },
 
-  // ⚠️ v4+ uses `static`, not `contentBase`
+  // ✅ wds v3 syntax
   devServer: {
-    static: {
-      directory: path.join(__dirname, "public"),
-    },
+    contentBase: path.join(__dirname, "public"),
     port: 8564,
-    open: true,
-    hot: true,
-    historyApiFallback: true,
+    open: true
   },
 
   module: {
@@ -34,11 +30,11 @@ module.exports = {
       { test: /\.css$/i, use: ["style-loader", "css-loader"] },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: "javascript/auto",
+        // ✅ remove "type" (webpack 5 only)
         use: [
           {
             loader: "file-loader",
-            options: { name: "[name].[ext]", outputPath: "assets/" },
+            options: { name: "[name].[ext]", outputPath: "assets/" }
           },
           {
             loader: "image-webpack-loader",
@@ -47,12 +43,12 @@ module.exports = {
               mozjpeg: { progressive: true },
               optipng: { enabled: false },
               pngquant: { quality: [0.65, 0.9], speed: 4 },
-              gifsicle: { interlaced: false },
-            },
-          },
-        ],
-      },
-    ],
+              gifsicle: { interlaced: false }
+            }
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [
@@ -61,8 +57,8 @@ module.exports = {
       title: "Holberton Dashboard",
       filename: "index.html",
       chunks: ["vendors", "header", "body", "footer"],
-      inject: "body",
-    }),
+      inject: "body"
+    })
   ],
 
   optimization: {
@@ -72,11 +68,11 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          enforce: true,
-        },
-      },
-    },
+          enforce: true
+        }
+      }
+    }
   },
 
-  performance: { hints: false },
+  performance: { hints: false }
 };
