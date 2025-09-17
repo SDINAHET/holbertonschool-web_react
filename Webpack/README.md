@@ -500,4 +500,80 @@ cacheable modules 952 KiB
   ./assets/holberton-logo.jpg 69 bytes [built] [code generated]
 webpack 5.101.3 compiled successfully in 9435 ms
 
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_3# npm run start-dev
+
+> task_3@1.0.0 start-dev
+> webpack-dev-server --open
+[webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'contentBase'. These properties are valid:
+   object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, server?, setupExitSignals?, setupMiddlewares?, static?, watchFiles?, webSocketServer? }
+npm notice
+npm notice New major version of npm available! 10.9.2 -> 11.6.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.0
+npm notice To update run: npm install -g npm@11.6.0
+npm notice
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpacroot@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpacroot@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_3# n
+pm i lodash
+
+up to date, audited 667 packages in 5s
+
+94 packages are looking for funding
+  run `npm fund` for details
+
+26 vulnerabilities (2 moderate, 24 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_3# npm run start-dev
+
+> task_3@1.0.0 start-dev
+> webpack-dev-server --open
+
+[webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'contentBase'. These properties are valid:
+   object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, server?, setupExitSignals?, setupMiddlewares?, static?, watchFiles?, webSocketServer? }
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpac
+k/task_3# npm run start-dev
+
+> task_3@1.0.0 start-dev
+> webpack-dev-server --open
+
+<i> [webpack-dev-server] Project is running at:
+<i> [webpack-dev-server] Loopback: http://localhost:8564/
+<i> [webpack-dev-server] On Your Network (IPv4): http://172.18.71.179:8564/
+<i> [webpack-dev-server] Content not from webpack is served from '/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/Webpack/task_3/public' directory
+<i> [webpack-dev-server] 404s will fallback to '/index.html'
+<i> [webpack-dev-middleware] wait until bundle finished: /
+assets by path *.js 2.85 MiB
+  asset vendors.bundle.js 2.5 MiB [emitted] [big] (name: vendors) (id hint: vendors)
+  asset header.bundle.js 121 KiB [emitted] (name: header)
+  asset body.bundle.js 118 KiB [emitted] (name: body)
+  asset footer.bundle.js 117 KiB [emitted] (name: footer)
+asset assets/holberton-logo.jpg 23.1 KiB [emitted] [from: assets/holberton-logo.jpg] (auxiliary name: header)
+asset index.html 385 bytes [emitted]
+Entrypoint header [big] 2.62 MiB (23.1 KiB) = vendors.bundle.js 2.5 MiB header.bundle.js 121 KiB 1 auxiliary asset
+Entrypoint body [big] 2.61 MiB = vendors.bundle.js 2.5 MiB body.bundle.js 118 KiB
+Entrypoint footer [big] 2.61 MiB = vendors.bundle.js 2.5 MiB footer.bundle.js 117 KiB
+runtime modules 87.4 KiB 45 modules
+cacheable modules 959 KiB
+  modules by path ./node_modules/ 948 KiB 37 modules
+  modules by path ./modules/ 10.4 KiB
+    modules by path ./modules/header/ 3.9 KiB 3 modules
+    modules by path ./modules/body/ 3.34 KiB 3 modules
+    modules by path ./modules/footer/ 3.12 KiB
+      ./modules/footer/footer.js 170 bytes [built] [code generated]
+      + 2 modules
+  ./assets/holberton-logo.jpg 69 bytes [built] [code generated]
+webpack 5.101.3 compiled successfully in 10538 ms
+
+
+
 ````
+![alt text](image-1.png)
+![alt text](image-2.png)
