@@ -11,7 +11,7 @@ module.exports = {
   },
   devtool: "inline-source-map",
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, 'public'),   // <= attendu par le checker
     filename: "[name].bundle.js",      // => header.bundle.js, body.bundle.js, footer.bundle.js
     chunkFilename: "[name].bundle.js",
     publicPath: "",
