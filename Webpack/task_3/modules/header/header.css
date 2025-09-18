@@ -6,23 +6,3 @@ header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   background: url("../../assets/holberton-logo.jpg") no-repeat;
   background-size: 200px 200px;
 }
-
-#app-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  border-bottom: 1px solid #eee;
-  font-family: Arial, Helvetica, sans-serif;
-}
-#app-header .hb-logo {
-  width: 32px;
-  height: 32px;
-  background: #e0003c;
-  border-radius: 4px;
-  display: inline-block;
-}
-#app-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
