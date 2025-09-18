@@ -588,7 +588,8 @@ webpacke config.js
   },
 
  et package.json
-     "start-dev": "webpack serve"
+    "build": "webpack --mode development",
+    "start-dev": "webpack serve"
 
 et pour faire fonctionner en local
 webpacke config.js
@@ -601,4 +602,5 @@ webpacke config.js
   }
 
  et package.json
+    "build": "webpack",
     "start-dev": "webpack serve --open --port 8564"
