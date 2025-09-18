@@ -578,3 +578,27 @@ webpack 5.101.3 compiled successfully in 10538 ms
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 ![alt text](image-3.png)
+
+checker
+webpacke config.js
+  devServer: {
+    contentBase: "./public",
+    port: 8564,
+    open: true
+  },
+
+ et package.json
+     "start-dev": "webpack serve"
+
+et pour faire fonctionner en local
+webpacke config.js
+  devServer: {
+    static: { directory: path.join(__dirname, "public") },
+    port: 8564,
+    open: true,
+    hot: true,
+    historyApiFallback: true,
+  }
+
+ et package.json
+    "start-dev": "webpack serve --open --port 8564"
