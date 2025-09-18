@@ -11,23 +11,23 @@ module.exports = {
   },
   devtool: "inline-source-map",
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, 'public'),   // <= attendu par le checker
+    filename: "[name].bundle.js",      // => header.bundle.js, body.bundle.js, footer.bundle.js
     chunkFilename: "[name].bundle.js",
-    publicPath: ""
-    // no `clean` in webpack 4
+    publicPath: ""                   // ne nettoie pas public à chaque build
   },
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: "./public",
     port: 8564,
     open: true
   },
+
   module: {
     rules: [
       { test: /\.css$/i, use: ["style-loader", "css-loader"] },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        // no `type` in webpack 4
+        type: "javascript/auto",
         use: [
           {
             loader: "file-loader",
@@ -36,7 +36,7 @@ module.exports = {
           {
             loader: "image-webpack-loader",
             options: {
-              disable: true,
+              disable: true,                 // plus rapide en dev
               mozjpeg: { progressive: true },
               optipng: { enabled: false },
               pngquant: { quality: [0.65, 0.9], speed: 4 },
@@ -52,7 +52,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Holberton Dashboard",
       filename: "index.html",
-      chunks: ["vendors", "header", "body", "footer"]
+      chunks: ["vendors", "header", "body", "footer"] // injecte tous les bundles
     })
   ],
   optimization: {
