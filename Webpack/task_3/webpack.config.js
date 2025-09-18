@@ -17,9 +17,11 @@ module.exports = {
     publicPath: ""                   // ne nettoie pas public à chaque build
   },
   devServer: {
-    contentBase: "./public",
+    static: { directory: path.join(__dirname, "public") },
     port: 8564,
-    open: true
+    open: true,
+    hot: true,
+    historyApiFallback: true,
   },
 
   module: {
