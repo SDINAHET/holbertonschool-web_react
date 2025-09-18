@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    // "start-dev": "webpack serve"
     "start-dev": "webpack-dev-server --open --port 8564"
   },
   "devDependencies": {
