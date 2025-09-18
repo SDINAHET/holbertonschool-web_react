@@ -1,1 +1,16 @@
 #count { font-weight: bold; margin-left: 10px; vertical-align: middle; }
+
+#app-body {
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#click-btn {
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+}
+#counter {
+  font-weight: bold;
+}
