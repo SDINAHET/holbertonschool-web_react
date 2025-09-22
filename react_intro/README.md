@@ -64,3 +64,19 @@ intro/task_0/dashboard# node testRunner.js
 OK
 ```
 
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
+intro/task_0/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+
+  VITE v5.4.20  ready in 831 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+![alt text](image.png)
