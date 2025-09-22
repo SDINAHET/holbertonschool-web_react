@@ -108,4 +108,22 @@ Ran all test suites.
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
 ct/react_intro/task_0/dashboard#
 
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_0/dashboard# npm test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/App.spec.js (34.009 s)
+  App (Task 0)
+    ✓ renders the <h1> with text "School dashboard" (66 ms)
+    ✓ renders body/footer texts and the logo image (16 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        47.808 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_0/dashboard#
 ```
