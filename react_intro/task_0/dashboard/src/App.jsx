@@ -1,3 +1,5 @@
+// src/App.jsx
+import React from 'react';      // <-- ajoute cette ligne
 import './App.css';
 import logo from './assets/holberton-logo.jpg';
 
