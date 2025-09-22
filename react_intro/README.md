@@ -80,3 +80,32 @@ intro/task_0/dashboard# npm run dev
 ```
 
 ![alt text](image.png)
+
+
+# Task1
+```bash
+npm test
+```
+
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_0/dashboard# npm test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/App.spec.js (34.853 s)
+  App (Task 0)
+    ✓ renders the <h1> with text "School dashboard" (70 ms)
+    ✓ renders body and footer texts in the right sections (9 ms)
+    ✓ renders the Holberton logo image (16 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        47.468 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_0/dashboard#
+
+```
