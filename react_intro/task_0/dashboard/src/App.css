@@ -30,10 +30,10 @@ body {
 
 /* ===== GROS LOGO TEXTE SOUS LE TITRE ===== */
 .brand-row {
-  padding: 0 40px 10px;
+  padding: 0 0px 0px;
 }
 .brand {
-  height: 120px;           /* ↑ taille du logo de marque */
+  height: 80px;           /* ↑ taille du logo de marque */
   width: auto;
   display: block;
 }
