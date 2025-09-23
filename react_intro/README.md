@@ -171,9 +171,76 @@ Re-optimizing dependencies because vite config has changed
 # Task3
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_2/dashboard# npm install
+
+up to date, audited 542 packages in 8s
+
+82 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_2/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+Re-optimizing dependencies because vite config has changed
+
+  VITE v5.4.20  ready in 907 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+
+```
+![alt text](image-2.png)
+
+# Task4
+
+```bash
+
 
 ```
 
+# Task5
+
 ```bash
+
+
+```
+
+# Task6
+
+```bash
+
+
+```
+
+# Task7
+
+```bash
+
+
+```
+
+# Task8
+
+```bash
+
+
+```
+
+# Task9
+
+```bash
+
 
 ```
