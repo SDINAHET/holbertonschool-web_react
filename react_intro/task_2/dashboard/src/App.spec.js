@@ -1,30 +1,28 @@
-// task_0/dashboard/src/App.spec.js
+// react_intro/task_2/dashboard/src/App.spec.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-describe('App (Task 0)', () => {
-  test('renders the <h1> with text "School dashboard"', () => {
-    render(<App />);
-    expect(
-      screen.getByRole('heading', { level: 1, name: /school dashboard/i })
-    ).toBeInTheDocument(); // expect #1
+describe('App (Task 2) - sign in form', () => {
+  test('renders two input elements (email and password)', () => {
+    const { container } = render(<App />);
+
+    // Cible par label (insensible à la casse)
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+
+    // Vérifie qu’il y a exactement 2 <input>
+    expect(container.querySelectorAll('input')).toHaveLength(2);
   });
 
-  test('renders body/footer texts and the logo image', () => {
+  test('renders two labels with texts "Email" and "Password"', () => {
     render(<App />);
-    const year = new Date().getFullYear();
+    expect(screen.getByText(/email/i).tagName).toBe('LABEL');
+    expect(screen.getByText(/password/i).tagName).toBe('LABEL');
+  });
 
-    expect(
-      screen.getByText(/login to access the full dashboard/i)
-    ).toBeInTheDocument(); // expect #2
-
-    expect(
-      screen.getByText(new RegExp(`Copyright\\s+${year}\\s+-\\s+holberton\\s+School`, 'i'))
-    ).toBeInTheDocument(); // expect #3
-
-    expect(
-      screen.getByRole('img', { name: /holberton logo/i })
-    ).toBeInTheDocument(); // expect #4
+  test('renders a button with text OK', () => {
+    render(<App />);
+    expect(screen.getByRole('button', { name: /ok/i })).toBeInTheDocument();
   });
 });

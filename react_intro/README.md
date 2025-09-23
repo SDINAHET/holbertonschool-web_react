@@ -206,7 +206,25 @@ Re-optimizing dependencies because vite config has changed
 # Task4
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_2/dashboard# npm test
 
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/App.spec.js (35.157 s)
+  App (Task 2) - sign in form
+    ✓ renders two input elements (email and password) (48 ms)
+    ✓ renders two labels with texts "Email" and "Password" (12 ms)
+    ✓ renders a button with text OK (70 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        51.633 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
+ct/react_intro/task_2/dashboard#
 
 ```
 
