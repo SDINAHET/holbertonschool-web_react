@@ -1,0 +1,24 @@
+/* react_intro/task_1/dashboard/src/Notifications.css */
+:root { --hb-red: #e1003c; }
+
+/* Wrapper posé par App.jsx pour donner un petit padding périphérique */
+.root-notifications {
+  padding: 8px;
+}
+
+/* Bandeau pleine largeur avec bordure pointillée (comme sur ta capture) */
+.notification-items {
+  width: 100%;
+  background: #fff;
+  border: 2px dotted var(--hb-red);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+}
+
+.notification-items p {
+  margin: 0;
+  font-size: 0.95rem;
+}
