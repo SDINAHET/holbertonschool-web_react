@@ -127,3 +127,14 @@ Ran all test suites.
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_rea
 ct/react_intro/task_0/dashboard#
 ```
+
+
+# Task2
+
+```bash
+
+```
+
+```bash
+
+```
