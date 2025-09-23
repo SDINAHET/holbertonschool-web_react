@@ -1,3 +1,4 @@
+// react_intro/task_1/dashboard/src/utils.js
 // utilitaires simples pour le footer
 
 export function getCurrentYear() {

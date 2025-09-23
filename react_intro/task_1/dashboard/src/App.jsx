@@ -1,3 +1,4 @@
+// react_intro/task_1/dashboard/src/App.jsx
 import React from 'react';
 import './App.css';
 import logo from './assets/holberton-logo.jpg';
