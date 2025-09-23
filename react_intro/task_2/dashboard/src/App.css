@@ -52,3 +52,19 @@ body {
   padding: 14px 0;
 }
 .App-footer p { margin: 0; font-style: italic; color: #333; }
+
+/* Optionnel : mise en ligne des champs */
+.Login-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.Login-form label {
+  margin-right: 4px;
+}
+
+.Login-form input {
+  padding: 4px 6px;
+}

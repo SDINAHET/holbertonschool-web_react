@@ -1,4 +1,4 @@
-// react_intro/task_1/dashboard/src/App.jsx
+// react_intro/task_2/dashboard/src/App.jsx
 import React from 'react';
 import './App.css';
 import logo from './assets/holberton-logo.jpg';
@@ -9,7 +9,7 @@ import { getCurrentYear, getFooterCopy } from './utils';
 export default function App() {
   return (
     <div className="App">
-      {/* Panneau Notifications, enfant direct de App (comme demandé) */}
+      {/* Notifications: enfant de App */}
       <div className="root-notifications">
         <Notifications />
       </div>
@@ -21,12 +21,23 @@ export default function App() {
 
       <main className="App-body">
         <p>Login to access the full dashboard</p>
+
+        {/* Formulaire demandé */}
+        <form className="Login-form" onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" />
+
+          <label htmlFor="password">Password</label>
+          <input id="password" name="password" type="password" />
+
+          <button type="submit">OK</button>
+        </form>
       </main>
 
       <footer className="App-footer">
         <p>
           <em>
-            Copyright {getCurrentYear()} - {getFooterCopy(true)}
+            Copyright {getCurrentYear()} {getFooterCopy(false)}
           </em>
         </p>
       </footer>
