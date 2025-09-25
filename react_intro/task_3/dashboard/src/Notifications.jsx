@@ -39,7 +39,8 @@ export default function Notifications() {
           lineHeight: 0
         }}
       >
-        <img src={closeIcon} alt="close" style={{ width: 12, height: 12 }} />
+        {/* <img src={closeIcon} alt="close" style={{ width: 12, height: 12 }} /> */}
+        x
       </button>
 
       <p>Here is the list of notifications</p>
