@@ -1,7 +1,7 @@
 // testRunner-seq3.js (version ESM sans JSX)
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Notifications from './src/Notifications.jsx';
+import Notifications from './src/Notifications.js';
 
 // On capture console.log pour tester le clic
 let logMessages = [];
