@@ -286,7 +286,26 @@ Snapshots:   0 total
 Time:        26.541 s
 Ran all test suites.
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
-intro/task_3/dashboard# 
+intro/task_3/dashboard#
+
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
+intro/task_3/dashboard# npm install --save-dev @babel/core @babel/preset-react @babel/register
+
+added 20 packages, and audited 562 packages in 4s
+
+82 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+
 
 ```
 

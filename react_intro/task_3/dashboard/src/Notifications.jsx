@@ -3,7 +3,7 @@ import React from 'react';
 import './Notifications.css';
 // import closeIcon from './assets/close-button.png';
 // Notifications.jsx
-import closeIcon from './assets/close-icon.png'; // <-- nom exact
+// import closeIcon from './assets/close-icon.png'; // <-- nom exact
 import { getLatestNotification } from './utils';
 
 // export default function Notifications() {
@@ -48,7 +48,8 @@ export default function Notifications() {
       <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
-        <li data-priority="urgent" dangerouslySetInnerHTML={latestHtml} />
+        {/* <li data-priority="urgent" dangerouslySetInnerHTML={latestHtml} /> */}
+        <li dangerouslySetInnerHTML={latestHtml} />
       </ul>
     </div>
   );
