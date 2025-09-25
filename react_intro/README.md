@@ -377,6 +377,29 @@ ask_4/dashboard#
 
 ```
 
+```bash
+# 1) Crée/écrase vite.config.js avec la base correcte
+echo "import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  base: '/holbertonschool-web_react/'
+})" > vite.config.js
+
+# 2) Rebuild et déploie sur GitHub Pages
+npm run build
+npm run deploy
+
+# 3) Crée le fichier avec l'URL demandée
+echo "https://SDINAHET.github.io/holbertonschool-web_react" > holberton-dashboard.txt
+
+# 4) Commit et push
+git add vite.config.js holberton-dashboard.txt
+git commit -m "Add vite.config.js, deploy site, and add holberton-dashboard.txt"
+git push
+```
+
 # Task9
 
 ```bash
