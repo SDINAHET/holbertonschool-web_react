@@ -23,6 +23,11 @@ html,body,#root{ margin:10px; }  /* pas de marge par défaut */
   padding: 40px;
 }
 
+/* Espace supplémentaire avant "Password" */
+.App-login label[for="password"] {
+  margin-left: 16px;   /* ajuste la valeur : 12, 16, 24… */
+}
+
 /* FORMULAIRE */
 .App-login{ display:inline-flex; align-items:center; gap:8px; }
 
