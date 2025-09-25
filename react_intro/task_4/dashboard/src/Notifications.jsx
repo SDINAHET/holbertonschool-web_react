@@ -48,7 +48,8 @@ export default function Notifications() {
       <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
-        <li data-priority="urgent" dangerouslySetInnerHTML={latestHtml} />
+        <li data-notification-type="urgent">Urgent requirement - complete by EOD</li>
+        {/* <li data-priority="urgent" dangerouslySetInnerHTML={latestHtml} /> */}
         {/* <li dangerouslySetInnerHTML={latestHtml} /> */}
       </ul>
     </div>
