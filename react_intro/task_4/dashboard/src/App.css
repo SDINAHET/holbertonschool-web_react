@@ -1,36 +1,35 @@
-.App-header {
-  display: flex;
-  align-items: center;
-  color: #e1003c;
-  padding: 10px;
-  margin: 10px;
-  border-bottom: 3px solid #e1003c;
+:root{
+  --hb-red:#e1003c;
+  --gut:10px;           /* même marge que le header */
 }
 
-.App-header img {
-  height: 200px;
-  margin-right: 20px;
+/* HEADER (tu peux garder le tien) */
+.App-header{
+  display:flex;
+  align-items:center;
+  color:var(--hb-red);
+  padding:10px;
+  margin:var(--gut);
+  border-bottom:3px solid var(--hb-red);
 }
 
-.App-body {
-  padding: 40px;
+/* Laisse de la place pour le footer fixe */
+.App-body{
+  padding:40px;
+  padding-bottom:80px;   /* évite que le footer recouvre le contenu */
 }
 
-/* Aligne les champs sur une ligne avec un espacement régulier */
-.App-login {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;    /* espace entre chaque élément */
-}
+/* FOOTER fixe avec espace gauche/droite comme le header */
+.App-footer{
+  position:fixed;
+  left:var(--gut);
+  right:var(--gut);
+  bottom:0;
+  border-top:3px solid var(--hb-red);
+  text-align:center;
+  font-style:italic;
+  padding:10px 0;
+  background:#fff;
 
-.App-footer {
-  border-top: 3px solid #e1003c;
-  text-align: center;
-  font-style: italic;
-  padding: 10px;
-  margin: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  background-color: white;
+  /* IMPORTANT : pas de width:100% et pas de margin ici */
 }
