@@ -1,11 +1,9 @@
-// react_intro/task_3/dashboard/src/Notifications.jsx
 import React from 'react';
-// import './Notifications.css';
 import { getLatestNotification } from './utils';
 
 export default function Notifications() {
   const latest = getLatestNotification();
-  const latestHtml = typeof latest === 'string' ? { __html: latest } : latest;
+  const latestHtml = { __html: latest };
 
   return (
     <div className="notification-items" style={{ position: 'relative' }}>
