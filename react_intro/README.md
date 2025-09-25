@@ -400,6 +400,87 @@ git commit -m "Add vite.config.js, deploy site, and add holberton-dashboard.txt"
 git push
 ```
 
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard# npm install
+npm run install:browsers   # (si demandé par le correcteur)
+npm run deploy
+
+up to date, audited 595 packages in 2s
+
+88 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> dashboard@0.0.0 install:browsers
+> npx playwright install chromium-headless-shell
+
+Need to install the following packages:
+playwright@1.55.1
+Ok to proceed? (y) y
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║ WARNING: It looks like you are running 'npx playwright install' without first ║
+║ installing your project's dependencies.                                       ║
+║                                                                               ║
+║ To avoid unexpected behavior, please install your dependencies first, and     ║
+║ then run Playwright's install command:                                        ║
+║                                                                               ║
+║     npm install                                                               ║
+║     npx playwright install                                                    ║
+║                                                                               ║
+║ If your project does not yet depend on Playwright, first install the          ║
+║ applicable npm package (most commonly @playwright/test), and                  ║
+║ then run Playwright's install command to download the browsers:               ║
+║                                                                               ║
+║     npm install @playwright/test                                              ║
+║     npx playwright install                                                    ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+Downloading Chromium Headless Shell 140.0.7339.186 (playwright build v1193) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1193/chromium-headless-shell-linux.zip
+104.3 MiB [====================] 100% 0.0s
+Chromium Headless Shell 140.0.7339.186 (playwright build v1193) downloaded to /root/.cache/ms-playwright/chromium_headless_shell-1193
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+2.3 MiB [====================] 100% 0.0s
+FFMPEG playwright build v1011 downloaded to /root/.cache/ms-playwright/ffmpeg-1011
+
+> dashboard@0.0.0 predeploy
+> npm run build
+
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 36 modules transformed.
+dist/index.html                            0.58 kB │ gzip:  0.36 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-Dblg1SDK.css             1.43 kB │ gzip:  0.62 kB
+dist/assets/index-WuqLIXZM.js            147.55 kB │ gzip: 49.22 kB
+✓ built in 1.45s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+
+> dashboard@0.0.0 deploy
+> gh-pages -d dist
+
+Published
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard#
+```
+https://sdinahet.github.io/holbertonschool-web_react/
+
+![alt text](image-3.png)
+
+
 # Task9
 
 ```bash
