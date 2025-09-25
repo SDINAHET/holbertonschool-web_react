@@ -1,67 +1,33 @@
-/* react_intro/task_1/dashboard/src/Notifications.css */
-:root { --hb-red: #e1003c; }
-
-/* --- Compatibilité avec ton ancien wrapper --- */
-.root-notifications {
-  padding: 6px 8px 0;
-}
-
-/* --- Bloc notifications (nouveau sélecteur attendu + alias) --- */
-.Notifications,
-.notification-items {
-  width: 100%;
-  background: #fff;
-  border: 2px dotted var(--hb-red);
-  border-radius: 4px;
-  padding: 10px 14px;
-  color: #222;
+.notifications {
+  border: 2px dashed red;
+  padding: 10px;
+  margin: 10px;
   position: relative;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* Titre/intro */
-.Notifications p,
-.notification-items p {
-  margin: 0 0 8px;
+/* Style du paragraphe */
+.notifications p {
+  margin: 0 0 10px 0;
 }
 
 /* Liste */
-.Notifications ul,
-.notification-items ul {
-  margin: 0;
-  padding-left: 22px;
-}
-
-.Notifications li,
-.notification-items li {
-  margin: 4px 0;
-}
-
-/* === Couleurs exigées par les tests === */
-.Notifications li[data-notification-type="default"],
-.notification-items li[data-notification-type="default"] {
-  color: blue;     /* 1 item bleu */
-}
-
-.Notifications li[data-notification-type="urgent"],
-.notification-items li[data-notification-type="urgent"] {
-  color: red;      /* 2 items rouges */
-}
-
-/* Bouton fermer en haut à droite */
-.Notifications-close {
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  line-height: 1;
+.notifications ul {
+  list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-/* (Optionnel) image du bouton close si tu utilises <img/> */
-.Notifications-close img { display: block; }
+/* Style des <li> selon priorité */
+.notifications li[data-priority="default"] {
+  color: blue;
+}
 
-/* ---- SUPPRIMÉ : anciens sélecteurs data-priority
-   .li[data-priority="default"|"urgent"|"mixed"] ---- */
+.notifications li[data-priority="urgent"] {
+  color: red;
+}
+
+/* Image du bouton de fermeture */
+.notifications button img {
+  width: 10px;
+  height: 10px;
+}
