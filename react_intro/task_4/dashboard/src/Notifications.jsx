@@ -1,7 +1,6 @@
 import React from 'react';
 import './Notifications.css';
-// import closeIcon from './assets/close-button.png';
-import closeIcon from './assets/close-icon.png';
+import closeIcon from './assets/close-button.png';
 import { getLatestNotification } from './utils';
 
 export default function Notifications() {
@@ -10,23 +9,34 @@ export default function Notifications() {
   };
 
   return (
-    <div className="Notifications" role="region" aria-label="Notifications">
+    <div className="notifications">
+      {/* Bouton Close */}
       <button
-        className="Notifications-close"
         aria-label="Close"
         onClick={handleClick}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer'
+        }}
       >
-        <img src={closeIcon} alt="close icon" width="10" height="10" />
+        <img src={closeIcon} alt="close icon" style={{ width: '10px', height: '10px' }} />
       </button>
 
+      {/* Message */}
       <p>Here is the list of notifications</p>
+
+      {/* Liste des notifications */}
       <ul>
-        <li data-notification-type="default">New course available</li>
-        <li data-notification-type="urgent">New resume available</li>
+        <li data-priority="default">New course available</li>
+        <li data-priority="urgent">New resume available</li>
         <li
-          data-notification-type="urgent"
+          data-priority="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        />
+        ></li>
       </ul>
     </div>
   );
