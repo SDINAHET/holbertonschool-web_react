@@ -1,15 +1,11 @@
-// task_3/dashboard/src/Notifications.spec.js
+// react_intro/task_3/dashboard/src/Notifications.spec.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Notifications from './Notifications';
 
-describe('Notifications component', () => {
-  let originalConsoleLog;
-
-  beforeAll(() => {
-    originalConsoleLog = console.log;
-  });
+describe('Notifications', () => {
+  const ORIGINAL_LOG = console.log;
 
   beforeEach(() => {
     console.log = jest.fn();
@@ -20,22 +16,20 @@ describe('Notifications component', () => {
   });
 
   afterAll(() => {
-    console.log = originalConsoleLog;
+    console.log = ORIGINAL_LOG;
   });
 
   test('renders the notifications title (case-insensitive)', () => {
     render(<Notifications />);
-    // Insensible à la casse grâce au /i
     expect(
       screen.getByText(/here is the list of notifications/i)
     ).toBeInTheDocument();
   });
 
-  test('renders the close button', () => {
+  test('renders the Close button', () => {
     render(<Notifications />);
-    // Recherche par rôle + nom accessible (aria-label="Close")
-    const btn = screen.getByRole('button', { name: /close/i });
-    expect(btn).toBeInTheDocument();
+    const button = screen.getByRole('button', { name: /close/i });
+    expect(button).toBeInTheDocument();
   });
 
   test('renders exactly 3 list items', () => {
@@ -44,10 +38,10 @@ describe('Notifications component', () => {
     expect(items).toHaveLength(3);
   });
 
-  test('clicking the close button logs the expected message', () => {
+  test('clicking the Close button logs the expected message', () => {
     render(<Notifications />);
-    const btn = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(btn);
+    const button = screen.getByRole('button', { name: /close/i });
+    fireEvent.click(button);
     expect(console.log).toHaveBeenCalledWith('Close button has been clicked');
   });
 });

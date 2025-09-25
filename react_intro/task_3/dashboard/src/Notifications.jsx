@@ -4,7 +4,7 @@ import './Notifications.css';
 // import closeIcon from './assets/close-button.png';
 // Notifications.jsx
 import closeIcon from './assets/close-icon.png'; // <-- nom exact
-import { getLatestNotification } from './utils';
+import { getLatestNotification } from './utils.js';
 
 // export default function Notifications() {
 //   return (
