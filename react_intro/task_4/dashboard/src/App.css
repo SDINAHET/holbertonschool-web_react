@@ -15,6 +15,13 @@
   padding: 40px;
 }
 
+/* Aligne les champs sur une ligne avec un espacement régulier */
+.App-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;    /* espace entre chaque élément */
+}
+
 .App-footer {
   border-top: 3px solid #e1003c;
   text-align: center;

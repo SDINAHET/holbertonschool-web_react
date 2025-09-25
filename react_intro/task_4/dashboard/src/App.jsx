@@ -9,14 +9,15 @@ function App() {
       <div className="root-notifications">
         <Notifications />
       </div>
+
       <div className="App-header">
-        <img src={logo} alt="holberton logo" />
+        <img src={logo} alt="Holberton logo" />
         <h1>School dashboard</h1>
       </div>
+
       <div className="App-body">
         <p>Login to access the full dashboard</p>
 
-        {/* Ajout pour Task 3 : formulaire de login */}
         <div className="App-login">
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" name="email" />
@@ -26,11 +27,13 @@ function App() {
 
           <button>OK</button>
         </div>
-
       </div>
+
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} - {getFooterCopy(false)}</p>
-        {/* <p>Copyright 2024 - {getFooterCopy(false)}</p> */}
+        {/* SANS tiret */}
+        <p>
+          Copyright {getCurrentYear()} {getFooterCopy(false)}
+        </p>
       </div>
     </>
   );

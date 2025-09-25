@@ -1,33 +1,36 @@
-.notifications {
-  border: 2px dashed red;
-  padding: 10px;
+:root { --hb-red: #e1354b; }
+
+/* Bandeau notifications */
+.Notifications {
+  width: 100%;
+  background: #fff;
+  border: 2px dotted var(--hb-red);
+  border-radius: 4px;
+  padding: 10px 14px;
   margin: 10px;
   position: relative;
+  color: #222;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* Style du paragraphe */
-.notifications p {
-  margin: 0 0 10px 0;
-}
+/* Texte et liste */
+.Notifications p { margin: 0 0 10px; }
+.Notifications ul { margin: 0; padding-left: 22px; }
+.Notifications li { margin: 4px 0; }
 
-/* Liste */
-.notifications ul {
-  list-style-type: none;
+/* Couleurs attendues : 1 bleu, 2 rouges */
+.Notifications li[data-notification-type="default"] { color: blue; }
+.Notifications li[data-notification-type="urgent"]  { color: red; }
+
+/* Bouton fermer (X) */
+.Notifications-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   padding: 0;
-  margin: 0;
+  line-height: 1;
 }
-
-/* Style des <li> selon priorité */
-.notifications li[data-priority="default"] {
-  color: blue;
-}
-
-.notifications li[data-priority="urgent"] {
-  color: red;
-}
-
-/* Image du bouton de fermeture */
-.notifications button img {
-  width: 10px;
-  height: 10px;
-}
+.Notifications-close img { display: block; width: 10px; height: 10px; }
