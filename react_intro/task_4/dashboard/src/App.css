@@ -3,6 +3,7 @@
   align-items: center;
   color: #e1003c;
   padding: 10px;
+  margin: 10px;
   border-bottom: 3px solid #e1003c;
 }
 
@@ -27,6 +28,7 @@
   text-align: center;
   font-style: italic;
   padding: 10px;
+  margin: 10px;
   position: fixed;
   width: 100%;
   bottom: 0;
