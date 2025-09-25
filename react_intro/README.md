@@ -249,8 +249,22 @@ intro/task_2/dashboard# npm run dev
 # Task6
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
+intro/task_3/dashboard# npm test
 
+> dashboard@0.0.0 test
+> jest --watchAll=false
 
+ PASS  src/utils.spec.js (9.627 s)
+ PASS  src/App.spec.js (18.77 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        40.462 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
+intro/task_3/dashboard#
 ```
 
 # Task7
