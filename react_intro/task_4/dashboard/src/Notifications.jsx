@@ -1,6 +1,6 @@
 import React from 'react';
 import './Notifications.css';
-import closeIcon from './assets/close-button.png';
+import closeIcon from './assets/close-icon.png';
 import { getLatestNotification } from './utils';
 
 export default function Notifications() {
@@ -23,7 +23,7 @@ export default function Notifications() {
           cursor: 'pointer'
         }}
       >
-        <img src={closeIcon} alt="close icon" style={{ width: '10px', height: '10px' }} />
+        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
       </button>
 
       {/* Message */}
