@@ -13,3 +13,9 @@ export function getCurrentYear() {
 export function getFooterCopy(isIndex) {
   return isIndex ? 'Holberton School' : 'Holberton School main dashboard';
 }
+
+// NEW
+export function getLatestNotification() {
+  // Doit retourner cette string EXACTE (avec balises)
+  return '<strong>Urgent requirement</strong> - complete by EOD';
+}

@@ -231,9 +231,20 @@ ct/react_intro/task_2/dashboard#
 # Task5
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_
+intro/task_2/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
 
 
+  VITE v5.4.20  ready in 415 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
+
 
 # Task6
 
