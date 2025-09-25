@@ -312,6 +312,67 @@ Run `npm audit` for details.
 # Task8
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4# cd dashboard/
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard# npm install gh-pages --save-dev
+
+added 33 packages, and audited 595 packages in 5s
+
+88 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard#
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard# npm install
+
+up to date, audited 595 packages in 2s
+
+88 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard# npm run deploy
+
+> dashboard@0.0.0 predeploy
+> npm run build
+
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 31 modules transformed.
+dist/index.html                            0.85 kB │ gzip:  0.36 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-Dblg1SDK.css             1.43 kB │ gzip:  0.62 kB
+dist/assets/index-CDO-CCUI.js            146.74 kB │ gzip: 49.08 kB
+✓ built in 1.80s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+
+> dashboard@0.0.0 deploy
+> gh-pages -d dist
+
+Published
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard#
 
 
 ```
