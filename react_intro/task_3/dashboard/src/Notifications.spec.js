@@ -1,24 +1,10 @@
 // react_intro/task_3/dashboard/src/Notifications.spec.js
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Notifications from './Notifications';
 
 describe('Notifications', () => {
-  const ORIGINAL_LOG = console.log;
-
-  beforeEach(() => {
-    console.log = jest.fn();
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  afterAll(() => {
-    console.log = ORIGINAL_LOG;
-  });
-
   test('renders the notifications title (case-insensitive)', () => {
     render(<Notifications />);
     expect(
@@ -34,14 +20,17 @@ describe('Notifications', () => {
 
   test('renders exactly 3 list items', () => {
     render(<Notifications />);
-    const items = screen.getAllByRole('listitem');
+    const list = screen.getByRole('list'); // s'assure qu'on cible la liste
+    const items = within(list).getAllByRole('listitem');
     expect(items).toHaveLength(3);
   });
 
   test('clicking the Close button logs the expected message', () => {
+    const spy = jest.spyOn(console, 'log').mockImplementation(() => {}); // mock local
     render(<Notifications />);
     const button = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(button);
-    expect(console.log).toHaveBeenCalledWith('Close button has been clicked');
+    fireEvent.click(button); // utilise bien fireEvent
+    expect(spy).toHaveBeenCalledWith('Close button has been clicked');
+    spy.mockRestore(); // nettoyage
   });
 });
