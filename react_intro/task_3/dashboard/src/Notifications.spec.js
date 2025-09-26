@@ -7,36 +7,44 @@ import Notifications from './Notifications';
 describe('Notifications component', () => {
   test('renders the notifications title (case-insensitive)', () => {
     render(<Notifications />);
-    // Vérifie que le texte exact est présent, insensible à la casse
     expect(
-      screen.getByText(/Here is the list of notifications/i)
+      screen.getByText(/here is the list of notifications/i)
     ).toBeInTheDocument();
   });
 
   test('renders the Close button', () => {
     render(<Notifications />);
-    // Vérifie que le bouton existe et porte le nom ou aria-label "Close"
+    // Bouton accessible par son nom/aria-label (insensible à la casse)
     const button = screen.getByRole('button', { name: /close/i });
     expect(button).toBeInTheDocument();
+    // L’icône de fermeture est présente (alt insensible à la casse)
+    expect(screen.getByAltText(/close/i)).toBeInTheDocument();
   });
 
   test('renders exactly 3 list items', () => {
     render(<Notifications />);
-    // Vérifie que la liste existe et qu'elle contient exactement 3 éléments <li>
     const list = screen.getByRole('list');
     const items = within(list).getAllByRole('listitem');
     expect(items).toHaveLength(3);
   });
 
+  // >>> Ce test couvre "all the required elements" en ignorant la casse
+  test('renders all required notification texts (case-insensitive)', () => {
+    render(<Notifications />);
+    // Les deux notifications en clair
+    expect(screen.getByText(/new course available/i)).toBeInTheDocument();
+    expect(screen.getByText(/new resume available/i)).toBeInTheDocument();
+    // La notification injectée en HTML (getLatestNotification)
+    // "<strong>Urgent requirement</strong> - complete by EOD"
+    expect(screen.getByText(/urgent requirement/i)).toBeInTheDocument();
+  });
+
   test('clicking the Close button logs the expected message', () => {
-    // Mock console.log uniquement pour ce test
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     render(<Notifications />);
     const button = screen.getByRole('button', { name: /close/i });
-    // Simule le clic comme demandé avec fireEvent
     fireEvent.click(button);
-    // Vérifie le message exact attendu
-    expect(spy).toHaveBeenCalledWith('Close button has been clicked');
-    spy.mockRestore(); // Nettoyage
+    expect(logSpy).toHaveBeenCalledWith('Close button has been clicked');
+    logSpy.mockRestore();
   });
 });
