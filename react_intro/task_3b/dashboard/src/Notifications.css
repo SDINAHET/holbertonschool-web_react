@@ -1,0 +1,76 @@
+/* react_intro/task_1/dashboard/src/Notifications.css */
+:root { --hb-red: #e1003c; }
+
+/* Wrapper posé par App.jsx pour donner un petit padding périphérique */
+/* .root-notifications {
+  padding: 8px;
+} */
+
+/* Bandeau pleine largeur avec bordure pointillée (comme sur ta capture) */
+/* .notification-items {
+  width: 100%;
+  background: #fff;
+  border: 2px dotted var(--hb-red);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+} */
+
+/* .notification-items p {
+  margin: 0;
+  font-size: 0.95rem;
+} */
+
+/* petit padding autour de la boîte en haut */
+/* Conteneur général */
+.root-notifications {
+  padding: 6px 8px 0;
+}
+
+/* Boîte avec bordure pointillée */
+.notification-items {
+  width: 100%;
+  background: #fff;
+  border: 2px dotted var(--hb-red);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+}
+
+/* Titre */
+.notification-items p {
+  margin: 0 0 8px;
+}
+
+/* Liste sans marges */
+.notification-items ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+/* Items par défaut */
+.notification-items li {
+  margin: 4px 0;
+}
+
+/* 1er item : texte bleu */
+.notification-items li[data-priority="default"] {
+  color: #1a73e8;
+}
+
+/* 2e item : texte rouge */
+.notification-items li[data-priority="urgent"] {
+  color: var(--hb-red);
+}
+
+/* 3e item : texte noir sauf le strong en rouge */
+.notification-items li[data-priority="mixed"] {
+  color: #222;
+}
+.notification-items li[data-priority="mixed"] strong {
+  color: var(--hb-red);
+  font-weight: bold;
+}
