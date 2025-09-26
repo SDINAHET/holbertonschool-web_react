@@ -8,7 +8,7 @@ describe('Notifications component', () => {
   test('renders the notifications title (case-insensitive)', () => {
     render(<Notifications />);
     expect(
-      screen.getByText(/here is the list of notifications/i)
+      screen.getByText(/Here is the list of notifications/i)
     ).toBeInTheDocument();
   });
 
