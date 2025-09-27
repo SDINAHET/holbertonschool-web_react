@@ -1,33 +1,32 @@
-// react_intro/task_3/dashboard/src/Notifications.spec.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Notifications from './Notifications'; // adapte le chemin si besoin
+import Notifications from './Notifications';
 
-describe('Notifications', () => {
+describe('Notifications component', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  test('shows the notifications title', () => {
+  test('renders the notifications title', () => {
     render(<Notifications />);
     expect(
       screen.getByText(/Here is the list of notifications/i)
     ).toBeInTheDocument();
   });
 
-  test('contains a close button', () => {
+  test('renders the close button', () => {
     render(<Notifications />);
     expect(
       screen.getByRole('button', { name: /close/i })
     ).toBeInTheDocument();
   });
 
-  test('renders 3 notifications (li elements)', () => {
+  test('renders 3 list items', () => {
     render(<Notifications />);
     expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 
-  test('logs when the close button is clicked', () => {
+  test('logs message when close button is clicked', () => {
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     render(<Notifications />);
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
