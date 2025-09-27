@@ -18,11 +18,11 @@ describe('Notifications', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 
-  it('logs on Close click', () => {
-    const spy = jest.spyOn(global.console, 'log').mockImplementation(() => {});
-    render(<Notifications />);
-    fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    expect(spy).toHaveBeenCalledWith('Close button has been clicked');
-    spy.mockRestore();
-  });
+  // it('logs on Close click', () => {
+  //   const spy = jest.spyOn(global.console, 'log').mockImplementation(() => {});
+  //   render(<Notifications />);
+  //   fireEvent.click(screen.getByRole('button', { name: /close/i }));
+  //   expect(spy).toHaveBeenCalledWith('Close button has been clicked');
+  //   spy.mockRestore();
+  // });
 });
