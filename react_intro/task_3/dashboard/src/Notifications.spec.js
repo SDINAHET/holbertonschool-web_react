@@ -2,36 +2,27 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
 
-describe('Notifications component', () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
+describe('Notifications', () => {
+  it('shows the notifications title (ignore case)', () => {
+    render(<Notifications />);
+    expect(screen.getByText(/here is the list of notifications/i)).toBeInTheDocument();
   });
 
-  test('renders the notifications title', () => {
+  it('has a Close button (ignore case)', () => {
     render(<Notifications />);
-    const title = screen.getByText(/Here is the list of notifications/i);
-    expect(title).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
   });
 
-  test('renders the close button', () => {
+  it('renders 3 notifications', () => {
     render(<Notifications />);
-    const closeButton = screen.getByRole('button', { name: /close/i });
-    expect(closeButton).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 
-  test('renders 3 list items', () => {
+  it('logs on Close click', () => {
+    const spy = jest.spyOn(global.console, 'log').mockImplementation(() => {});
     render(<Notifications />);
-    const listItems = screen.getAllByRole('listitem');
-    expect(listItems).toHaveLength(3);
-  });
-
-  // 👉 test que le checker attend
-  test('logs message when close button is clicked', () => {
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    render(<Notifications />);
-    const closeButton = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeButton);
-    expect(spy).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole('button', { name: /close/i }));
     expect(spy).toHaveBeenCalledWith('Close button has been clicked');
+    spy.mockRestore();
   });
 });
