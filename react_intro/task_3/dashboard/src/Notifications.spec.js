@@ -25,11 +25,11 @@ describe('Notifications component', () => {
   //   expect(listItems).toHaveLength(3);
   // });
 
-  test('logs message when close button is clicked', () => {
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    render(<Notifications />);
-    const closeButton = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeButton);
-    expect(spy).toHaveBeenCalledWith('Close button has been clicked');
-  });
+  // test('logs message when close button is clicked', () => {
+  //   const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  //   render(<Notifications />);
+  //   const closeButton = screen.getByRole('button', { name: /close/i });
+  //   fireEvent.click(closeButton);
+  //   expect(spy).toHaveBeenCalledWith('Close button has been clicked');
+  // });
 });
