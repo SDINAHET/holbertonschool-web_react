@@ -307,6 +307,27 @@ Run `npm audit` for details.
 
 
 
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_3/dashboard# npm test -- src/Notifications.spec.js --watchAll=false
+
+> dashboard@0.0.0 test
+> jest --watchAll=false src/Notifications.spec.js --watchAll=false
+
+ PASS  src/Notifications.spec.js (28.959 s)
+  Notifications component
+    ✓ renders the notifications title (46 ms)
+    ✓ renders the close button (64 ms)
+    ✓ renders 3 list items (23 ms)
+    ✓ logs message when close button is clicked (15 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        41.098 s, estimated 48 s
+Ran all test suites matching /src\/Notifications.spec.js/i.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_3/dashboard#
 ```
 
 # Task8
