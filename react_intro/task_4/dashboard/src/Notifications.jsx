@@ -40,7 +40,7 @@ export default function Notifications() {
         onClick={() => console.log('Close button has been clicked')}
         style={{ position: 'absolute', top: 10, right: 10, background: 'none', border: 'none', cursor: 'pointer' }}
       >
-        <img src={closeButton} alt="close button" width="12" height="12" />
+        <img src={closeButton} alt="close" width="12" height="12" />
       </button>
     </div>
   );
