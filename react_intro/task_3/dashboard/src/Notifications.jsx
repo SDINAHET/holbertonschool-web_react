@@ -1,39 +1,46 @@
-import React from 'react';
-import './Notifications.css';
-import closeIcon from './assets/close-icon.png';
-import { getLatestNotification } from './utils';
+// task_3/dashboard/src/Notifications.spec.js
+import React from "react";
+import { render, screen, fireEvent, within, cleanup } from "@testing-library/react";
+import Notifications from "./Notifications";
 
-export default function Notifications() {
-  return (
-    <div className="Notifications" style={{ position: 'relative' }}>
-      {/* Titre exact */}
-      <p>Here is the list of notifications</p>
+// Nettoyage et reset des mocks après chaque test
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 
-      {/* Liste des notifications */}
-      <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li
-          data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        ></li>
-      </ul>
+describe("Notifications component (Task 7)", () => {
+  test("renders the notifications title (case-insensitive)", () => {
+    render(<Notifications />);
+    // Ignore la casse
+    const title = screen.getByText(/here is the list of notifications/i);
+    expect(title).toBeInTheDocument();
+  });
 
-      {/* Bouton Close */}
-      <button
-        aria-label="Close"
-        onClick={() => console.log('Close button has been clicked')}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer'
-        }}
-      >
-        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
-      </button>
-    </div>
-  );
-}
+  test("contains a Close button inside the notifications container", () => {
+    const { container } = render(<Notifications />);
+    const panel = container.querySelector(".Notifications");
+    expect(panel).toBeTruthy();
+
+    // Bouton avec aria-label="Close" (recherche insensible à la casse)
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    // S'assure que le bouton est bien dans le container .Notifications
+    expect(within(panel).getByRole("button", { name: /close/i })).toBe(closeBtn);
+  });
+
+  test("renders exactly 3 list items as notifications", () => {
+    render(<Notifications />);
+    const items = screen.getAllByRole("listitem");
+    expect(items).toHaveLength(3);
+  });
+
+  test("clicking the Close button logs the expected message", () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    render(<Notifications />);
+
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    fireEvent.click(closeBtn);
+
+    expect(logSpy).toHaveBeenCalledWith("Close button has been clicked");
+  });
+});
