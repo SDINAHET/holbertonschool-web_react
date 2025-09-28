@@ -519,6 +519,37 @@ dist/assets/index-WuqLIXZM.js            147.55 kB │ gzip: 49.22 kB
 Published
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
 ask_4/dashboard#
+
+
+
+
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard# # 1. Le close button
+grep -R 'close-button.png' -n src
+grep -R 'alt="close"' -n src/Notifications.jsx
+
+# 2. Le logo Holberton
+grep -R 'holberton-logo.jpg' -n src
+grep -R 'alt="holberton logo"' -n src/App.jsx
+
+# 3. Le favicon en chemin relatif dans index.html
+grep -n 'rel="icon"' index.html
+# → doit afficher href="favicon.ico"
+src/Notifications.jsx:4:import closeButton from './assets/close-button.png';   // <-- nom attendu
+36:        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
+43:        <img src={closeButton} alt="close" width="12" height="12" />
+src/App.jsx:2:import logo from "./assets/holberton-logo.jpg";
+14:        <img src={logo} alt="holberton logo" />
+5:    <!-- <link rel="icon" href="favicon.ico" /> -->
+6:    <link rel="icon" href="/holbertonschool-web_react/favicon.ico" />
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/t
+ask_4/dashboard#
+
+
+
+
 ```
 https://sdinahet.github.io/holbertonschool-web_react/
 

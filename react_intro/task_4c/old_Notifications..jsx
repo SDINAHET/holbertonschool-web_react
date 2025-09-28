@@ -1,5 +1,6 @@
 import React from 'react';
 import './Notifications.css';
+// import closeIcon from './assets/close-icon.png';
 import closeButton from './assets/close-button.png';   // <-- nom attendu
 import { getLatestNotification } from './utils';
 
@@ -20,6 +21,20 @@ export default function Notifications() {
       </ul>
 
       {/* Bouton Close */}
+      {/* <button
+        aria-label="Close"
+        onClick={() => console.log('Close button has been clicked')}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer'
+        }}
+      >
+        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
+      </button> */}
       <button
         aria-label="Close"
         onClick={() => console.log('Close button has been clicked')}
