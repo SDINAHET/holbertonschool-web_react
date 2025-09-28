@@ -3,7 +3,7 @@ import { render, screen, fireEvent, within, cleanup } from "@testing-library/rea
 import Notifications from "./Notifications";
 
 // Mocks CSS & assets pour Jest
-jest.mock("./assets/close-button.png", () => "close-button.png");
+jest.mock("./assets/close-icon.png", () => "close-icon.png");
 jest.mock("./Notifications.css", () => ({}), { virtual: true });
 
 afterEach(() => {
