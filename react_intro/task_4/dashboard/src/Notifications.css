@@ -1,4 +1,4 @@
-:root { --hb-red: #e1003c; }
+:root { --hb-red: red; }
 
 /* Boîte notifications (pointillée comme la maquette) */
 .Notifications, .notifications {
@@ -43,12 +43,12 @@
 .Notifications li[data-notification-type="urgent"],
 .notifications li[data-notification-type="urgent"],
 .Notifications li[data-priority="urgent"],
-.notifications li[data-priority="urgent"] { color: #e1003c; }
+.notifications li[data-priority="urgent"] { color: red !important; }
 
 .Notifications li[data-notification-type="urgent"]::marker,
 .notifications li[data-notification-type="urgent"]::marker,
 .Notifications li[data-priority="urgent"]::marker,
-.notifications li[data-priority="urgent"]::marker { color: #e1003c; }
+.notifications li[data-priority="urgent"]::marker { color: red !important; }
 
 /* Bouton fermer */
 .Notifications-close{

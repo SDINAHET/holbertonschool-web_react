@@ -15,9 +15,9 @@ html, body, #root {
 .App-header {
   display: flex;
   align-items: center;
-  color: #e1003c;
+  color: red;
   padding: 10px;
-  border-bottom: 3px solid #e1003c;
+  border-bottom: 3px solid red;
 }
 
 .App-header img {
@@ -45,7 +45,7 @@ html, body, #root {
   bottom: 0;         /* mets 10px si tu veux aussi un espace en bas */
   /* bottom: 10px; */
 
-  border-top: 3px solid #e1003c;
+  border-top: 3px solid red;
   text-align: center;
   font-style: italic;
   padding: 10px 0;
