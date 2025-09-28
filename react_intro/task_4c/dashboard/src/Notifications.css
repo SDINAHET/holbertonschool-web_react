@@ -29,18 +29,6 @@
 }
 
 /* Couleurs du texte ET de la puce */
-.Notifications li[data-priority="default"],
-.notifications li[data-priority="default"] { color: blue; }
-.Notifications li[data-priority="default"]::marker,
-.notifications li[data-priority="default"]::marker { color: blue; }
-
-.Notifications li[data-priority="urgent"],
-.notifications li[data-priority="urgent"] { color: var(--hb-red); }
-.Notifications li[data-priority="urgent"]::marker,
-.notifications li[data-priority="urgent"]::marker { color: var(--hb-red); }
-
-
-/* Couleurs du texte ET de la puce */
 .Notifications li[data-notification-type="default"],
 .notifications li[data-notification-type="default"] { color: blue; }
 .Notifications li[data-notification-type="default"]::marker,

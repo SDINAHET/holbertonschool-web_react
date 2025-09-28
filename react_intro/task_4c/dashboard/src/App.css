@@ -1,0 +1,50 @@
+/* :root{
+  --hb-red:#e1003c;
+  --gut:10px;
+} */
+
+html,body,#root{ margin:10px; }  /* pas de marge par défaut */
+
+/* HEADER : bordure 100%, contenu paddé */
+.App-header {
+  display: flex;
+  align-items: center;
+  color: #e1003c;
+  padding: 10px;
+  border-bottom: 3px solid #e1003c;
+}
+
+.App-header img {
+  height: 200px;
+  margin-right: 20px;
+}
+
+.App-body {
+  padding: 40px;
+}
+
+/* Espace supplémentaire avant "Password" */
+.App-login label[for="password"] {
+  margin-left: 16px;   /* ajuste la valeur : 12, 16, 24… */
+}
+
+/* FORMULAIRE */
+.App-login{ display:inline-flex; align-items:center; gap:8px; }
+
+/* espace aux extrémités de la barre rouge du footer */
+.App-footer {
+  position: fixed;
+  left: 20px;        /* espace à gauche */
+  right: 20px;       /* espace à droite */
+  bottom: 0;         /* mets 10px si tu veux aussi un espace en bas */
+  /* bottom: 10px; */
+
+  border-top: 3px solid #e1003c;
+  text-align: center;
+  font-style: italic;
+  padding: 10px 0;
+  background-color: #fff;
+
+  width: auto;       /* surtout pas 100% */
+  margin: 0;         /* margin n'affecte pas un élément fixed correctement ici */
+}
