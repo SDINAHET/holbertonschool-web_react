@@ -24,7 +24,7 @@ check "logo holberton-logo.jpg présent dans src/assets/" \
   "[ -f src/assets/holberton-logo.jpg ]"
 
 check "close-icon.png présent dans src/assets/" \
-  "[ -f src/assets/close-icon.png ]"
+  "[ -f src/assets/close-button.png ]"
 
 # 1) Favicon en chemin relatif (pas de chemin absolu /... )
 check 'index.html -> <link rel="icon" href="favicon.ico">' \
@@ -38,18 +38,18 @@ check 'App.jsx utilise alt="holberton logo"' \
   "grep -q 'alt=\"holberton logo\"' src/App.jsx"
 
 # 3) Notifications.jsx -> utilise close-button.png + alt="close"
-check "Notifications.jsx importe ./assets/close-icon.png" \
-  "grep -qE 'import\\s+.+\\s+from\\s+\\\"\\./assets/close-icon\\.png\\\"' src/Notifications.jsx"
+check "Notifications.jsx importe ./assets/close-button.png" \
+  "grep -qE 'import\\s+.+\\s+from\\s+\\\"\\./assets/close-button\\.png\\\"' src/Notifications.jsx"
 
 check 'Notifications.jsx utilise alt="close"' \
   "grep -q 'alt=\"close\"' src/Notifications.jsx"
 
 # 3b) S'assurer qu'aucun ancien close-icon.png/closeIcon ne traîne
-# check "Aucune trace de close-icon.png dans src/" \
-#   "! grep -R -q 'close-icon\\.png' src || false"
+check "Aucune trace de close-icon.png dans src/" \
+  "! grep -R -q 'close-icon\\.png' src || false"
 
-# check "Aucune trace de closeIcon dans src/" \
-#   "! grep -R -q '\\bcloseIcon\\b' src || false"
+check "Aucune trace de closeIcon dans src/" \
+  "! grep -R -q '\\bcloseIcon\\b' src || false"
 
 # 4) Vite configuré pour GitHub Pages
 check "vite.config.js -> base: '/holbertonschool-web_react/'" \
