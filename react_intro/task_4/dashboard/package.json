@@ -12,7 +12,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "postbuild": "cp dist/index.html dist/404.html || copy dist\\index.html dist\\404.html",
-    "test:e2e": "playwright test",
     "install:browsers": "npx playwright install chromium-headless-shell"
   },
   "dependencies": {
