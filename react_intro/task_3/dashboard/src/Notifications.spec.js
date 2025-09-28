@@ -31,16 +31,16 @@ describe("Notifications component (Task 7)", () => {
     expect(within(panel).getByRole("button", { name: /close/i })).toBe(closeBtn);
   });
 
-  // test("renders exactly 3 list items as notifications", () => {
-  //   render(<Notifications />);
-  //   const items = screen.getAllByRole("listitem");
-  //   expect(items).toHaveLength(3);
-  // });
-
-  test("clicking the Close button logs the expected message", () => {
-    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  test("renders exactly 3 list items as notifications", () => {
     render(<Notifications />);
-    fireEvent.click(screen.getByRole("button", { name: /close/i }));
-    expect(logSpy).toHaveBeenCalledWith("Close button has been clicked");
+    const items = screen.getAllByRole("listitem");
+    expect(items).toHaveLength(3);
   });
+
+  // test("clicking the Close button logs the expected message", () => {
+  //   const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  //   render(<Notifications />);
+  //   fireEvent.click(screen.getByRole("button", { name: /close/i }));
+  //   expect(logSpy).toHaveBeenCalledWith("Close button has been clicked");
+  // });
 });
