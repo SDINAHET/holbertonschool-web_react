@@ -1,7 +1,14 @@
+import React from 'react';
 import "./App.css";
-import logo from "./assets/holberton-logo.jpg";
-import { getCurrentYear, getFooterCopy } from "./utils";
+// import logo from "./assets/holberton-logo.jpg";
+// import { getCurrentYear, getFooterCopy } from "./utils";
+import {
+  getFullYear,
+  getFooterCopy,
+  getLatestNotification,
+} from '../utils/utils.js';         // ← important
 import Notifications from "../Notifications/Notifications";
+import holbertonLogo from '../assets/holberton-logo.jpg';
 
 function App() {
   return (
@@ -11,7 +18,8 @@ function App() {
       </div>
 
       <div className="App-header">
-        <img src={logo} alt="holberton logo" />
+        {/* <img src={logo} alt="holberton logo" /> */}
+        <img src={holbertonLogo} alt="holberton logo" />
         <h1>School dashboard</h1>
       </div>
 

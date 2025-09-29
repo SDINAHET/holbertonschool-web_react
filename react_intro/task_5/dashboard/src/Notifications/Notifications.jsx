@@ -1,9 +1,11 @@
 import React from 'react';
 import './Notifications.css';
-import closeIcon from "./assets/close-icon.png";
+// import closeIcon from "./assets/close-icon.png";
+import closeIcon from '../assets/close-button.png';
 // import closeButton from "./assets/close-button.png";
 // import { getLatestNotification } from './utils';
-import { getFullYear, getFooterCopy, getLatestNotification } from '../utils/utils.js';
+import { getLatestNotification } from '../utils/utils.js';
+// import { getFullYear, getFooterCopy, getLatestNotification } from '../utils/utils.js';
 
 export default function Notifications() {
   return (

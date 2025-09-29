@@ -559,6 +559,26 @@ https://sdinahet.github.io/holbertonschool-web_react/
 # Task9
 
 ```bash
+task_5/dashboard/
+├─ public/
+│  └─ favicon.ico
+├─ src/
+│  ├─ App/
+│  │  ├─ App.jsx
+│  │  └─ App.css
+│  ├─ Notifications/
+│  │  ├─ Notifications.jsx
+│  │  └─ Notifications.css
+│  ├─ utils/
+│  │  ├─ utils.js
+│  │  └─ utils.spec.js
+│  ├─ assets/
+│  │  ├─ holberton-logo.jpg
+│  │  └─ close-button.png
+│  ├─ main.jsx
+│  └─ index.css (if you have one)
+├─ package.json
+└─ vite.config.js
 
 
 ```
