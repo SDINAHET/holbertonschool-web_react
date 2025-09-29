@@ -1,70 +1,59 @@
-:root { --hb-red: #e1003c; }
+/* :root{
+  --hb-red:#e1003c;
+  --gut:10px;
+} */
 
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; margin: 0; }
-body {
-  font-family: Georgia, "Times New Roman", serif;
-  color: #222;
+/* html,body,#root{ margin:10px; }  pas de marge par défaut */
+
+/* Police par défaut de l’app (hors Notifications) */
+html, body, #root {
+  margin: 10px;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-.App { min-height: 100%; display: flex; flex-direction: column; }
-
-/* ===== HEADER (petit hippocampe + gros titre) ===== */
-.App-header {
+/* HEADER : bordure 100%, contenu paddé */
+.App-header {                 /* garde display, align-items, padding, border */
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 24px 40px 8px;
-}
-.logo-top {
-  height: 120px;           /* ↑ plus grand */
-  width: auto;
-}
-.App-header h1 {
-  margin: 0;
-  font-size: 56px;         /* ↑ taille du titre */
-  font-weight: 700;
-  color: var(--hb-red);
-  line-height: 1;
+  padding: 10px;
+  border-bottom: 3px solid red;
 }
 
-/* ===== GROS LOGO TEXTE SOUS LE TITRE ===== */
-.brand-row {
-  padding: 0 0px 0px;
-}
-.brand {
-  height: 80px;           /* ↑ taille du logo de marque */
-  width: auto;
-  display: block;
+.App-header h1 {              /* ✅ seule la couleur du h1 */
+  color: #e1003c;
 }
 
-/* ===== CORPS ===== */
+.App-header img {
+  height: 200px;
+  margin-right: 20px;
+}
+
 .App-body {
-  border-top: 4px solid var(--hb-red);  /* barre rouge pleine largeur */
-  padding: 18px 24px 24px;
-  flex: 1;
+  padding: 40px;
 }
 
-/* ===== FOOTER ===== */
+/* Espace supplémentaire avant "Password" */
+.App-login label[for="password"] {
+  margin-left: 16px;   /* ajuste la valeur : 12, 16, 24… */
+}
+
+/* FORMULAIRE */
+.App-login{ display:inline-flex; align-items:center; gap:8px; }
+
+/* espace aux extrémités de la barre rouge du footer */
 .App-footer {
-  border-top: 3px solid var(--hb-red);
+  position: fixed;
+  left: 20px;        /* espace à gauche */
+  right: 20px;       /* espace à droite */
+  bottom: 0;         /* mets 10px si tu veux aussi un espace en bas */
+  /* bottom: 10px; */
+
+  border-top: 3px solid red;
   text-align: center;
-  padding: 14px 0;
-}
-.App-footer p { margin: 0; font-style: italic; color: #333; }
+  font-style: italic;
+  padding: 10px 0;
+  background-color: #fff;
 
-/* Optionnel : mise en ligne des champs */
-.Login-form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.Login-form label {
-  margin-right: 4px;
-}
-
-.Login-form input {
-  padding: 4px 6px;
+  width: auto;       /* surtout pas 100% */
+  margin: 0;         /* margin n'affecte pas un élément fixed correctement ici */
 }

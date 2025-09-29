@@ -1,46 +1,43 @@
-// react_intro/task_2/dashboard/src/App.jsx
-import React from 'react';
-import './App.css';
-import logo from './assets/holberton-logo.jpg';
+import "./App.css";
+import logo from "./assets/holberton-logo.jpg";
+import { getCurrentYear, getFooterCopy } from "./utils";
+import Notifications from "./Notifications";
 
-import Notifications from './Notifications';
-import { getCurrentYear, getFooterCopy } from './utils';
-
-export default function App() {
+function App() {
   return (
-    <div className="App">
-      {/* Notifications: enfant de App */}
+    <>
       <div className="root-notifications">
         <Notifications />
       </div>
 
-      <header className="App-header">
-        <img src={logo} alt="holberton logo" className="logo" />
+      <div className="App-header">
+        <img src={logo} alt="holberton logo" />
         <h1>School dashboard</h1>
-      </header>
+      </div>
 
-      <main className="App-body">
+      <div className="App-body">
         <p>Login to access the full dashboard</p>
 
-        {/* Formulaire demandé */}
-        <form className="Login-form" onSubmit={(e) => e.preventDefault()}>
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" />
+        <div className="App-login">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" />
 
-          <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" />
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" />
 
-          <button type="submit">OK</button>
-        </form>
-      </main>
+          <button>OK</button>
+        </div>
+      </div>
 
-      <footer className="App-footer">
-        <p>
-          <em>
-            Copyright {getCurrentYear()} {getFooterCopy(false)}
-          </em>
-        </p>
-      </footer>
-    </div>
+      <div className="App-footer">
+        <p>Copyright {getCurrentYear()} Holberton School main dashboard</p>
+        {/* SANS tiret */}
+        {/* <p>
+          Copyright {getCurrentYear()} {getFooterCopy(false)}
+        </p> */}
+      </div>
+    </>
   );
 }
+
+export default App;
