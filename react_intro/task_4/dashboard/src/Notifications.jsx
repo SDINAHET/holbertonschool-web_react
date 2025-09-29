@@ -1,6 +1,7 @@
 import React from 'react';
 import './Notifications.css';
 import closeIcon from "./assets/close-icon.png";
+import closeButton from "./assets/close-button.png";
 import { getLatestNotification } from './utils';
 
 export default function Notifications() {
@@ -41,6 +42,7 @@ export default function Notifications() {
         }}
       >
         <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
+        <img src={closeButton} alt="close" style={{ width: '10px', height: '10px' }} />
       </button>
     </div>
   );
