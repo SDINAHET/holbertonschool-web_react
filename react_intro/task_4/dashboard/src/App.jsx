@@ -30,7 +30,7 @@ function App() {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} - Holberton School</p>
+        <p>Copyright {getCurrentYear()} Holberton School main dashboard</p>
         {/* SANS tiret */}
         {/* <p>
           Copyright {getCurrentYear()} {getFooterCopy(false)}
