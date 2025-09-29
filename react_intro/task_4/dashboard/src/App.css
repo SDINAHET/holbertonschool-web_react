@@ -12,12 +12,15 @@ html, body, #root {
 }
 
 /* HEADER : bordure 100%, contenu paddé */
-.App-header {
+.App-header {                 /* garde display, align-items, padding, border */
   display: flex;
   align-items: center;
-  color: red;
   padding: 10px;
   border-bottom: 3px solid red;
+}
+
+.App-header h1 {              /* ✅ seule la couleur du h1 */
+  color: #e1003c;
 }
 
 .App-header img {
