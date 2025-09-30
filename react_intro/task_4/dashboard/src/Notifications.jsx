@@ -11,22 +11,22 @@ export default function Notifications() {
       <p>Here is the list of notifications</p>
 
       {/* Liste des notifications */}
-      <ul>
+      {/* <ul>
         <li data-notification-type="default">New course available</li>
         <li data-notification-type="urgent">New resume available</li>
         <li
           data-notification-type="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         />
-      </ul>
-      {/* <ul>
+      </ul> */}
+      <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
         <li
           data-priority="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         ></li>
-      </ul> */}
+      </ul>
 
       {/* Bouton Close */}
       <button
