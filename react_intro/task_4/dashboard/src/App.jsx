@@ -1,5 +1,7 @@
+import React from 'react';
 import "./App.css";
-import logo from "./assets/holberton-logo.jpg";
+// import logo from "./assets/holberton-logo.jpg";
+import holbertonLogo from './assets/holberton-logo.jpg';
 import { getCurrentYear, getFooterCopy } from "./utils";
 import Notifications from "./Notifications";
 
@@ -11,7 +13,8 @@ function App() {
       </div>
 
       <div className="App-header">
-        <img src={logo} alt="holberton logo" />
+        {/* <img src={logo} alt="holberton logo" /> */}
+        <img src={holbertonLogo} alt="holberton logo" />
         <h1>School dashboard</h1>
       </div>
 
@@ -30,7 +33,8 @@ function App() {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} Holberton School main dashboard</p>
+        {/* <p>Copyright {getCurrentYear()} Holberton School main dashboard</p> */}
+        <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p>
         {/* SANS tiret */}
         {/* <p>
           Copyright {getCurrentYear()} {getFooterCopy(false)}

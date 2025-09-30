@@ -1,21 +1,11 @@
-// react_intro/task_1/dashboard/src/utils.js
-// utilitaires simples pour le footer
+// task_4/dashboard/src/utils.js
+export const getCurrentYear = () => new Date().getFullYear();
 
-export function getCurrentYear() {
-  return new Date().getFullYear();
-}
+export const getFooterCopy = (isIndex) =>
+  isIndex ? 'Holberton School' : 'Holberton School main dashboard';
 
-/**
- * @param {boolean} isIndex
- *  - true  => "Holberton School"
- *  - false => "Holberton School main dashboard"
- */
-export function getFooterCopy(isIndex) {
-  return isIndex ? 'Holberton School' : 'Holberton School main dashboard';
-}
+export const getLatestNotification = () =>
+  '<strong>Urgent requirement</strong> - complete by EOD';
 
-// NEW
-export function getLatestNotification() {
-  // Doit retourner cette string EXACTE (avec balises)
-  return '<strong>Urgent requirement</strong> - complete by EOD';
-}
+// Optional alias so old code using getFullYear() still works
+export const getFullYear = getCurrentYear;
