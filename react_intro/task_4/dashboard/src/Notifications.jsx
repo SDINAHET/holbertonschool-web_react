@@ -42,7 +42,7 @@ export default function Notifications() {
         }}
       >
         {/* <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} /> */}
-        <img src={closeOcon} alt="close" style={{ width: '10px', height: '10px' }} />
+        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
       </button>
     </div>
   );
