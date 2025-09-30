@@ -3,9 +3,8 @@ import "./App.css";
 // import logo from "./assets/holberton-logo.jpg";
 // import { getCurrentYear, getFooterCopy } from "./utils";
 import {
-  getFullYear,
+  getCurrentYear,
   getFooterCopy,
-  getLatestNotification,
 } from '../utils/utils.js';         // ← important
 import Notifications from "../Notifications/Notifications";
 import holbertonLogo from '../assets/holberton-logo.jpg';
@@ -38,7 +37,8 @@ function App() {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} Holberton School main dashboard</p>
+        {/* <p>Copyright {getCurrentYear()} Holberton School main dashboard</p> */}
+        <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p>
         {/* SANS tiret */}
         {/* <p>
           Copyright {getCurrentYear()} {getFooterCopy(false)}
