@@ -583,3 +583,104 @@ task_5/dashboard/
 
 ```
 
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/task_
+5/dashboard# npm test -- --watchAll=false --verbose
+
+> dashboard@0.0.0 test
+> jest --watchAll=false --watchAll=false --verbose
+
+ PASS  src/favicon.spec.js (22.69 s)
+  Favicon link in index.html
+    ✓ declares <link rel="icon" ...> that points to favicon.ico (150 ms)
+
+ PASS  src/App/App.spec.js (25.522 s)
+  App (Task 2) - sign in form
+    ✓ renders two input elements (email and password) (138 ms)
+    ✓ renders two labels with texts "Email" and "Password" (18 ms)
+    ✓ renders a button with text OK (59 ms)
+
+ PASS  src/utils/utils.spec.js (22.094 s)
+  Utils functions
+    ✓ getCurrentYear returns the current year (94 ms)
+    ✓ getFooterCopy returns correct string when argument is true (1 ms)
+    ✓ getFooterCopy returns correct string when argument is false
+    ✓ getLatestNotification returns the correct string
+
+ FAIL  src/staticAssets.spec.js
+  ● Test suite failed to run
+
+    Cannot find module './App' from 'src/staticAssets.spec.js'
+
+      1 | import React from "react";
+      2 | import { render, screen, within } from "@testing-library/react";
+    > 3 | import App from "./App";
+        | ^
+      4 |
+      5 | describe("Static images (logo + close button)", () => {
+      6 |   test("renders the Holberton logo image", () => {
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.require (src/staticAssets.spec.js:3:1)
+
+ PASS  src/Notifications/Notifications.spec.js (32.504 s)
+  Notifications component (Task 7)
+    ✓ renders the notifications title (case-insensitive) (125 ms)
+    ✓ contains a Close button inside the notifications container (47 ms)
+    ✓ renders exactly 3 list items as notifications (12 ms)
+    ✓ clicking the Close button logs the expected message (15 ms)
+
+Test Suites: 1 failed, 4 passed, 5 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        50.317 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/task_
+5/dashboard#
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/task_
+5/dashboard# npm test -- --watchAll=false --verbose
+
+> dashboard@0.0.0 test
+> jest --watchAll=false --watchAll=false --verbose
+
+ PASS  src/utils/utils.spec.js (10.659 s)
+  Utils functions
+    ✓ getCurrentYear returns the current year (126 ms)
+    ✓ getFooterCopy returns correct string when argument is true (1 ms)
+    ✓ getFooterCopy returns correct string when argument is false
+    ✓ getLatestNotification returns the correct string (1 ms)
+
+ PASS  src/favicon.spec.js (22.561 s)
+  Favicon link in index.html
+    ✓ declares <link rel="icon" ...> that points to favicon.ico (96 ms)
+
+ PASS  src/staticAssets.spec.js (21.353 s)
+  Static images (logo + close button)
+    ✓ renders the Holberton logo image (223 ms)
+    ✓ renders the Close button image inside the Notifications close button (51 ms)
+
+ PASS  src/App/App.spec.js (18.31 s)
+  App (Task 2) - sign in form
+    ✓ renders two input elements (email and password) (169 ms)
+    ✓ renders two labels with texts "Email" and "Password" (18 ms)
+    ✓ renders a button with text OK (74 ms)
+
+ PASS  src/Notifications/Notifications.spec.js (18.727 s)
+  Notifications component (Task 7)
+    ✓ renders the notifications title (case-insensitive) (224 ms)
+    ✓ contains a Close button inside the notifications container (127 ms)
+    ✓ renders exactly 3 list items as notifications (15 ms)
+    ✓ clicking the Close button logs the expected message (18 ms)
+
+Test Suites: 5 passed, 5 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        31.312 s, estimated 33 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_intro/task_
+5/dashboard#
+
+```
+
