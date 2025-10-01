@@ -1,6 +1,6 @@
 /* Notifications box */
 .Notifications {
-  border: 1px dashed #e1354b; /* proche de la maquette */
+  border: 1px dotted red;
   padding: 10px 14px;
   margin: 10px;
   position: relative;
