@@ -1,12 +1,7 @@
 import React from 'react';
 import './Notifications.css';
 import closeIcon from "./assets/close-icon.png";
-// import closeIcon from '../assets/close-button.png';
-// import closeButton from "./assets/close-button.png";
-// import { getLatestNotification } from './utils';
-// import { getLatestNotification } from '../utils/utils.js';
 import { getLatestNotification } from '../utils.js';
-// import { getFullYear, getFooterCopy, getLatestNotification } from '../utils/utils.js';
 
 export default function Notifications() {
   return (
@@ -23,14 +18,6 @@ export default function Notifications() {
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         />
       </ul>
-      {/* <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li
-          data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        ></li>
-      </ul> */}
 
       {/* Bouton Close */}
       <button
@@ -45,7 +32,6 @@ export default function Notifications() {
           cursor: 'pointer'
         }}
       >
-        {/* <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} /> */}
         <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
       </button>
     </div>

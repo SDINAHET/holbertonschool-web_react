@@ -55,9 +55,3 @@
   position: absolute; top: 10px; right: 10px;
   background: transparent; border: none; cursor: pointer; padding: 0; line-height: 1;
 }
-
-/* ⚠️ SUPPRIMER ces anciennes règles si elles traînent :
-   .notifications ul { list-style-type:none; padding:0; margin:0; }
-   .notifications li[data-priority="default"] { ... }
-   .notifications li[data-priority="urgent"]  { ... }
-*/
