@@ -5,7 +5,7 @@ import {
   getFooterCopy,
 } from './utils.js';
 import Notifications from "./Notifications";
-import holbertonLogo from './assets/holberton-logo.jpg';
+import holbertonLogo from "./assets/holberton-logo.jpg";
 
 function App() {
   return (
