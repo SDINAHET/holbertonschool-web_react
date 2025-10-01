@@ -1,9 +1,9 @@
 // react_intro/task_1/dashboard/src/Notifications.jsx
 import React from 'react';
 import './Notifications.css';
-// import closeIcon from './assets/close-button.png';
+import closeIcon from './assets/close-button.png';
 // Notifications.jsx
-import closeIcon from './assets/close-icon.png'; // <-- nom exact
+// import closeIcon from './assets/close-icon.png'; // <-- nom exact
 import { getLatestNotification } from './utils';
 
 // export default function Notifications() {
