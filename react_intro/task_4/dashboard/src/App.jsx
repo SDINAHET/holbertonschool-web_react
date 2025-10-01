@@ -3,7 +3,7 @@ import "./App.css";
 import {
   getCurrentYear,
   getFooterCopy,
-} from '../utils.js';         // ← important
+} from './utils.js';
 import Notifications from "./Notifications";
 import holbertonLogo from './assets/holberton-logo.jpg';
 
@@ -34,7 +34,7 @@ function App() {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} - holberton School</p>
+        <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p>
       </div>
     </>
   );
