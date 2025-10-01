@@ -1,0 +1,63 @@
+:root { --hb-red: red; }
+
+/* Boîte notifications (pointillée comme la maquette) */
+.Notifications, .notifications {
+  border: 2px dotted var(--hb-red);
+  padding: 10px 14px;
+  margin: 10px;
+  position: relative;
+  color: #222;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* Titre/intro */
+.Notifications p, .notifications p {
+  margin: 0 0 8px;
+}
+
+/* Liste : puces visibles + bonne indentation */
+.Notifications ul, .notifications ul {
+  list-style: disc outside;
+  margin: 0;               /* pas de gros écart au-dessus */
+  padding-left: 22px;      /* décrochage comme la consigne */
+}
+
+/* Interligne/espacement entre puces (un peu serré) */
+.Notifications li, .notifications li {
+  line-height: 1;
+  margin: 2px 0;
+}
+
+/* couleurs + puces pour default (bleu) */
+.Notifications li[data-notification-type="default"],
+.notifications li[data-notification-type="default"],
+.Notifications li[data-priority="default"],
+.notifications li[data-priority="default"] { color: blue; }
+
+.Notifications li[data-notification-type="default"]::marker,
+.notifications li[data-notification-type="default"]::marker,
+.Notifications li[data-priority="default"]::marker,
+.notifications li[data-priority="default"]::marker { color: blue; }
+
+/* couleurs + puces pour urgent (rouge) */
+.Notifications li[data-notification-type="urgent"],
+.notifications li[data-notification-type="urgent"],
+.Notifications li[data-priority="urgent"],
+.notifications li[data-priority="urgent"] { color: red !important; }
+
+.Notifications li[data-notification-type="urgent"]::marker,
+.notifications li[data-notification-type="urgent"]::marker,
+.Notifications li[data-priority="urgent"]::marker,
+.notifications li[data-priority="urgent"]::marker { color: red !important; }
+
+/* Bouton fermer */
+.Notifications-close{
+  position: absolute; top: 10px; right: 10px;
+  background: transparent; border: none; cursor: pointer; padding: 0; line-height: 1;
+}
+
+/* ⚠️ SUPPRIMER ces anciennes règles si elles traînent :
+   .notifications ul { list-style-type:none; padding:0; margin:0; }
+   .notifications li[data-priority="default"] { ... }
+   .notifications li[data-priority="urgent"]  { ... }
+*/
