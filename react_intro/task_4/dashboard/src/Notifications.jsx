@@ -1,8 +1,12 @@
 import React from 'react';
 import './Notifications.css';
-// import closeIcon from "./assets/close-icon.png";
-import closeIcon from "./assets/close-button.png";
-import { getLatestNotification } from './utils';
+import closeIcon from "./assets/close-icon.png";
+// import closeIcon from '../assets/close-button.png';
+// import closeButton from "./assets/close-button.png";
+// import { getLatestNotification } from './utils';
+// import { getLatestNotification } from '../utils/utils.js';
+import { getLatestNotification } from '../utils.js';
+// import { getFullYear, getFooterCopy, getLatestNotification } from '../utils/utils.js';
 
 export default function Notifications() {
   return (
@@ -11,22 +15,22 @@ export default function Notifications() {
       <p>Here is the list of notifications</p>
 
       {/* Liste des notifications */}
-      {/* <ul>
+      <ul>
         <li data-notification-type="default">New course available</li>
         <li data-notification-type="urgent">New resume available</li>
         <li
           data-notification-type="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         />
-      </ul> */}
-      <ul>
+      </ul>
+      {/* <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
         <li
           data-priority="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         ></li>
-      </ul>
+      </ul> */}
 
       {/* Bouton Close */}
       <button

@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import App from "./App";
+// import App from "./App/App.jsx";
+import App from "./App.jsx";
 
 describe("Static images (logo + close button)", () => {
   test("renders the Holberton logo image", () => {

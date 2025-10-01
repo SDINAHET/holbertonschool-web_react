@@ -1,9 +1,15 @@
 import React from 'react';
 import "./App.css";
 // import logo from "./assets/holberton-logo.jpg";
-import holbertonLogo from './assets/holberton-logo.jpg';
-import { getCurrentYear, getFooterCopy } from "./utils";
+// import { getCurrentYear, getFooterCopy } from "./utils";
+import {
+  getCurrentYear,
+  getFooterCopy,
+} from '../utils.js';         // ← important
+// import Notifications from "../Notifications/Notifications";
+// import holbertonLogo from '../assets/holberton-logo.jpg';
 import Notifications from "./Notifications";
+import holbertonLogo from './assets/holberton-logo.jpg';
 
 function App() {
   return (

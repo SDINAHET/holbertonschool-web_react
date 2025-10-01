@@ -1,4 +1,4 @@
-// task_4/dashboard/src/utils.js
+// task_5/dashboard/src/utils/utils.js
 export const getCurrentYear = () => new Date().getFullYear();
 
 export const getFooterCopy = (isIndex) =>
