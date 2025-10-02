@@ -2,9 +2,10 @@ import React from "react";
 import { render, screen, fireEvent, within, cleanup } from "@testing-library/react";
 import Notifications from "./Notifications";
 import { getLatestNotification } from '../utils/utils';
+import '@testing-library/jest-dom';
 
 // Mocks CSS & assets pour Jest
-jest.mock("./assets/close-button.png", () => "close-icon.png");
+jest.mock("./assets/close-button.png", () => "close-button.png");
 jest.mock("./Notifications.css", () => ({}), { virtual: true });
 
 afterEach(() => {
@@ -27,9 +28,11 @@ describe("Notifications component (Task 7)", () => {
   });
 
   test("renders exactly 3 list items as notifications", () => {
-    render(<Notifications />);
-    expect(screen.getAllByRole("listitem")).toHaveLength(3);
-  });
+  const { container } = render(<Notifications />);
+  const panel = container.querySelector(".Notifications");
+    const items = within(panel).getAllByRole("listitem");
+  expect(items).toHaveLength(3);
+});
 
   // ✅ Test requis par seq1/seq3 : vérifie le log exact (case-insensitive)
   test("clicking the Close button logs the expected message", () => {
@@ -40,7 +43,6 @@ describe("Notifications component (Task 7)", () => {
     spy.mockRestore();
   });
 
-describe('Notifications', () => {
   test('renders 3 notification items with appropriate text', () => {
     const notificationsList = [
       { id: 1, type: 'default', value: 'New course available' },
