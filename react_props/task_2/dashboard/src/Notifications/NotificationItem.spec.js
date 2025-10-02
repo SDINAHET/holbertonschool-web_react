@@ -5,6 +5,7 @@ import NotificationItem from './NotificationItem';
 
 // (facultatif) mock du CSS
 jest.mock('./Notifications.css', () => ({}), { virtual: true });
+jest.mock("../assets/close-button.png", () => "close-button.png");
 
 describe('NotificationItem component (Task 2)', () => {
   test('default → data-notification-type="default" et couleur bleu', () => {
