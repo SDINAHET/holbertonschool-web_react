@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CourseListRow({
+export default function CourseListRow({
   isHeader = false,
   textFirstCell = '',
   textSecondCell = null,
@@ -45,5 +45,3 @@ CourseListRow.propTypes = {
     PropTypes.oneOf([null]),
   ]),
 };
-
-export default CourseListRow;

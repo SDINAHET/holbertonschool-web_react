@@ -341,6 +341,11 @@ Time:        31.902 s, estimated 32 s
 Ran all test suites.
 ```
 
+
+```bash
+node test-courseList-component_testRunner.js
+```
+
 # Task5
 
 ```bash
