@@ -10,11 +10,13 @@ function CourseList({ courses = [] }) {
   return (
     <table id="CourseList" className="course-list">
       <thead>
-        <CourseListRow isHeader textFirstCell="Available courses" textSecondCell={null} />
+        {/* <CourseListRow isHeader textFirstCell="Available courses" textSecondCell={null} /> */}
         {/* <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" /> */}
-        {hasCourses && (
+        {/* {hasCourses && (
         <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
-        )}
+        )} */}
+        <CourseListRow isHeader textFirstCell="Available courses" />
+        <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
       </thead>
       <tbody>
         {/* {hasCourses ? (
@@ -33,7 +35,7 @@ function CourseList({ courses = [] }) {
             <td colSpan="2">No course available yet</td>
           </tr>
         )} */}
-        {hasCourses ? (
+        {/* {hasCourses ? (
           courses.map((c) => (
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
@@ -41,7 +43,12 @@ function CourseList({ courses = [] }) {
           <tr>
             <td className="CourseList-empty" colSpan="2">No course available yet</td>
           </tr>
-        )}
+        )} */}
+        {hasCourses
+          ? courses.map((c) => (
+              <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
+            ))
+          : <CourseListRow textFirstCell="No course available yet" />}
       </tbody>
     </table>
   );
