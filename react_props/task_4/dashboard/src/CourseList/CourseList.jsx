@@ -1,42 +1,39 @@
-// CommonJS, sans JSX (pour le runner du checkeur)
-const React = require('react');
-const CourseListRow = require('./CourseListRow.js');
+import React from 'react';
+import PropTypes from 'prop-types';
+import CourseListRow from './CourseListRow';
+import './CourseList.css';
 
-module.exports = function CourseList({ courses = [] }) {
+function CourseList({ courses = [] }) {
   const hasCourses = Array.isArray(courses) && courses.length > 0;
 
-  return React.createElement(
-    'table',
-    { id: 'CourseList', className: 'course-list' },
-    React.createElement(
-      'thead',
-      null,
-      React.createElement(CourseListRow, {
-        isHeader: true,
-        textFirstCell: 'Available courses',
-        textSecondCell: null
-      }),
-      React.createElement(CourseListRow, {
-        isHeader: true,
-        textFirstCell: 'Course name',
-        textSecondCell: 'Credit'
-      })
-    ),
-    React.createElement(
-      'tbody',
-      null,
-      hasCourses
-        ? courses.map((c) =>
-            React.createElement(CourseListRow, {
-              key: c.id,
-              textFirstCell: c.name,
-              textSecondCell: c.credit
-            })
-          )
-        : React.createElement(CourseListRow, {
-            textFirstCell: 'No course available yet',
-            textSecondCell: null
-          })
-    )
+  return (
+    <table id="CourseList" className="course-list">
+      <thead>
+        <CourseListRow isHeader textFirstCell="Available courses" textSecondCell={null} />
+        <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
+      </thead>
+      <tbody>
+        {hasCourses ? (
+          courses.map((c) => (
+            <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
+          ))
+        ) : (
+          // ✅ état vide via CourseListRow + <td colSpan="2">
+          <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
+        )}
+      </tbody>
+    </table>
   );
+}
+
+CourseList.propTypes = {
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      credit: PropTypes.number.isRequired,
+    })
+  ),
 };
+
+export default CourseList;
