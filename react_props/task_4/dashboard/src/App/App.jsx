@@ -7,13 +7,17 @@ import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 import './App.css';
 
+// const coursesList = [];
+
 const coursesList = [
   { id: 1, name: 'ES6', credit: 60 },
   { id: 2, name: 'Webpack', credit: 20 },
   { id: 3, name: 'React', credit: 40 },
 ];
 
+// function App({ isLoggedIn = true, courses = coursesList }) {
 function App({ isLoggedIn = false, courses = coursesList }) {
+
   return (
     <>
       <Notifications />
