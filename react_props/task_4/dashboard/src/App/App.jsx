@@ -26,7 +26,7 @@ function App({ isLoggedIn = false, courses = coursesList }) {
         <main className="App-body">
           {!isLoggedIn ? (
             <>
-              <p className="App-body-title">Login to access the full dashboard</p>
+              {/* <p className="App-body-title">Login to access the full dashboard</p> */}
               <Login />
             </>
           ) : (
