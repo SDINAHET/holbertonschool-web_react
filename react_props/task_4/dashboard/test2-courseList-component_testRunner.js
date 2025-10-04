@@ -15,6 +15,14 @@ require('@babel/register')({
   ignore: [/node_modules/],
 });
 
+// Ignorer les imports d'assets et de styles (Node ne sait pas les charger)
+;[
+  '.css', '.scss', '.sass', '.less',
+  '.png', '.jpg', '.jpeg', '.svg', '.gif', '.webp', '.avif'
+].forEach((ext) => {
+  require.extensions[ext] = () => {};
+});
+
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
@@ -34,20 +42,24 @@ function findCourseListFile(dir) {
       const full = path.join(d, e.name);
       if (e.isDirectory()) {
         walk(full);
-      } else if (
-        /CourseList(\.jsx|\.js)$/i.test(e.name) || // CourseList.jsx / CourseList.js
-        /CourseList\/index\.(jsx|js)$/i.test(full.replaceAll('\\', '/')) // CourseList/index.jsx
-      ) {
-        candidates.push(full);
+      } else {
+        const unixy = full.replace(/\\/g, '/');
+        if (
+          /\/CourseList\/CourseList\.(jsx|js)$/i.test(unixy) ||
+          /\/CourseList\/index\.(jsx|js)$/i.test(unixy) ||
+          /\/CourseList\.(jsx|js)$/i.test(unixy) // fallback
+        ) {
+          candidates.push(full);
+        }
       }
     }
   }
   walk(dir);
-  // ordre de préférence: .js puis .jsx ou l'inverse ? on prend .jsx d'abord
+  // on préfère .js (souvent attendu par les runners), puis .jsx
   candidates.sort((a, b) => {
-    const ax = a.endsWith('.jsx') ? 0 : 1;
-    const bx = b.endsWith('.jsx') ? 0 : 1;
-    return ax - bx;
+    const ascore = a.endsWith('.js') ? 0 : 1;
+    const bscore = b.endsWith('.js') ? 0 : 1;
+    return ascore - bscore;
   });
   return candidates[0] || null;
 }
@@ -95,17 +107,20 @@ const totalRows = count(htmlWithCourses, /<tr\b/gi);
 // --- Test 2: tableau vide -> 1 <tr> dans <tbody>, texte "No course available yet"
 // et cellule unique avec colSpan=2 (td ou th accepté)
 const htmlEmpty = render(React.createElement(CourseList, { courses: [] }));
-const tbodyMatch = htmlEmpty.match(/<tbody>([\s\S]*?)<\/tbody>/i);
+const tbodyMatch = htmlEmpty.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
 const tbodyHtml = (tbodyMatch && tbodyMatch[1]) || '';
 const tbodyRows = count(tbodyHtml, /<tr\b/gi);
 const hasEmptyText = /No course available yet/i.test(tbodyHtml);
-const hasColSpan2 = /<(td|th)\b[^>]*colspan\s*=\s*["']?2["']?/i.test(tbodyHtml);
+const hasColSpan2 = /<(td|th)\b[^>]*colspan\s*=\s*["']?2["']?[^>]*>/i.test(tbodyHtml);
 
 // Verdict
 if (totalRows === 5 && tbodyRows === 1 && hasEmptyText && hasColSpan2) {
   console.log('OK');
 } else {
   console.log('NOK');
-  // Pour déboguer, décommente :
-  // console.log({ totalRows, tbodyRows, hasEmptyText, hasColSpan2, htmlWithCourses, htmlEmpty });
+  // Debug (décommente si besoin)
+  // console.log({
+  //   totalRows, tbodyRows, hasEmptyText, hasColSpan2,
+  //   htmlWithCourses, htmlEmpty
+  // });
 }

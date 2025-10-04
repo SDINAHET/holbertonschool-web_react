@@ -15,14 +15,23 @@ const coursesList = [
 ];
 
 // ✅ use a default parameter instead of defaultProps
-function App({ isLoggedIn = false }) {
+// function App({ isLoggedIn = false }) {
+function App({ isLoggedIn = false, courses = coursesList }) {
   return (
     <>
       <Notifications />
       <div className="App">
         <Header />
         <main className="App-body">
-          {!isLoggedIn ? <Login /> : <CourseList courses={coursesList} />}
+          {/* {!isLoggedIn ? <Login /> : <CourseList courses={coursesList} />} */}
+          {!isLoggedIn ? (
+            <>
+              <p className="App-body-title">Login to access the full dashboard</p>
+              <Login />
+            </>
+          ) : (
+            <CourseList courses={courses} />
+          )}
         </main>
         <Footer />
       </div>
@@ -32,6 +41,7 @@ function App({ isLoggedIn = false }) {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
+  courses: PropTypes.array,
 };
 
 // ❌ remove App.defaultProps if you still have it

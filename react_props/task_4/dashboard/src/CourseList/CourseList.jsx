@@ -11,7 +11,10 @@ function CourseList({ courses = [] }) {
     <table id="CourseList" className="course-list">
       <thead>
         <CourseListRow isHeader textFirstCell="Available courses" textSecondCell={null} />
+        {/* <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" /> */}
+        {hasCourses && (
         <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
+        )}
       </thead>
       <tbody>
         {/* {hasCourses ? (
@@ -21,13 +24,22 @@ function CourseList({ courses = [] }) {
         ) : (
           <CourseListRow isHeader textFirstCell="No course available yet" textSecondCell={null} />
         )} */}
-        {hasCourses ? (
+        {/* {hasCourses ? (
           courses.map((c) => (
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
         ) : (
           <tr>
             <td colSpan="2">No course available yet</td>
+          </tr>
+        )} */}
+        {hasCourses ? (
+          courses.map((c) => (
+            <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
+          ))
+        ) : (
+          <tr>
+            <td className="CourseList-empty" colSpan="2">No course available yet</td>
           </tr>
         )}
       </tbody>

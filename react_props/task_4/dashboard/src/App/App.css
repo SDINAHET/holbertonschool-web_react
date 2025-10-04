@@ -57,3 +57,16 @@ html, body, #root {
   width: auto;       /* surtout pas 100% */
   margin: 0;         /* margin n'affecte pas un élément fixed correctement ici */
 }
+
+/* petit titre au-dessus du Login */
+.App-body-title {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* centre le message "No course available yet" */
+.CourseList-empty {
+  text-align: center;
+  color: #555;
+}
