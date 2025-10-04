@@ -14,12 +14,21 @@ function CourseList({ courses = [] }) {
         <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
       </thead>
       <tbody>
-        {hasCourses ? (
+        {/* {hasCourses ? (
           courses.map((c) => (
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
         ) : (
           <CourseListRow isHeader textFirstCell="No course available yet" textSecondCell={null} />
+        )} */}
+        {hasCourses ? (
+          courses.map((c) => (
+            <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
+          ))
+        ) : (
+          <tr>
+            <td colSpan="2">No course available yet</td>
+          </tr>
         )}
       </tbody>
     </table>
