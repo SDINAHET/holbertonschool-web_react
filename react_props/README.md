@@ -346,6 +346,35 @@ Ran all test suites.
 node test-courseList-component_testRunner.js
 ```
 
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_props/task_
+4/dashboard# npm test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/Notifications/NotificationItem.spec.js (15.367 s)
+ PASS  src/Login/Login.spec.js (15.519 s)
+ PASS  src/Footer/Footer.spec.js (16.2 s)
+ PASS  src/Header/Header.spec.js (16.295 s)
+ PASS  src/utils/utils.spec.js
+ PASS  src/favicon.spec.js
+ PASS  src/CourseList/CourseListRow.spec.js (6.68 s)
+ PASS  src/CourseList/CourseList.spec.js (6.94 s)
+ PASS  src/Notifications/Notifications.spec.js (31.235 s)
+ PASS  src/App/App.spec.js (33.881 s)
+ PASS  src/staticAssets.spec.js (42.836 s)
+
+Test Suites: 11 passed, 11 total
+Tests:       30 passed, 30 total
+Snapshots:   0 total
+Time:        58.562 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_props/task_
+4/dashboard#
+
+```
+
 # Task5
 
 ```bash

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CourseListRow({
+export default function CourseListRow({
   isHeader = false,
   textFirstCell = '',
   textSecondCell = null,
@@ -10,7 +10,7 @@ function CourseListRow({
     return (
       <tr>
         {textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
+          <th colSpan={2}>{textFirstCell}</th>
         ) : (
           <>
             <th>{textFirstCell}</th>
@@ -21,17 +21,10 @@ function CourseListRow({
     );
   }
 
-  // Body rows
   return (
     <tr>
-      {textSecondCell === null ? (
-        <td colSpan="2">{textFirstCell}</td>
-      ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
-      )}
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell ?? ''}</td>
     </tr>
   );
 }
@@ -45,5 +38,3 @@ CourseListRow.propTypes = {
     PropTypes.oneOf([null]),
   ]),
 };
-
-export default CourseListRow;

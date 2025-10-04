@@ -10,7 +10,7 @@ function CourseListRow({
     return (
       <tr>
         {textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
+          <th colSpan={2}>{textFirstCell}</th>
         ) : (
           <>
             <th>{textFirstCell}</th>
@@ -21,17 +21,11 @@ function CourseListRow({
     );
   }
 
-  // Body rows
+  // Non-header rows must always have two <td>
   return (
     <tr>
-      {textSecondCell === null ? (
-        <td colSpan="2">{textFirstCell}</td>
-      ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
-      )}
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell ?? ''}</td>
     </tr>
   );
 }

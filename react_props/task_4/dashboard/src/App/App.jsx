@@ -1,3 +1,4 @@
+// task_4/dashboard/src/App/App.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Header/Header';
@@ -13,7 +14,8 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-function App({ isLoggedIn }) {
+// ✅ use a default parameter instead of defaultProps
+function App({ isLoggedIn = false }) {
   return (
     <>
       <Notifications />
@@ -32,8 +34,7 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool,
 };
 
-App.defaultProps = {
-  isLoggedIn: false,
-};
+// ❌ remove App.defaultProps if you still have it
+// App.defaultProps = { isLoggedIn: false };
 
 export default App;
