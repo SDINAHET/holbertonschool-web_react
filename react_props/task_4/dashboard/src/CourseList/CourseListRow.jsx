@@ -1,27 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CourseListRow({ isHeader = false, textFirstCell = '', textSecondCell = null }) {
+function CourseListRow({
+  isHeader = false,
+  textFirstCell = '',
+  textSecondCell = null,
+}) {
   if (isHeader) {
-    if (textSecondCell === null) {
-      return (
-        <tr>
-          <th colSpan="2">{textFirstCell}</th>
-        </tr>
-      );
-    }
     return (
       <tr>
-        <th>{textFirstCell}</th>
-        <th>{textSecondCell}</th>
+        {textSecondCell === null ? (
+          <th colSpan="2">{textFirstCell}</th>
+        ) : (
+          <>
+            <th>{textFirstCell}</th>
+            <th>{textSecondCell}</th>
+          </>
+        )}
       </tr>
     );
   }
 
+  // Case "body"
   return (
     <tr>
-      <td>{textFirstCell}</td>
-      <td>{textSecondCell}</td>
+      {textSecondCell === null ? (
+        <td colSpan="2">{textFirstCell}</td>
+      ) : (
+        <>
+          <td>{textFirstCell}</td>
+          <td>{textSecondCell}</td>
+        </>
+      )}
     </tr>
   );
 }
@@ -29,7 +39,11 @@ function CourseListRow({ isHeader = false, textFirstCell = '', textSecondCell = 
 CourseListRow.propTypes = {
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string,
-  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  textSecondCell: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.oneOf([null]),   // ✅ autorise explicitement null
+  ]),
 };
 
 export default CourseListRow;

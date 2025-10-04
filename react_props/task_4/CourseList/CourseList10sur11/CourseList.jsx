@@ -9,25 +9,22 @@ function CourseList({ courses = [] }) {
   return (
     <table id="CourseList" className="course-list">
       <thead>
-        <CourseListRow isHeader textFirstCell="Available courses" textSecondCell={null} />
+        <CourseListRow isHeader textFirstCell="Available courses" />
         <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
       </thead>
       <tbody>
-        {hasCourses
+        {/* {hasCourses
           ? courses.map((c) => (
-              <CourseListRow
-                key={c.id}
-                textFirstCell={c.name}
-                textSecondCell={c.credit}
-              />
+              <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
             ))
-          : (
-              // ✅ état vide via CourseListRow en "body"
-              <CourseListRow
-                textFirstCell="No course available yet"
-                textSecondCell={null}
-              />
-            )}
+          : <CourseListRow textFirstCell="No course available yet" />
+        } */}
+        {hasCourses
+        ? courses.map((c) => (
+            <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
+          ))
+        : <CourseListRow isHeader textFirstCell="No course available yet" />
+      }
       </tbody>
     </table>
   );
