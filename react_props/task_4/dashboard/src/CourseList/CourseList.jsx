@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CourseListRow from './CourseListRow';
 import './CourseList.css';
 
-// ✅ note le "= {}" pour éviter l'erreur si le composant est appelé sans props
+// ✅ important: accepte un appel sans props
 function CourseList({ courses = [] } = {}) {
   const hasCourses = Array.isArray(courses) && courses.length > 0;
 
@@ -23,7 +23,7 @@ function CourseList({ courses = [] } = {}) {
             />
           ))
         ) : (
-          // Etat vide: 1 seule ligne, 1 cellule avec colSpan=2
+          // ⬇️ Avec le changement ci-dessus, ceci produira <td>“No course…”</td><td></td>
           <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
         )}
       </tbody>
@@ -32,11 +32,13 @@ function CourseList({ courses = [] } = {}) {
 }
 
 CourseList.propTypes = {
-  courses: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    credit: PropTypes.number.isRequired,
-  })),
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      credit: PropTypes.number.isRequired,
+    })
+  ),
 };
 
 export default CourseList;

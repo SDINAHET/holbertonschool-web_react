@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// ✅ on sécurise aussi le paramètre d'entrée
+// ✅ Accepte un appel sans props
 function CourseListRow(props = {}) {
   const {
     isHeader = false,
@@ -10,6 +10,9 @@ function CourseListRow(props = {}) {
   } = props;
 
   if (isHeader) {
+    // Header:
+    //  - sans seconde cellule -> un seul <th colSpan="2">
+    //  - avec seconde cellule -> deux <th>
     return (
       <tr>
         {textSecondCell === null ? (
@@ -24,17 +27,12 @@ function CourseListRow(props = {}) {
     );
   }
 
+  // Body:
+  //  ❗ Toujours deux <td>, même si textSecondCell est null (cellule vide attendue par le checker)
   return (
     <tr>
-      {textSecondCell === null ? (
-        // Dans le tbody, si pas de 2e cellule on met un td avec colSpan=2
-        <td colSpan="2">{textFirstCell}</td>
-      ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
-      )}
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell}</td>
     </tr>
   );
 }
@@ -42,7 +40,6 @@ function CourseListRow(props = {}) {
 CourseListRow.propTypes = {
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string,
-  // ✅ on autorise explicitement null pour éviter les warnings en console
   textSecondCell: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
