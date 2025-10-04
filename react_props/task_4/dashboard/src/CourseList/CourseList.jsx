@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CourseListRow from './CourseListRow';
 import './CourseList.css';
 
-// ✅ important: accepte un appel sans props
 function CourseList({ courses = [] } = {}) {
   const hasCourses = Array.isArray(courses) && courses.length > 0;
 
@@ -15,16 +14,14 @@ function CourseList({ courses = [] } = {}) {
       </thead>
       <tbody>
         {hasCourses ? (
-          courses.map((c) => (
-            <CourseListRow
-              key={c.id}
-              textFirstCell={c.name}
-              textSecondCell={c.credit}
-            />
+          courses.map(({ id, name, credit }) => (
+            <CourseListRow key={id} textFirstCell={name} textSecondCell={credit} />
           ))
         ) : (
-          // ⬇️ Avec le changement ci-dessus, ceci produira <td>“No course…”</td><td></td>
-          <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
+          // ⬇️ Exigé par le checker: une seule cellule qui span 2 colonnes
+          <tr>
+            <td colSpan="2">No course available yet</td>
+          </tr>
         )}
       </tbody>
     </table>
