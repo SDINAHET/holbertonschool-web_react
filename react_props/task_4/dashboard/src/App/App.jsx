@@ -1,4 +1,3 @@
-// task_4/dashboard/src/App/App.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Header/Header';
@@ -14,8 +13,6 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-// ✅ use a default parameter instead of defaultProps
-// function App({ isLoggedIn = false }) {
 function App({ isLoggedIn = false, courses = coursesList }) {
   return (
     <>
@@ -23,7 +20,6 @@ function App({ isLoggedIn = false, courses = coursesList }) {
       <div className="App">
         <Header />
         <main className="App-body">
-          {/* {!isLoggedIn ? <Login /> : <CourseList courses={coursesList} />} */}
           {!isLoggedIn ? (
             <>
               <p className="App-body-title">Login to access the full dashboard</p>
@@ -43,8 +39,5 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool,
   courses: PropTypes.array,
 };
-
-// ❌ remove App.defaultProps if you still have it
-// App.defaultProps = { isLoggedIn: false };
 
 export default App;
