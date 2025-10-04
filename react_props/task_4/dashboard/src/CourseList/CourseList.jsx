@@ -14,7 +14,7 @@ function CourseList({ courses }) {
       </thead>
       <tbody>
         {!hasCourses && (
-          <CourseListRow isHeader textFirstCell="No course available yet" textSecondCell={null} />
+          <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
         )}
         {hasCourses &&
           courses.map((course) => (
