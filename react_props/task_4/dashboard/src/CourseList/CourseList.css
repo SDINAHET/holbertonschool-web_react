@@ -1,28 +1,18 @@
 .course-list {
-  width: 100%;
-  border: 1px solid #e0e0e0;
+  width: 95%;
+  margin: 16px auto;
+  border: 1px solid #c7c7c7;
   border-collapse: collapse;
-  margin: 2rem 0;
-  background: #fff;
+  font-size: 0.9rem;
 }
 
-.course-list th {
-  text-align: left;
-  border-bottom: 2px solid #e0e0e0;
-  padding: 0.75rem;
-  font-weight: 700;
-}
-
+.course-list th,
 .course-list td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #f0f0f0;
+  border: 1px solid #c7c7c7;
+  padding: 4px 8px;
 }
 
-.course-list thead tr:first-child th {
-  background: #fafafa;
-  font-size: 1.05rem;
-}
-
-.course-list tbody tr:nth-child(even) td {
-  background: #fcfcfc;
+.course-list thead th:first-child {
+  text-align: center;
+  background: #f7f7f7;
 }
