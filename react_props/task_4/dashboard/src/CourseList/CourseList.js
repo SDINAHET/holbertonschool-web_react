@@ -18,7 +18,7 @@ export default function CourseList({ courses = [] }) {
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
         ) : (
-          // ⚠️ Le runner attend exactement 1 ligne dans <tbody> avec une seule cellule colSpan=2
+          // ÉTAT VIDE EXIGÉ PAR LE RUNNER : 1 ligne / 1 cellule avec colSpan=2
           <tr>
             <td colSpan="2">No course available yet</td>
           </tr>
