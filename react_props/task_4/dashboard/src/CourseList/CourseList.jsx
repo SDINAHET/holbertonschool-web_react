@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CourseListRow from './CourseListRow';
+import CourseListRow from './CourseListRow.jsx';
 import './CourseList.css';
 
-function CourseList({ courses = [] }) {
+export default function CourseList({ courses = [] }) {
   const hasCourses = Array.isArray(courses) && courses.length > 0;
 
   return (
@@ -18,7 +18,6 @@ function CourseList({ courses = [] }) {
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
         ) : (
-          // ✅ état vide via CourseListRow + <td colSpan="2">
           <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
         )}
       </tbody>
@@ -35,5 +34,3 @@ CourseList.propTypes = {
     })
   ),
 };
-
-export default CourseList;
