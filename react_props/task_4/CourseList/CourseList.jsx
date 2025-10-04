@@ -1,10 +1,9 @@
-// src/CourseList/CourseList.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import CourseListRow from './CourseListRow';
 import './CourseList.css';
 
-function CourseList({ courses = [] }) {
+function CourseList({ courses }) {
   const hasCourses = courses && courses.length > 0;
 
   return (
@@ -14,13 +13,17 @@ function CourseList({ courses = [] }) {
         <CourseListRow isHeader textFirstCell="Course name" textSecondCell="Credit" />
       </thead>
       <tbody>
-        {hasCourses ? (
-          courses.map((c) => (
-            <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
-          ))
-        ) : (
-          <CourseListRow isHeader textFirstCell="No course available yet" textSecondCell={null} />
+        {!hasCourses && (
+          <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
         )}
+        {hasCourses &&
+          courses.map((course) => (
+            <CourseListRow
+              key={course.id}
+              textFirstCell={course.name}
+              textSecondCell={course.credit}
+            />
+          ))}
       </tbody>
     </table>
   );
@@ -36,7 +39,8 @@ CourseList.propTypes = {
   ),
 };
 
-// ❌ enlever toute ligne du style :
-// CourseList.defaultProps = { courses: [] };
+CourseList.defaultProps = {
+  courses: [],
+};
 
 export default CourseList;
