@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CourseListRow({
-  isHeader = false,
-  textFirstCell = '',
-  textSecondCell = null,
-}) {
+// ✅ on sécurise aussi le paramètre d'entrée
+function CourseListRow(props = {}) {
+  const {
+    isHeader = false,
+    textFirstCell = '',
+    textSecondCell = null,
+  } = props;
+
   if (isHeader) {
     return (
       <tr>
@@ -21,10 +24,10 @@ function CourseListRow({
     );
   }
 
-  // Case "body"
   return (
     <tr>
       {textSecondCell === null ? (
+        // Dans le tbody, si pas de 2e cellule on met un td avec colSpan=2
         <td colSpan="2">{textFirstCell}</td>
       ) : (
         <>
@@ -39,10 +42,11 @@ function CourseListRow({
 CourseListRow.propTypes = {
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string,
+  // ✅ on autorise explicitement null pour éviter les warnings en console
   textSecondCell: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.oneOf([null]),   // ✅ autorise explicitement null
+    PropTypes.oneOf([null]),
   ]),
 };
 
