@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
-import CourseList from '../CourseList/CourseList.jsx';
+import CourseList from '../CourseList/CourseList';
 import './App.css';
 
 // const coursesList = [];

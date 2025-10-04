@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CourseListRow from './CourseListRow.jsx';
+import CourseListRow from './CourseListRow';
 import './CourseList.css';
 
 export default function CourseList({ courses = [] }) {
