@@ -1,52 +1,52 @@
 import React from 'react';
 import './Notifications.css';
-// import closeIcon from "./assets/close-icon.png";
 import closeIcon from '../assets/close-button.png';
-// import closeButton from "./assets/close-button.png";
-// import { getLatestNotification } from './utils';
+import NotificationItem from './NotificationItem.jsx';
 import { getLatestNotification } from '../utils/utils.js';
-// import { getFullYear, getFooterCopy, getLatestNotification } from '../utils/utils.js';
 
-export default function Notifications() {
+export default function Notifications({
+  displayDrawer = false,
+  notifications = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+  ],
+}) {
   return (
     <div className="Notifications" style={{ position: 'relative' }}>
-      {/* Titre exact */}
-      <p>Here is the list of notifications</p>
+      {/* Titre toujours visible */}
+      <div className="notification-title">Your notifications</div>
 
-      {/* Liste des notifications */}
-      <ul>
-        <li data-notification-type="default">New course available</li>
-        <li data-notification-type="urgent">New resume available</li>
-        <li
-          data-notification-type="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        />
-      </ul>
-      {/* <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li
-          data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        ></li>
-      </ul> */}
+      {/* Contenu conditionnel */}
+      {displayDrawer && (
+        <div className="notification-items">
+          {notifications.length === 0 ? (
+            <p>No new notification for now</p>
+          ) : (
+            <>
+              <p>Here is the list of notifications</p>
+              <ul>
+                {notifications.map((n) => (
+                  <NotificationItem
+                    key={n.id}
+                    type={n.type}
+                    value={n.value}
+                    html={n.html}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
 
-      {/* Bouton Close */}
-      <button
-        aria-label="Close"
-        onClick={() => console.log('Close button has been clicked')}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer'
-        }}
-      >
-        {/* <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} /> */}
-        <img src={closeIcon} alt="close" style={{ width: '10px', height: '10px' }} />
-      </button>
+          <button
+            className="Notifications-close"
+            aria-label="Close"
+            onClick={() => console.log('Close button has been clicked')}
+          >
+            <img src={closeIcon} alt="Close" style={{ width: 10, height: 10 }} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
