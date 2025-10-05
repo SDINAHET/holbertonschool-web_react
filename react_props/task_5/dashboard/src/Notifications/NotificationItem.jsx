@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function NotificationItem({ type = 'default', value, html }) {
+export default function NotificationItem({ type = 'default', html, value }) {
   const style = { color: type === 'urgent' ? 'red' : 'blue' };
 
   if (html) {
@@ -9,10 +9,12 @@ export default function NotificationItem({ type = 'default', value, html }) {
       <li
         data-notification-type={type}
         style={style}
+        // html = { __html: '...' }
         dangerouslySetInnerHTML={html}
       />
     );
   }
+
   return (
     <li data-notification-type={type} style={style}>
       {value}

@@ -1,4 +1,3 @@
-// src/Notifications/Notifications.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Notifications.css';
