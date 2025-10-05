@@ -21,7 +21,7 @@ export default function NotificationItem({ type = 'default', value, html }) {
 }
 
 NotificationItem.propTypes = {
-  type: PropTypes.oneOf(['default', 'urgent']),
+  type: PropTypes.string,
   value: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
 };

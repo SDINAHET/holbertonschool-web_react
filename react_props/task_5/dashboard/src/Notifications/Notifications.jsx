@@ -1,18 +1,13 @@
 // src/Notifications/Notifications.jsx
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Notifications.css';
 import closeIcon from '../assets/close-button.png';
-import NotificationItem from './NotificationItem';
-import { getLatestNotification } from '../utils/utils';
+import NotificationItem from './NotificationItem.jsx';
 
 export default function Notifications({
-  // ✅ Par défaut: panneau ouvert + 3 items (pour matcher les tests)
-  displayDrawer = true,
-  notifications = [
-    { id: 1, type: 'default', value: 'New course available' },
-    { id: 2, type: 'urgent', value: 'New resume available' },
-    { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-  ],
+  displayDrawer = false,
+  notifications = [],
 }) {
   const hasItems = Array.isArray(notifications) && notifications.length > 0;
 
@@ -21,12 +16,13 @@ export default function Notifications({
       {/* Toujours visible */}
       <div className="notification-title">Your notifications</div>
 
-      {/* Visible seulement quand displayDrawer === true */}
+      {/* Visible seulement si le drawer est ouvert */}
       {displayDrawer && (
         <div className="notification-items">
           {hasItems ? (
             <>
               <p>Here is the list of notifications</p>
+
               <ul>
                 {notifications.map((n) => (
                   <NotificationItem
@@ -38,17 +34,24 @@ export default function Notifications({
                 ))}
               </ul>
 
-              {/* Bouton visible uniquement quand il y a des items */}
               <button
-                className="Notifications-close"
+                type="button"
                 aria-label="Close"
+                className="Notifications-close"
                 onClick={() => console.log('Close button has been clicked')}
+                style={{
+                  position: 'absolute',
+                  top: 10,
+                  right: 10,
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
               >
-                <img src={closeIcon} alt="close" style={{ width: 10, height: 10 }} />
+                <img src={closeIcon} alt="close" width="10" height="10" />
               </button>
             </>
           ) : (
-            // Etat vide: pas de bouton, juste le message
             <p>No new notification for now</p>
           )}
         </div>
@@ -56,3 +59,15 @@ export default function Notifications({
     </div>
   );
 }
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      type: PropTypes.string,
+      value: PropTypes.string,
+      html: PropTypes.shape({ __html: PropTypes.string }),
+    })
+  ),
+};
