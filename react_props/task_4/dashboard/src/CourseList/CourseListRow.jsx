@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function CourseListRow({ isHeader = false, textFirstCell = '', textSecondCell = null }) {
+export default function CourseListRow({
+  isHeader = false,
+  textFirstCell = '',
+  textSecondCell = null,
+}) {
   if (isHeader) {
+    if (textSecondCell === null) {
+      return (
+        <tr>
+          <th colSpan="2">{textFirstCell}</th>
+        </tr>
+      );
+    }
     return (
       <tr>
-        {textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
-        ) : (
-          <>
-            <th>{textFirstCell}</th>
-            <th>{textSecondCell}</th>
-          </>
-        )}
+        <th>{textFirstCell}</th>
+        <th>{textSecondCell}</th>
       </tr>
     );
   }
 
-  // en body: toujours une <tr>; si pas de 2e cellule -> <td colSpan="2">
   if (textSecondCell === null) {
     return (
       <tr>
