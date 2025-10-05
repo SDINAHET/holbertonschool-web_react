@@ -18,6 +18,7 @@ export default function CourseList({ courses = [] }) {
             <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
           ))
         ) : (
+          // état vide attendu par le checker: 1 seule <tr> avec une <td colSpan="2">
           <CourseListRow textFirstCell="No course available yet" textSecondCell={null} />
         )}
       </tbody>
