@@ -6,8 +6,10 @@ import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications.jsx';
 import CourseList from '../CourseList/CourseList';
 import './App.css';
+import { getLatestNotification } from '../utils/utils';
 
 // const coursesList = [];
+// const notificationsList = [];
 
 const coursesList = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -18,6 +20,7 @@ const coursesList = [
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
+  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
 ];
 
 // function App({ isLoggedIn = true, courses = coursesList }) {
@@ -25,7 +28,8 @@ function App({ isLoggedIn = false, courses = coursesList }) {
 
   return (
     <>
-      <Notifications />
+      {/* <Notifications /> */}
+      <Notifications displayDrawer notifications={notificationsList} />
       {/* //  utilise le défaut: displayDrawer = false */}
       {/* <Notifications displayDrawer /> */}
       <div className="App">
