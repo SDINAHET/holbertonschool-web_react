@@ -1,47 +1,79 @@
-import React from 'react';
-import { render, screen, within, fireEvent } from '@testing-library/react';
-import Notifications from './Notifications.jsx';
+import { render, screen, fireEvent } from "@testing-library/react";
+import Notifications from "./Notifications";
+import { getLatestNotification } from "../utils/utils.js";
 
-const sample = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong>' } },
-];
+describe('Notifications', () => {
+  const mockNotifications = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } },
+  ];
 
-describe('Notifications component (Task 5)', () => {
-  test('always shows the "Your notifications" title', () => {
-    render(<Notifications />);
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
+  test('Check the existence of the notifications title Here is the list of notifications', () => {
+    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+    const notiftitle = screen.getByText(/Here is the list of notifications/i);
+
+    expect(notiftitle).toBeInTheDocument();
+  })
+
+  test('Check the existence of the button element in the notifications', () => {
+    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+    const button = screen.getByRole('button');
+
+    expect(button).toBeInTheDocument();
+  })
+
+  test('Verify that there are 3 li elements as notifications rendered', () => {
+    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+    const lielements = screen.getAllByRole('listitem');
+
+    expect(lielements.length).toBe(3);
+  })
+
+  test('Check whether clicking the close button logs Close button has been clicked to the console.', () => {
+    const consolelog = jest.spyOn(console, 'log');
+    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+    const button = screen.getByRole('button', { name: /close/i });
+
+    fireEvent.click(button);
+
+    expect(consolelog).toHaveBeenCalledWith('Close button has been clicked');
+  })
+})
+
+describe('Whenever the prop displayDrawer set to false', () => {
+  test('Check that the Notifications component doesn t displays the elements', () => {
+    const notifications = [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+      ];
+    render(<Notifications notifications={notifications} displayDrawer={false} />);
+
+    expect(screen.queryByText("Here is the list of notifications")).not.toBeInTheDocument();
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  })
+})
+
+describe('Whenever the the prop displayDrawer set to true', () => {
+  test('Check that the Notifications component displays the elements', () => {
+    const notifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+    ];
+    render(<Notifications notifications={notifications} displayDrawer={true} />);
+
+    expect(screen.queryByText("Here is the list of notifications")).toBeInTheDocument();
+    expect(screen.queryAllByRole('listitem')).toHaveLength(3);
+    expect(screen.queryByRole('button')).toBeInTheDocument();
   });
 
-  test('with displayDrawer=false: no list, no "Here is...", no button', () => {
-    render(<Notifications displayDrawer={false} notifications={sample} />);
-    expect(screen.queryByText(/here is the list of notifications/i)).toBeNull();
-    expect(screen.queryByRole('list')).toBeNull();
-    expect(screen.queryByRole('button', { name: /close/i })).toBeNull();
+  test('Check that the Notifications component displays the elements', () => {
+    const notifications = [];
+    render(<Notifications notifications={notifications} displayDrawer={true} />);
+
+    expect(screen.queryByText("No new notification for now")).toBeInTheDocument();
   });
-
-  test('with displayDrawer=true and notifications non-empty: shows list, text and button', () => {
-    const { container } = render(<Notifications displayDrawer notifications={sample} />);
-    expect(screen.getByText(/here is the list of notifications/i)).toBeInTheDocument();
-
-    const list = container.querySelector('ul');
-    expect(list).toBeTruthy();
-    const items = within(list).getAllByRole('listitem');
-    expect(items).toHaveLength(sample.length);
-
-    const closeBtn = screen.getByRole('button', { name: /close/i });
-    expect(closeBtn).toBeInTheDocument();
-
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    fireEvent.click(closeBtn);
-    expect(spy).toHaveBeenCalledWith(expect.stringMatching(/close button has been clicked/i));
-    spy.mockRestore();
-  });
-
-  test('with displayDrawer=true and notifications empty: shows "No new notification for now" and no button', () => {
-    render(<Notifications displayDrawer notifications={[]} />);
-    expect(screen.getByText(/no new notification for now/i)).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /close/i })).toBeNull();
-  });
-});
+})
