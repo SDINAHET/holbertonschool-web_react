@@ -96,7 +96,7 @@
 /* Contenu du tiroir */
 .notification-items > p { margin: 0 0 12px; }
 .notification-items ul { list-style: none; padding: 0; margin: 0; }
-.notifications-empty { color: #555; font-style: italic; }
+.notifications-empty { color: #000000; }
 
 /* Bouton de fermeture */
 .notifications-close {

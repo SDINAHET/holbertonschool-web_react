@@ -7,13 +7,13 @@ import Notifications from '../Notifications/Notifications.jsx';
 import CourseList from '../CourseList/CourseList';
 import './App.css';
 
-// const coursesList = [];
+const coursesList = [];
 
-const coursesList = [
-  { id: 1, name: 'ES6', credit: 60 },
-  { id: 2, name: 'Webpack', credit: 20 },
-  { id: 3, name: 'React', credit: 40 },
-];
+// const coursesList = [
+//   { id: 1, name: 'ES6', credit: 60 },
+//   { id: 2, name: 'Webpack', credit: 20 },
+//   { id: 3, name: 'React', credit: 40 },
+// ];
 
 // const defaultNotifications = [
 //   { id: 1, type: 'default', value: 'New course available' },
