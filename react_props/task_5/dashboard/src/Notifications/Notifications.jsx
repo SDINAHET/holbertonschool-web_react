@@ -17,31 +17,33 @@ export default function Notifications({
   // Drawer content only when displayDrawer === true
   const Drawer = displayDrawer ? (
     <div className="notifications">
-      {notifications.length > 0 ? (
-        <>
-          <p>Here is the list of notifications</p>
-          <button
-            onClick={() => console.log('Close button has been clicked')}
-            aria-label="Close"
-            className="notifications-close"
-          >
-            <img src={closebtn} alt="Close" />
-          </button>
-          <ul className="notification-items">
-            {notifications.map((n) => (
-              <NotificationItem
-                key={n.id}
-                type={n.type}
-                value={n.value}
-                html={n.html}
-              />
-            ))}
-          </ul>
-        </>
-      ) : (
-        // When displayDrawer is true and list is empty
-        <p className="notifications-empty">No new notification for now</p>
-      )}
+      <div className="notification-items">
+        {notifications.length > 0 ? (
+          <>
+            <p>Here is the list of notifications</p>
+            <button
+              onClick={() => console.log('Close button has been clicked')}
+              aria-label="Close"
+              className="notifications-close"
+            >
+              <img src={closebtn} alt="Close" />
+            </button>
+            <ul>
+              {notifications.map((n) => (
+                <NotificationItem
+                  key={n.id}
+                  type={n.type}
+                  value={n.value}
+                  html={n.html}
+                />
+              ))}
+            </ul>
+          </>
+        ) : (
+          // When displayDrawer is true and list is empty
+          <p className="notifications-empty">No new notification for now</p>
+        )}
+      </div>
     </div>
   ) : null;
 
