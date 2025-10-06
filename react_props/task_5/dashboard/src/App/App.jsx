@@ -25,8 +25,8 @@ function App({ isLoggedIn = false, courses = coursesList }) {
 
   return (
     <>
-      {/* <Notifications /> */}
-      <Notifications displayDrawer />
+      <Notifications /> {/* //  utilise le défaut: displayDrawer = false */}
+      {/* <Notifications displayDrawer /> */}
       <div className="App">
         <Header />
         <main className="App-body">

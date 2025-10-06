@@ -5,16 +5,16 @@ import NotificationItem from './NotificationItem';
 
 export default function Notifications({
   notifications = [],
-  displayDrawer = false
+  displayDrawer = false, // <= par défaut false (exigence Task 5)
 }) {
-  // Always-visible title
+  // Titre toujours visible
   const Title = (
     <div className="notification-title" data-testid="notifications-title">
-      <p>Your Notifications</p>
+      <p>Your notifications</p>
     </div>
   );
 
-  // Drawer content only when displayDrawer === true
+  // Contenu du tiroir (uniquement si displayDrawer === true)
   const Drawer = displayDrawer ? (
     <div className="notifications">
       <div className="notification-items">
@@ -40,7 +40,6 @@ export default function Notifications({
             </ul>
           </>
         ) : (
-          // When displayDrawer is true and list is empty
           <p className="notifications-empty">No new notification for now</p>
         )}
       </div>
@@ -61,8 +60,8 @@ Notifications.propTypes = {
       id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       type: PropTypes.string,
       value: PropTypes.string,
-      html: PropTypes.shape({ __html: PropTypes.string })
+      html: PropTypes.shape({ __html: PropTypes.string }),
     })
   ),
-  displayDrawer: PropTypes.bool
+  displayDrawer: PropTypes.bool,
 };
