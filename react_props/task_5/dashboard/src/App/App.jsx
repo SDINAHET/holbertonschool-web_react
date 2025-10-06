@@ -15,10 +15,10 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-const defaultNotifications = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-];
+// const defaultNotifications = [
+//   { id: 1, type: 'default', value: 'New course available' },
+//   { id: 2, type: 'urgent', value: 'New resume available' },
+// ];
 
 // function App({ isLoggedIn = true, courses = coursesList }) {
 function App({ isLoggedIn = false, courses = coursesList }) {

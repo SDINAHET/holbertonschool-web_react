@@ -13,7 +13,9 @@
     "deploy": "gh-pages -d dist",
     "postbuild": "cp dist/index.html dist/404.html || copy dist\\index.html dist\\404.html",
     "install:browsers": "npx playwright install chromium-headless-shell",
-    "test:ci": "node --max-old-space-size=4096 node_modules/jest/bin/jest.js --watchAll=false --runInBand --maxWorkers=1"
+    "test:ci": "node --max-old-space-size=4096 node_modules/jest/bin/jest.js --watchAll=false --runInBand --maxWorkers=1",
+    "lint": "eslint -c eslint.config.js \"src/**/*.{js,jsx}\"",
+    "lint:fix": "eslint -c eslint.config.js \"src/**/*.{js,jsx}\" --fix"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
