@@ -21,7 +21,7 @@ const defaultNotifications = [
 ];
 
 // function App({ isLoggedIn = true, courses = coursesList }) {
-function App({ isLoggedIn = false, courses = coursesList }) {
+function App({ isLoggedIn = true, courses = coursesList }) {
 
   return (
     <>
