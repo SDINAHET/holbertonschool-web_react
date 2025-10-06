@@ -1,58 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import './App.css';
+import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
-import Notifications from '../Notifications/Notifications.jsx';
 import CourseList from '../CourseList/CourseList';
-import './App.css';
 import { getLatestNotification } from '../utils/utils';
 
-// const coursesList = [];
-// const notificationsList = [];
+function App() {
+  const isLoggedIn = false; // change to true for testing CourseList display
 
-const coursesList = [
-  { id: 1, name: 'ES6', credit: 60 },
-  { id: 2, name: 'Webpack', credit: 20 },
-  { id: 3, name: 'React', credit: 40 },
-];
+  const notificationsList = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+  ];
 
-const notificationsList = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-];
-
-// function App({ isLoggedIn = true, courses = coursesList }) {
-function App({ isLoggedIn = false, courses = coursesList }) {
+  const coursesList = [
+    { id: 1, name: 'ES6', credit: 60 },
+    { id: 2, name: 'Webpack', credit: 20 },
+    { id: 3, name: 'React', credit: 40 },
+  ];
 
   return (
-    <>
-      {/* <Notifications /> */}
-      <Notifications displayDrawer notifications={notificationsList} />
-      {/* //  utilise le défaut: displayDrawer = false */}
-      {/* <Notifications displayDrawer /> */}
-      <div className="App">
-        <Header />
-        <main className="App-body">
-          {!isLoggedIn ? (
-            <>
-              {/* <p className="App-body-title">Login to access the full dashboard</p> */}
-              <Login />
-            </>
-          ) : (
-            <CourseList courses={courses} />
-          )}
-        </main>
-        <Footer />
+    <React.Fragment>
+      <div className='root-notifications'>
+        <Notifications notifications={notificationsList} />
       </div>
-    </>
+      <Header />
+      {isLoggedIn ? <CourseList courses={coursesList} /> : <Login />}
+      <Footer />
+    </React.Fragment>
   );
 }
-
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  courses: PropTypes.array,
-};
 
 export default App;
