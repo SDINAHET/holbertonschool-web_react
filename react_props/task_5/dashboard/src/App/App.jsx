@@ -26,7 +26,8 @@ function App({ isLoggedIn = false, courses = defaultCourses }) {
   return (
     <>
       {/* Drawer masqué par défaut, seul le titre de notifications est visible */}
-      <Notifications notifications={defaultNotifications} />
+      {/* <Notifications notifications={defaultNotifications} /> */}
+      <Notifications displayDrawer={true} notifications={defaultNotifications} />
 
       <div className="App">
         <Header />
