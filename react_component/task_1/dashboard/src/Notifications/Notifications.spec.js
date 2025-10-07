@@ -30,15 +30,29 @@ describe('Notifications', () => {
     expect(lielements.length).toBe(3);
   })
 
-  test('Check whether clicking the close button logs Close button has been clicked to the console.', () => {
-    const consolelog = jest.spyOn(console, 'log');
+  // test('Check whether clicking the close button logs Close button has been clicked to the console.', () => {
+  //   const consolelog = jest.spyOn(console, 'log');
+  //   render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+  //   const button = screen.getByRole('button', { name: /close/i });
+
+  //   fireEvent.click(button);
+
+  //   expect(consolelog).toHaveBeenCalledWith('Close button has been clicked');
+  // })
+
+  test('Check whether clicking the close button logs "Close button has been clicked" to the console.', () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {}); // ← silence
+
     render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
     const button = screen.getByRole('button', { name: /close/i });
-
     fireEvent.click(button);
 
-    expect(consolelog).toHaveBeenCalledWith('Close button has been clicked');
-  })
+    expect(consoleSpy).toHaveBeenCalledWith('Close button has been clicked');
+    // optionnel : vérifier le nombre d'appels
+    // expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+    consoleSpy.mockRestore(); // ← on rétablit le vrai console.log
+  });
 })
 
 describe('Whenever the prop displayDrawer set to false', () => {

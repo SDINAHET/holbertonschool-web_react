@@ -32,12 +32,31 @@ class App extends React.Component {
         credit: PropTypes.number.isRequired,
       })
     ),
+    logOut: PropTypes.func,
   };
 
   static defaultProps = {
     isLoggedIn: false,
     courses: defaultCourses,
+    logOut: () => {},
   };
+
+  handleKeyDown = (e) => {
+    // Safeguard keys access & accept both 'h' and 'H'
+    const key = e && typeof e.key === 'string' ? e.key : '';
+    if (e?.ctrlKey && (key === 'h' || key === 'H')) {
+      window.alert('Logging you out');
+      this.props.logOut();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
 
   render() {
     const { isLoggedIn, courses } = this.props;
@@ -45,7 +64,6 @@ class App extends React.Component {
     return (
       <>
         <Notifications displayDrawer={false} notifications={defaultNotifications} />
-
         <div className="App">
           <Header />
           <main className="App-body">
