@@ -378,5 +378,54 @@ root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
 # Task5
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
+t/react_props/task_5/dashboard# npm run test
 
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/Notifications/NotificationItem.spec.js (45.381 s)
+ PASS  src/CourseList/CourseList.spec.js (45.704 s)
+ PASS  src/Notifications/Notifications.spec.js (46.496 s)
+  ● Console
+
+    console.log
+      Close button has been clicked
+
+      at console.<anonymous> (node_modules/jest-mock/build/index.js:794:25)
+
+ PASS  ./test-app-component.spec.js (50.331 s)
+ PASS  src/Footer/Footer.spec.js (43.635 s)
+ PASS  src/App/App.spec.js (45.636 s)
+ PASS  src/favicon.spec.js (7.251 s)
+ PASS  src/Login/Login.spec.js (13.701 s)
+ PASS  src/staticAssets.spec.js
+ PASS  src/utils/utils.spec.js
+ PASS  src/Header/Header.spec.js (11.224 s)
+ PASS  src/CourseList/CourseListRow.spec.js (89.64 s)
+
+Test Suites: 12 passed, 12 total
+Tests:       37 passed, 37 total
+Snapshots:   0 total
+Time:        123.177 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
+t/react_props/task_5/dashboard# npm run lint
+
+> dashboard@0.0.0 lint
+> eslint -c eslint.config.js "src/**/*.{js,jsx}"
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_reac
+t/react_props/task_5/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+
+  VITE v5.4.20  ready in 8455 ms
+
+  ➜  Local:   http://localhost:5173/holbertonschool-web_react/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
+![alt text](image-2.png)
