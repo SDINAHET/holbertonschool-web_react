@@ -22,31 +22,40 @@ const defaultCourses = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-function App({ isLoggedIn = false, courses = defaultCourses }) {
-  return (
-    <>
-      {/* Drawer masqué par défaut, seul le titre de notifications est visible */}
-      {/* <Notifications notifications={defaultNotifications} /> */}
-      <Notifications displayDrawer={false} notifications={defaultNotifications} />
+class App extends React.Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool,
+    courses: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        credit: PropTypes.number.isRequired,
+      })
+    ),
+  };
 
-      <div className="App">
-        <Header />
-        <main className="App-body">
-          {isLoggedIn ? (
-            <CourseList courses={courses} />
-          ) : (
-            <Login />
-          )}
-        </main>
-        <Footer />
-      </div>
-    </>
-  );
+  static defaultProps = {
+    isLoggedIn: false,
+    courses: defaultCourses,
+  };
+
+  render() {
+    const { isLoggedIn, courses } = this.props;
+
+    return (
+      <>
+        <Notifications displayDrawer={false} notifications={defaultNotifications} />
+
+        <div className="App">
+          <Header />
+          <main className="App-body">
+            {isLoggedIn ? <CourseList courses={courses} /> : <Login />}
+          </main>
+          <Footer />
+        </div>
+      </>
+    );
+  }
 }
-
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  courses: PropTypes.array,
-};
 
 export default App;
