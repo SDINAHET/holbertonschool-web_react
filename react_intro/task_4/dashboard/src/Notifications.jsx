@@ -1,7 +1,7 @@
 import React from 'react';
 import './Notifications.css';
 import closeIcon from "./assets/close-button.png";
-import { getLatestNotification } from '../utils.js';
+import { getLatestNotification } from './utils.js';
 
 export default function Notifications() {
   return (
@@ -10,18 +10,23 @@ export default function Notifications() {
       <p>Here is the list of notifications</p>
 
       {/* Liste des notifications */}
-      <ul>
+      {/* <ul>
         <li data-notification-type="default">New course available</li>
         <li data-notification-type="urgent">New resume available</li>
         <li
           data-notification-type="urgent"
           dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
         />
+      </ul> */}
+      <ul>
+        <li data-priority="default">New course available</li>
+        <li data-priority="urgent">New resume available</li>
+        <li data-priority="urgent">Server is down</li>
       </ul>
 
       {/* Bouton Close */}
       <button
-        aria-label="Close"
+        aria-label="close"
         onClick={() => console.log('Close button has been clicked')}
         style={{
           position: 'absolute',

@@ -23,10 +23,10 @@ function App() {
         <p>Login to access the full dashboard</p>
 
         <div className="App-login">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" />
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" />
 
           <button>OK</button>
@@ -34,7 +34,8 @@ function App() {
       </div>
 
       <div className="App-footer">
-        <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p>
+        {/* <p>Copyright {getCurrentYear()} - {getFooterCopy(true)}</p> */}
+        <p>Copyright {getCurrentYear()} - Holberton School</p>
       </div>
     </>
   );

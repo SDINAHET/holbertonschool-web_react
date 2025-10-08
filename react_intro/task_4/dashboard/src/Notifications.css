@@ -36,3 +36,6 @@
   padding: 0;
   line-height: 1;
 }
+
+.Notifications [data-priority="default"] { color: blue; }
+.Notifications [data-priority="urgent"] { color: red; }
