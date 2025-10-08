@@ -9,7 +9,7 @@ export default function Login() {
       <input id="email" type="email" />
       <label htmlFor="password">Password</label>
       <input id="password" type="password" />
-      <button>ok</button>
+      <button>OK</button>
     </div>
   );
 }
