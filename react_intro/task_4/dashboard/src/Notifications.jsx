@@ -29,6 +29,7 @@ export default function Notifications() {
 
       {/* Bouton Close */}
       <button
+        type="button"
         aria-label="close"
         onClick={() => console.log('Close button has been clicked')}
         style={{
