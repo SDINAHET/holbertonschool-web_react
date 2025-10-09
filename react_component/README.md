@@ -1,5 +1,6 @@
 # react_component
 
+# Task0
 ```bash
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_component
 /task_0/dashboard# npm run build
@@ -70,4 +71,49 @@ Snapshots:   0 total
 Time:        125.322 s
 Ran all test suites.
 
+```
+
+# task2
+````bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_2/dashboard# npm run build
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 52 modules transformed.
+dist/index.html                            0.59 kB │ gzip:  0.35 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-B8KTArxz.css             2.15 kB │ gzip:  0.82 kB
+dist/assets/index-a5hI8TA5.js            151.28 kB │ gzip: 50.49 kB
+✓ built in 1.69s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_2/dashboard# npm run test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/utils/utils.spec.js (17.729 s)
+ PASS  src/Login/Login.spec.js (43.174 s)
+ PASS  src/CourseList/CourseList.spec.js (50.077 s)
+ PASS  src/App/App.spec.js (50.527 s)
+ PASS  ./test-app-component.spec.js (51.251 s)
+ PASS  src/favicon.spec.js
+ PASS  src/staticAssets.spec.js
+ PASS  src/Footer/Footer.spec.js
+ PASS  src/Notifications/NotificationItem.spec.js
+ PASS  src/Header/Header.spec.js (29.43 s)
+ PASS  src/Notifications/Notifications.spec.js (47.635 s)
+ PASS  src/CourseList/CourseListRow.spec.js (62.54 s)
+
+Test Suites: 12 passed, 12 total
+Tests:       41 passed, 41 total
+Snapshots:   0 total
+Time:        83.274 s
+Ran all test suites.
 ```
