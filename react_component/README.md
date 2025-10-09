@@ -187,12 +187,334 @@ ponent/task_3/dashboard# npm run dev
 # Task4
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard# npm run build
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 55 modules transformed.
+dist/index.html                            0.59 kB │ gzip:  0.34 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-C-po6wFU.css             2.19 kB │ gzip:  0.84 kB
+dist/assets/index-BecyewEd.js            151.83 kB │ gzip: 50.64 kB
+✓ built in 1.70s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard# npm run test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/CourseList/CourseListRow.spec.js (87.86 s)
+ PASS  src/Notifications/NotificationItem.spec.js (97.43 s)
+ PASS  ./test-app-component.spec.js (101.496 s)
+ PASS  src/BodySection/BodySectionWithMarginBottom.spec.js (99.914 s)
+ PASS  src/Header/Header.spec.js (39.46 s)
+ PASS  src/staticAssets.spec.js (30.423 s)
+ PASS  src/BodySection/BodySection.spec.js (31.835 s)
+ PASS  src/Notifications/Notifications.spec.js (124.886 s)
+ PASS  src/App/App.spec.js (129.883 s)
+ PASS  src/Login/Login.spec.js (37.915 s)
+ PASS  src/utils/utils.spec.js (11.747 s)
+ PASS  src/favicon.spec.js (13.102 s)
+ PASS  src/Footer/Footer.spec.js (25.119 s)
+ PASS  src/CourseList/CourseList.spec.js (198.338 s)
+
+Test Suites: 14 passed, 14 total
+Tests:       48 passed, 48 total
+Snapshots:   0 total
+Time:        248.411 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard#
 
 ```
 
 # Task5
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_4/dashboard# npm run build
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 56 modules transformed.
+dist/index.html                            0.59 kB │ gzip:  0.34 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-C-po6wFU.css             2.19 kB │ gzip:  0.84 kB
+dist/assets/index-Bnv1_iBP.js            152.16 kB │ gzip: 50.75 kB
+✓ built in 1.87s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_4/dashboard# npm run test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/Notifications/Notifications.spec.js (29.043 s)
+ PASS  src/CourseList/CourseListRow.spec.js (27.897 s)
+ PASS  src/Notifications/NotificationItem.spec.js (29.687 s)
+ PASS  ./test-app-component.spec.js (29.402 s)
+  ● Console
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+ PASS  src/HOC/WithLogging.spec.js (39.827 s)
+  ● Console
+
+    console.log
+      Component MockApp is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component MockApp is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+ PASS  src/BodySection/BodySectionWithMarginBottom.spec.js (29.278 s)
+ PASS  src/utils/utils.spec.js
+ PASS  src/CourseList/CourseList.spec.js (6.865 s)
+  ● Console
+
+    console.log
+      Component CourseList is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component CourseList is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component CourseList is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component CourseList is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+ PASS  src/BodySection/BodySection.spec.js (6.636 s)
+ PASS  src/favicon.spec.js
+ PASS  src/Login/Login.spec.js (8.285 s)
+  ● Console
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+ PASS  src/Header/Header.spec.js
+ PASS  src/staticAssets.spec.js (6.463 s)
+ PASS  src/Footer/Footer.spec.js (6.783 s)
+ PASS  src/App/App.spec.js (52.04 s)
+  ● Console
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component CourseList is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component CourseList is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component CourseList is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component CourseList is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+    console.log
+      Component Login is mounted
+
+      at WithLoggingHOC.log [as componentDidMount] (src/HOC/WithLogging.jsx:9:15)
+
+    console.log
+      Component Login is going to unmount
+
+      at WithLoggingHOC.log [as componentWillUnmount] (src/HOC/WithLogging.jsx:13:15)
+          at Array.forEach (<anonymous>)
+
+
+Test Suites: 15 passed, 15 total
+Tests:       51 passed, 51 total
+Snapshots:   0 total
+Time:        71.104 s
+Ran all test suites.
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_4/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+Re-optimizing dependencies because vite config has changed
+
+  VITE v5.4.20  ready in 2210 ms
+
+  ➜  Local:   http://localhost:5173/holbertonschool-web_react/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 
 ```
 
