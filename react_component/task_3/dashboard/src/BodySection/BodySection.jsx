@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './BodySection.css';
+import './BodySectionWithMarginBottom.css';
 
 const BodySection = ({ title, children }) => {
   return (
