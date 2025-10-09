@@ -73,7 +73,13 @@ Ran all test suites.
 
 ```
 
-# task2
+# Task1
+
+```bash
+
+```
+
+# Task2
 ````bash
 root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
 ponent/task_2/dashboard# npm run build
@@ -116,4 +122,82 @@ Tests:       41 passed, 41 total
 Snapshots:   0 total
 Time:        83.274 s
 Ran all test suites.
+```
+
+# Task4
+
+```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard# npm run build
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 52 modules transformed.
+dist/index.html                            0.59 kB │ gzip:  0.35 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg   23.64 kB
+dist/assets/index-B8KTArxz.css             2.15 kB │ gzip:  0.82 kB
+dist/assets/index-a5hI8TA5.js            151.28 kB │ gzip: 50.49 kB
+✓ built in 1.47s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard# npm run test
+
+> dashboard@0.0.0 test
+> jest --watchAll=false
+
+ PASS  src/BodySection/BodySectionWithMarginBottom.spec.js (22.399 s)
+ PASS  src/Notifications/Notifications.spec.js (23.043 s)
+ PASS  src/utils/utils.spec.js
+ PASS  src/CourseList/CourseListRow.spec.js (38.404 s)
+ PASS  ./test-app-component.spec.js (28.709 s)
+ PASS  src/BodySection/BodySection.spec.js
+ PASS  src/Login/Login.spec.js (6.96 s)
+ PASS  src/Header/Header.spec.js (6.099 s)
+ PASS  src/favicon.spec.js
+ PASS  src/staticAssets.spec.js (6.105 s)
+ PASS  src/Footer/Footer.spec.js
+ PASS  src/App/App.spec.js (38.898 s)
+ PASS  src/Notifications/NotificationItem.spec.js (38.168 s)
+ PASS  src/CourseList/CourseList.spec.js (40.805 s)
+
+Test Suites: 14 passed, 14 total
+Tests:       45 passed, 45 total
+Snapshots:   0 total
+Time:        56.344 s
+Ran all test suites.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_com
+ponent/task_3/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+
+  VITE v5.4.20  ready in 1070 ms
+
+  ➜  Local:   http://localhost:5173/holbertonschool-web_react/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+# Task5
+
+```bash
+
+```
+
+# Task6
+
+```bash
+
+```
+
+# Task7
+
+```bash
+
 ```
