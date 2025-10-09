@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Notifications from "./Notifications";
 import { getLatestNotification } from "../utils/utils.js";
@@ -52,6 +53,18 @@ describe('Notifications', () => {
     // expect(consoleSpy).toHaveBeenCalledTimes(1);
 
     consoleSpy.mockRestore(); // ← on rétablit le vrai console.log
+  });
+
+  test('Clicking a notification item logs "Notification {id} has been marked as read"', () => {
+    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+
+    // On clique l’item avec value "New resume available" (id = 2)
+    fireEvent.click(screen.getByText('New resume available'));
+
+    expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+
+    spy.mockRestore();
   });
 })
 
