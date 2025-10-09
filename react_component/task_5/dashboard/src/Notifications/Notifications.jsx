@@ -28,6 +28,13 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
+  /** IMPORTANT (Task 7):
+   *  Ne re-render que si la longueur de notifications change
+   */
+  shouldComponentUpdate(nextProps) {
+    return nextProps.notifications.length !== this.props.notifications.length;
+  }
+
   // méthode demandée par l'exo
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
