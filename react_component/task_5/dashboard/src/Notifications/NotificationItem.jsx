@@ -1,5 +1,6 @@
 // import React from 'react';
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // export default function NotificationItem({ type = 'default', html, value }) {
@@ -29,7 +30,8 @@ import PropTypes from 'prop-types';
 //   html: PropTypes.shape({ __html: PropTypes.string }),
 // };
 
-export default class NotificationItem extends Component {
+export default class NotificationItem extends PureComponent {
+// export default class NotificationItem extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     type: PropTypes.string,
