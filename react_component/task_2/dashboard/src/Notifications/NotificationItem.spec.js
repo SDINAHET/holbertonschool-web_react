@@ -51,6 +51,18 @@ describe('Notifications component (Task 5)', () => {
 
       spy.mockRestore();
     });
+
+    test('clicking a notification item logs "Notification {id} has been marked as read"', () => {
+      const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+      render(<Notifications displayDrawer notifications={sample} />);
+
+      // On clique sur l'item dont la valeur = "New resume available" (id = 2)
+      fireEvent.click(screen.getByText('New resume available'));
+
+      expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+
+      spy.mockRestore();
+    });
   });
 
   describe('when displayDrawer is true and notifications is empty', () => {

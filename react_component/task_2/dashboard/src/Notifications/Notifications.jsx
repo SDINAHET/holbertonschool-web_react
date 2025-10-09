@@ -1,12 +1,41 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Notifications.css';
 import closebtn from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
 
-export default function Notifications({
-  notifications = [],
-  displayDrawer = false, // <= par défaut false (exigence Task 5)
-}) {
+// export default function Notifications({
+//   notifications = [],
+//   displayDrawer = false, // <= par défaut false (exigence Task 5)
+// }) {
+
+export default class Notifications extends Component {
+  static propTypes = {
+    notifications: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        type: PropTypes.string,
+        value: PropTypes.string,
+        html: PropTypes.shape({ __html: PropTypes.string }),
+      })
+    ),
+    displayDrawer: PropTypes.bool,
+  };
+
+  // par défaut false (exigence Task 5)
+  static defaultProps = {
+    notifications: [],
+    displayDrawer: false,
+  };
+
+  // méthode demandée par l'exo
+  markAsRead = (id) => {
+    console.log(`Notification ${id} has been marked as read`);
+  };
+
+  render() {
+    const { notifications, displayDrawer } = this.props;
+
   // Titre toujours visible
   const Title = (
     <div className="notification-title" data-testid="notifications-title">
@@ -32,9 +61,11 @@ export default function Notifications({
               {notifications.map((n) => (
                 <NotificationItem
                   key={n.id}
+                  id={n.id}
                   type={n.type}
                   value={n.value}
                   html={n.html}
+                  markAsRead={this.markAsRead}
                 />
               ))}
             </ul>
@@ -53,15 +84,4 @@ export default function Notifications({
     </>
   );
 }
-
-Notifications.propTypes = {
-  notifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      type: PropTypes.string,
-      value: PropTypes.string,
-      html: PropTypes.shape({ __html: PropTypes.string }),
-    })
-  ),
-  displayDrawer: PropTypes.bool,
-};
+}
