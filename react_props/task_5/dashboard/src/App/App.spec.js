@@ -3,6 +3,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
+// --- Test demandé explicitement ---
+test('renders App with no props (no crash)', () => {
+  render(<App />); // utilise les valeurs par défaut d’App
+  expect(screen.getByText(/school dashboard/i)).toBeInTheDocument();
+});
+
 /** Task 2 checks (sign-in form) */
 describe('App (Task 2) - sign in form', () => {
   test('renders two input elements (email and password)', () => {

@@ -34,10 +34,10 @@ function App() {
       </div>
 
       <div className="App-footer">
-        {/* <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p> */}
+        <p>Copyright {getCurrentYear()} {getFooterCopy(false)}</p>
         {/* <p>Copyright {getCurrentYear()} - Holberton School</p> */}
         {/* <p>Copyright 2024 - Holberton School</p> */}
-        <p>Copyright 2024 {getFooterCopy(false)}</p>
+        {/* <p>Copyright 2024 {getFooterCopy(false)}</p> */}
       </div>
     </>
   );
