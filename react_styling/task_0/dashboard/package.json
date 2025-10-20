@@ -18,6 +18,7 @@
     "lint:fix": "eslint -c eslint.config.js \"src/**/*.{js,jsx}\" --fix"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.2.8",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -28,6 +29,7 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/register": "^7.28.3",
     "@playwright/test": "^1.55.1",
+    "@tailwindcss/vite": "^4.1.15",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^14.2.2",
     "@testing-library/user-event": "^14.5.2",

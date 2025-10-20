@@ -1105,5 +1105,111 @@ k_0/dashboard#
 ```
 
 ```bash
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_styling/tas
+k_0/dashboard# npm i -D @tailwindcss/vite
+npm i @fontsource/roboto
+
+added 12 packages, and audited 613 packages in 11s
+
+91 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+added 3 packages, and audited 616 packages in 8s
+
+93 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_styling/tas
+k_0/dashboard# npm run build
+
+> dashboard@0.0.0 build
+> vite build
+
+vite v5.4.20 building for production...
+✓ 60 modules transformed.
+dist/index.html                                              0.59 kB │ gzip:  0.35 kB
+dist/assets/roboto-vietnamese-400-normal-BYP5tVVv.woff       5.44 kB
+dist/assets/roboto-vietnamese-700-normal-BhieYfot.woff       5.44 kB
+dist/assets/roboto-vietnamese-500-normal-CUzdRVXb.woff       5.48 kB
+dist/assets/roboto-greek-400-normal-DwVopRQH.woff            7.47 kB
+dist/assets/roboto-greek-700-normal-Bi9oTykh.woff            7.48 kB
+dist/assets/roboto-greek-500-normal-B0wzjI_J.woff            7.51 kB
+dist/assets/roboto-vietnamese-500-normal-HYpufUYk.woff2      7.84 kB
+dist/assets/roboto-vietnamese-400-normal-CDDxGrUb.woff2      7.86 kB
+dist/assets/roboto-vietnamese-700-normal-iKxYNAzq.woff2      7.88 kB
+dist/assets/roboto-symbols-500-normal-B3xPS0M7.woff          8.64 kB
+dist/assets/roboto-symbols-400-normal-B2LMqLB2.woff          8.66 kB
+dist/assets/roboto-symbols-700-normal-BT-mnhPp.woff          8.68 kB
+dist/assets/roboto-greek-500-normal-BJMS0heP.woff2           9.64 kB
+dist/assets/roboto-greek-400-normal-jFM2czAU.woff2           9.64 kB
+dist/assets/roboto-greek-700-normal-BcGn9doz.woff2           9.67 kB
+dist/assets/roboto-cyrillic-400-normal-C5q4FMUG.woff         9.73 kB
+dist/assets/roboto-cyrillic-700-normal-bDW9bgt5.woff         9.90 kB
+dist/assets/roboto-cyrillic-500-normal-DhPqGoNQ.woff         9.90 kB
+dist/assets/roboto-symbols-400-normal-fF1SLJBj.woff2        10.58 kB
+dist/assets/roboto-symbols-500-normal-BXFTxrNR.woff2        10.73 kB
+dist/assets/roboto-symbols-700-normal-rJi6RjIy.woff2        10.86 kB
+dist/assets/roboto-cyrillic-400-normal-DAIM1_dR.woff2       11.84 kB
+dist/assets/roboto-cyrillic-700-normal-BiSG5NnW.woff2       11.94 kB
+dist/assets/roboto-cyrillic-500-normal-hCeO1jFL.woff2       11.98 kB
+dist/assets/roboto-latin-ext-400-normal-BG57dRWO.woff       12.47 kB
+dist/assets/roboto-latin-ext-700-normal-B3Q5yJJO.woff       12.48 kB
+dist/assets/roboto-latin-ext-500-normal-EUd9mLnZ.woff       12.52 kB
+dist/assets/roboto-latin-ext-400-normal-ZYmyxeOy.woff2      13.74 kB
+dist/assets/roboto-latin-ext-500-normal-C_ARlJGk.woff2      13.98 kB
+dist/assets/roboto-latin-ext-700-normal-70GS1MYH.woff2      14.02 kB
+dist/assets/roboto-cyrillic-ext-400-normal-5IDvadIC.woff    15.40 kB
+dist/assets/roboto-cyrillic-ext-700-normal-Ct5_lukf.woff    15.52 kB
+dist/assets/roboto-cyrillic-ext-500-normal-aAFKCR76.woff    15.52 kB
+dist/assets/roboto-cyrillic-ext-400-normal-DzMWdK87.woff2   16.85 kB
+dist/assets/roboto-cyrillic-ext-500-normal-B7rQpwPu.woff2   17.16 kB
+dist/assets/roboto-cyrillic-ext-700-normal-UFn0vR9r.woff2   17.21 kB
+dist/assets/roboto-math-400-normal-BRMeFL5Z.woff            18.28 kB
+dist/assets/roboto-math-500-normal-nGmytUgK.woff            18.36 kB
+dist/assets/roboto-math-700-normal-De_Mfcv-.woff            18.43 kB
+dist/assets/roboto-latin-400-normal-BX2H0A0_.woff           19.57 kB
+dist/assets/roboto-math-400-normal-B3wgz80t.woff2           19.66 kB
+dist/assets/roboto-latin-500-normal-CoDN7ZW2.woff           19.67 kB
+dist/assets/roboto-latin-700-normal-DxC3k-1u.woff           19.72 kB
+dist/assets/roboto-math-700-normal-VUAI6Bz2.woff2           19.95 kB
+dist/assets/roboto-math-500-normal-CFNaIMFC.woff2           19.98 kB
+dist/assets/roboto-latin-400-normal-CNwBRw8h.woff2          20.61 kB
+dist/assets/roboto-latin-500-normal-CkrA1NAy.woff2          20.93 kB
+dist/assets/roboto-latin-700-normal-CXeAXeti.woff2          21.00 kB
+dist/assets/holberton-logo-CIW0R4GT.jpg                     23.64 kB
+dist/assets/index-D6bbFSdR.css                              46.34 kB │ gzip: 20.08 kB
+dist/assets/index-CjmkVxHV.js                              152.25 kB │ gzip: 50.79 kB
+✓ built in 2.94s
+
+> dashboard@0.0.0 postbuild
+> cp dist/index.html dist/404.html || copy dist\index.html dist\404.html
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_trimestre/holbertonschool-web_react/react_styling/tas
+k_0/dashboard# npm run dev
+
+> dashboard@0.0.0 dev
+> vite
+
+Re-optimizing dependencies because lockfile has changed
+
+  VITE v5.4.20  ready in 2025 ms
+
+  ➜  Local:   http://localhost:5173/holbertonschool-web_react/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+o
 
 ```
