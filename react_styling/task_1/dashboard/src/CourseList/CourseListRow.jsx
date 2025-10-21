@@ -5,14 +5,12 @@ export default function CourseListRow({
   textFirstCell = "",
   textSecondCell = null,
 }) {
-  // Fond translucide via variables (texte non translucide)
+  // Fond translucide via variables alpha-hex (texte reste 100% opaque)
   const rowBg = isHeader
-    ? "bg-[color:rgb(var(--color-table-header-rgb)/0.66)]"
-    : "bg-[color:rgb(var(--color-table-rows-rgb)/0.45)]";
+    ? "bg-[var(--color-table-header-66)]"
+    : "bg-[var(--color-table-rows-45)]";
 
-  // ⬇️ th centrés (exigence maquette)
   const thBase = "border border-gray-400 px-2 py-2 font-bold text-center";
-  // td à gauche + padding-left 8px
   const tdBase = "border border-gray-400 text-left pl-2 py-2";
 
   return (

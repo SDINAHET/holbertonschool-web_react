@@ -11,14 +11,14 @@
     --color-table-header: #deb5b5; /* header bg */
     --color-table-rows: #CDCDCD;   /* row bg */
 
-    /* ⚠️ Ajout: versions RGB pour gérer l'alpha sans affecter le texte */
-    --color-table-header-rgb: 222 181 181;
-    --color-table-rows-rgb: 205 205 205;
+    /* ⬇️ helpers en alpha-hex (pas de rgb) */
+    /* 66% ≈ A8, 45% ≈ 73 */
+    --color-table-header-66: #deb5b5A8;
+    --color-table-rows-45: #CDCDCD73;
   }
 
   html, body {
     font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
-
   body { @apply font-sans; }
 }
