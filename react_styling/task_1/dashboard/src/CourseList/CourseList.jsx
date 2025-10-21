@@ -4,8 +4,8 @@ import WithLogging from "../HOC/WithLogging";
 
 function CourseList({ courses = [] }) {
   return (
-    // Conteneur centré qui occupe ~80% de la page
-    <div className="w-4/5 mx-auto my-10">
+    // 85% de la page, centré, marge verticale
+    <div className="w-[85%] mx-auto my-10">
       <div className="overflow-x-auto rounded border border-gray-200">
         {/* La table remplit 100% du conteneur */}
         <table id="CourseList" className="w-full table-auto border-collapse">

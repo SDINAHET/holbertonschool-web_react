@@ -10,6 +10,10 @@
   :root {
     --color-table-header: #deb5b5; /* header bg */
     --color-table-rows: #CDCDCD;   /* row bg */
+
+    /* ⚠️ Ajout: versions RGB pour gérer l'alpha sans affecter le texte */
+    --color-table-header-rgb: 222 181 181;
+    --color-table-rows-rgb: 205 205 205;
   }
 
   html, body {
