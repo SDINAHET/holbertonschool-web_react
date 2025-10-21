@@ -5,14 +5,14 @@ export default function CourseListRow({
   textFirstCell = "",
   textSecondCell = null,
 }) {
-  // Fond avec alpha (0.66 pour header, 0.45 sinon), le texte reste opaque
+  // Fond translucide via variables (texte non translucide)
   const rowBg = isHeader
     ? "bg-[color:rgb(var(--color-table-header-rgb)/0.66)]"
     : "bg-[color:rgb(var(--color-table-rows-rgb)/0.45)]";
 
-  // Bordures gray-400 autour de chaque cellule
-  // th: padding x = 8px ; td: padding-left = 8px
-  const thBase = "border border-gray-400 text-left px-2 py-2 font-bold";
+  // ⬇️ th centrés (exigence maquette)
+  const thBase = "border border-gray-400 px-2 py-2 font-bold text-center";
+  // td à gauche + padding-left 8px
   const tdBase = "border border-gray-400 text-left pl-2 py-2";
 
   return (

@@ -26,6 +26,9 @@ const defaultCourses = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
+// const defaultCourses = [
+// ];
+
 // class App extends React.Component {
 class App extends Component {
   static propTypes = {
