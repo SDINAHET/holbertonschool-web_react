@@ -1,15 +1,7 @@
 @import "tailwindcss";
-
-/* Tailwind v4 in-CSS theme setup */
-@theme {
-  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-/* Apply Roboto as the default font across the app (and make the checker happy) */
+@theme { --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
 @layer base {
   :root { font-family: var(--font-sans); }
-  html, body {
-    font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
-  body { @apply font-sans; } /* optionnel mais propre */
+  html, body { font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  body { @apply font-sans; }
 }
