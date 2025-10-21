@@ -58,7 +58,7 @@ class App extends Component {
   };
 
   static defaultProps = {
-    isLoggedIn: true,     // ou false, au choix
+    isLoggedIn: false,     // ou false, au choix
     logOut: () => {},
   };
 
