@@ -33,22 +33,32 @@ const defaultNotifications = [
 const listCourses = [];
 
 // class App extends React.Component {
+// class App extends Component {
+//   static propTypes = {
+//     isLoggedIn: PropTypes.bool,
+//     courses: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         id: PropTypes.number.isRequired,
+//         name: PropTypes.string.isRequired,
+//         credit: PropTypes.number.isRequired,
+//       })
+//     ),
+//     logOut: PropTypes.func,
+//   };
+
+//   static defaultProps = {
+//     isLoggedIn: true,
+//     courses: defaultCourses,
+//     logOut: () => {},
+//   };
 class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool,
-    courses: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        credit: PropTypes.number.isRequired,
-      })
-    ),
     logOut: PropTypes.func,
   };
 
   static defaultProps = {
-    isLoggedIn: false,
-    courses: defaultCourses,
+    isLoggedIn: true,     // ou false, au choix
     logOut: () => {},
   };
 
@@ -70,7 +80,8 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, courses } = this.props;
+    // const { isLoggedIn, courses } = this.props;
+    const { isLoggedIn } = this.props;
 
     return (
       // <>
