@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   // plugins: [react()],
   plugins: [react(), tailwindcss()],
-  // base: '/holbertonschool-web_react/',
+  base: '/holbertonschool-web_react/',
 })
