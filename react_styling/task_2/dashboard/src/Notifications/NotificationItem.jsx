@@ -52,7 +52,15 @@ export default class NotificationItem extends PureComponent {
 
   render() {
     const { type, html, value } = this.props;
-    const style = { color: type === 'urgent' ? 'red' : 'blue' };
+    // const style = { color: type === 'urgent' ? 'red' : 'blue' };
+
+    // Use Task 2 CSS variables for colors
+    const style = {
+      color:
+        type === 'urgent'
+          ? 'var(--urgent-notification-item)'
+          : 'var(--default-notification-item)',
+    };
 
     if (html) {
       return (

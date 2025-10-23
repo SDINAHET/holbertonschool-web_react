@@ -8,6 +8,12 @@
 /* Couleurs pour le tableau */
 @layer base {
   :root {
+    /* === Task 2 color variables === */
+    --main-color: #e1003c;
+    --default-notification-item: blue;
+    --urgent-notification-item: red;
+
+    /* existing variables kept */
     --color-table-header: #deb5b5; /* header bg */
     --color-table-rows: #CDCDCD;   /* row bg */
 
