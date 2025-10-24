@@ -12,11 +12,13 @@ import { getLatestNotification } from './utils/utils';
 import BodySection from './BodySection/BodySection';
 import BodySectionWithMarginBottom from './BodySection/BodySectionWithMarginBottom';
 
-const defaultNotifications = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-];
+// const defaultNotifications = [
+//   { id: 1, type: 'default', value: 'New course available' },
+//   { id: 2, type: 'urgent', value: 'New resume available' },
+//   { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+// ];
+
+const defaultNotifications = [];
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -43,7 +45,7 @@ class App extends Component {
 
     return (
       <>
-        <Notifications displayDrawer={false} notifications={defaultNotifications} />
+        <Notifications displayDrawer={true} notifications={defaultNotifications} />
         <div className="App">
           <Header />
           <main className="App-body">

@@ -1,13 +1,8 @@
+// task_2/dashboard/src/Notifications/Notifications.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import './Notifications.css'; ❌ No CSS imports allowed per Task 2
 import closebtn from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
-
-// export default function Notifications({
-//   notifications = [],
-//   displayDrawer = false, // <= par défaut false (exigence Task 5)
-// }) {
 
 export default class Notifications extends Component {
   static propTypes = {
@@ -22,20 +17,15 @@ export default class Notifications extends Component {
     displayDrawer: PropTypes.bool,
   };
 
-  // par défaut false (exigence Task 5)
   static defaultProps = {
     notifications: [],
     displayDrawer: false,
   };
 
-  /** IMPORTANT (Task 7):
-   *  Ne re-render que si la longueur de notifications change
-   */
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
 
-  // méthode demandée par l'exo
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
@@ -43,28 +33,37 @@ export default class Notifications extends Component {
   render() {
     const { notifications, displayDrawer } = this.props;
 
-    // Titre toujours visible
+    // Title pinned top-right above the panel
     const Title = (
-      <div className="notification-title" data-testid="notifications-title">
-        <p>Your notifications</p>
+      <div
+        className="notification-title fixed top-2 right-3 z-[1000]"
+        data-testid="notifications-title"
+      >
+        <p className="m-0 p-0 text-sm font-medium">Your notifications</p>
       </div>
     );
 
-    // Contenu du tiroir (uniquement si displayDrawer === true)
+    // Drawer with dashed border using --main-color
     const Drawer = displayDrawer ? (
-      <div className="notifications">
+      <div
+        className="notifications fixed top-10 right-3 z-[999] w-[360px] max-w-[calc(100%-24px)] rounded-md bg-white box-border p-4 pb-3 border-2 border-dashed"
+        style={{ borderColor: 'var(--main-color)' }}
+      >
         <div className="notification-items">
           {notifications.length > 0 ? (
             <>
-              <p>Here is the list of notifications</p>
+              <p className="m-0 mb-3">Here is the list of notifications</p>
+
               <button
                 onClick={() => console.log('Close button has been clicked')}
                 aria-label="Close"
-                className="notifications-close"
+                className="notifications-close absolute top-2 right-2 p-1 bg-transparent border-0 cursor-pointer"
+                type="button"
               >
-                <img src={closebtn} alt="Close" />
+                <img src={closebtn} alt="Close" className="block w-3 h-3" />
               </button>
-              <ul>
+
+              <ul className="list-disc list-outside pl-4 m-0">
                 {notifications.map((n) => (
                   <NotificationItem
                     key={n.id}
@@ -78,17 +77,17 @@ export default class Notifications extends Component {
               </ul>
             </>
           ) : (
-            <p className="notifications-empty">No new notification for now</p>
+            <p className="notifications-empty m-0">No new notification for now</p>
           )}
         </div>
       </div>
     ) : null;
 
-  return (
-    <>
-      {Title}
-      {Drawer}
-    </>
-  );
-}
+    return (
+      <>
+        {Title}
+        {Drawer}
+      </>
+    );
+  }
 }
