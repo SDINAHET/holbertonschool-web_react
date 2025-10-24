@@ -46,9 +46,10 @@ export default class Notifications extends Component {
     // Drawer with dashed border using --main-color
     const Drawer = displayDrawer ? (
       <div
-        className="notifications fixed top-10 right-3 z-[999] w-[360px] max-w-[calc(100%-24px)] rounded-md bg-white box-border p-4 pb-3 border-2 border-dashed"
+        className="notifications fixed top-10 right-3 z-[999] w-[360px] max-w-[calc(100%-24px)] rounded-none bg-white box-border p-4 pb-3 border-2 border-dashed"
         style={{ borderColor: 'var(--main-color)' }}
       >
+
         <div className="notification-items">
           {notifications.length > 0 ? (
             <>
