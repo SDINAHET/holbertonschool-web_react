@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+               "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
 @layer base {
-  :root { font-family: var(--font-sans); }
-  html, body {
-    font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
   body { @apply font-sans; }
+
+  /* Titles bigger & bold */
+  h1 { @apply text-3xl sm:text-4xl font-bold; }
+  h2 { @apply text-2xl sm:text-3xl font-semibold; }
+  h3 { @apply text-xl font-medium; }
 }
