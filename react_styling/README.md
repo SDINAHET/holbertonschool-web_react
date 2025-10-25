@@ -2040,9 +2040,31 @@ k_0/dashboard# npm run dev
 
 
 ```
+
+![alt text](image-5.png)
+```css
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+               "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+}
+
+@layer base {
+  body { @apply font-sans; }
+
+  /* Titles bigger & bold */
+  h1 { @apply text-3xl sm:text-4xl font-bold; }
+  h2 { @apply text-2xl sm:text-3xl font-semibold; }
+  h3 { @apply text-xl font-medium; }
+}
+```
+
 ## Task1
 ![alt text](image.png)
 ![alt text](image-1.png)
+
 
 ## Task2
 ![alt text](image-2.png)

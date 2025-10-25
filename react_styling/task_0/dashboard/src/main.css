@@ -1,16 +1,13 @@
 @import "tailwindcss";
 
+/* 1) Définir la famille de police dans le thème */
 @theme {
   --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
                Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
                "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
+/* 2) Utiliser le layer base pour l’appliquer globalement */
 @layer base {
   body { @apply font-sans; }
-
-  /* Titles bigger & bold */
-  h1 { @apply text-3xl sm:text-4xl font-bold; }
-  h2 { @apply text-2xl sm:text-3xl font-semibold; }
-  h3 { @apply text-xl font-medium; }
 }
