@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* 1) Définir la famille de police dans le thème */
 @theme {
-  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-               Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
-               "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/* 2) Utiliser le layer base pour l’appliquer globalement */
 @layer base {
+  :root { font-family: var(--font-sans); }
+  html, body {
+    font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
   body { @apply font-sans; }
 }
