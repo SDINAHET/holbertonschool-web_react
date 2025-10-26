@@ -44,6 +44,9 @@
                "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   --color-table-header: #deb5b5; /* === Tâche 1 : variables couleurs du tableau === */
   --color-table-rows: #CDCDCD;
+  --main-color: #e1003c;
+  --default-notification-item: blue;
+  --urgent-notification-item: red;
 }
 
 /* Application globale */
