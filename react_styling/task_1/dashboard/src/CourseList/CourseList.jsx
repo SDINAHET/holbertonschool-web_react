@@ -1,6 +1,5 @@
 import React from "react";
 import CourseListRow from "./CourseListRow";
-// import './CourseList.css'
 import WithLogging from '../HOC/WithLogging';
 
 // export default function CourseList({ courses=[] }) {
