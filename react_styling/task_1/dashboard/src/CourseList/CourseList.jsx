@@ -5,7 +5,7 @@ import WithLogging from "../HOC/WithLogging";
 function CourseList({ courses = [] }) {
   return (
     // Wrapper unique : centré + 85% (80–90%) — pas d'autre div autour
-    <div className="mx-auto my-8 w-[85%] md:w-4/5">
+    <div className="w-4/5 mx-auto my-8">
       {/* La table remplit complètement le conteneur */}
       <table id="CourseList" className="w-full border-collapse text-black">
         {courses.length > 0 ? (
