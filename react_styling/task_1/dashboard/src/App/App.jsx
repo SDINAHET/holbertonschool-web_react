@@ -82,7 +82,7 @@ class App extends Component {
       //   </div>
       // </>
             <>
-        <Notifications displayDrawer={false} notifications={defaultNotifications} />
+        <Notifications displayDrawer={true} notifications={defaultNotifications} />
         <div className="App">
           <Header />
 
