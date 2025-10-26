@@ -62,7 +62,7 @@ import WithLogging from '../HOC/WithLogging';
 function CourseList({ courses = [] }) {
   return (
     <div className="w-full flex justify-center my-8">
-      <div className="w-4/5 md:w-[85%]"> {/* 80–85% de largeur */}
+      <div className="w-[85%] md:w-4/5"> {/* 80–85% de largeur */}
         <table id="CourseList" className="w-full border-collapse">
           {courses.length > 0 ? (
             <>
