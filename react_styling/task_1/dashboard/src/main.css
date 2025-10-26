@@ -1,24 +1,51 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
-/* Thème Tailwind v4 + Roboto par défaut */
 @theme {
   --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/* Couleurs pour le tableau */
 @layer base {
-  :root {
-    --color-table-header: #deb5b5; /* header bg */
-    --color-table-rows: #CDCDCD;   /* row bg */
-
-    /* ⬇️ helpers en alpha-hex (pas de rgb) */
-    /* 66% ≈ A8, 45% ≈ 73 */
-    --color-table-header-66: #deb5b5A8;
-    --color-table-rows-45: #CDCDCD73;
-  }
-
+  :root { font-family: var(--font-sans); }
   html, body {
     font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
+  body { @apply font-sans; }
+} */
+
+@import "tailwindcss";
+
+/* Forcer des requêtes réseau vers les fichiers roboto .woff2 */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("@fontsource/roboto/files/roboto-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("@fontsource/roboto/files/roboto-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("@fontsource/roboto/files/roboto-latin-700-normal.woff2") format("woff2");
+}
+
+/* Thème Tailwind v4 : Roboto par défaut */
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+               "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+}
+
+/* Application globale */
+@layer base {
+  html { font-family: var(--font-sans); }
   body { @apply font-sans; }
 }
