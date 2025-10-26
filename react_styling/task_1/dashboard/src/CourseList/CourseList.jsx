@@ -4,35 +4,24 @@ import WithLogging from "../HOC/WithLogging";
 
 function CourseList({ courses = [] }) {
   return (
-    <div className="flex justify-center my-8">
-      {/* Conteneur principal entre 80–90 % de la largeur */}
-      <table id="CourseList" className="w-4/5 border-collapse">
+    // Un SEUL wrapper centré, 80% de largeur
+    <div className="w-4/5 mx-auto my-8">
+      <table id="CourseList" className="w-full border-collapse">
         {courses.length > 0 ? (
           <>
             <thead>
               <CourseListRow isHeader={true} textFirstCell="Available courses" />
-              <CourseListRow
-                isHeader={true}
-                textFirstCell="Course name"
-                textSecondCell="Credit"
-              />
+              <CourseListRow isHeader={true} textFirstCell="Course name" textSecondCell="Credit" />
             </thead>
             <tbody>
-              {courses.map((course) => (
-                <CourseListRow
-                  key={course.id}
-                  textFirstCell={course.name}
-                  textSecondCell={course.credit}
-                />
+              {courses.map((c) => (
+                <CourseListRow key={c.id} textFirstCell={c.name} textSecondCell={c.credit} />
               ))}
             </tbody>
           </>
         ) : (
           <tbody>
-            <CourseListRow
-              isHeader={true}
-              textFirstCell="No course available yet"
-            />
+            <CourseListRow isHeader={true} textFirstCell="No course available yet" />
           </tbody>
         )}
       </table>
