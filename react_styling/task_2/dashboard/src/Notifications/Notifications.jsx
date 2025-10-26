@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import closebtn from '../assets/close-button.png';
+import closeIcon from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
-
-// export default function Notifications({
-//   notifications = [],
-//   displayDrawer = false, // <= par défaut false (exigence Task 5)
-// }) {
 
 export default class Notifications extends Component {
   static propTypes = {
@@ -21,20 +16,16 @@ export default class Notifications extends Component {
     displayDrawer: PropTypes.bool,
   };
 
-  // par défaut false (exigence Task 5)
   static defaultProps = {
     notifications: [],
     displayDrawer: false,
   };
 
-  /** IMPORTANT (Task 7):
-   *  Ne re-render que si la longueur de notifications change
-   */
+  // Task 7: rerender uniquement si la longueur change
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
 
-  // méthode demandée par l'exo
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
@@ -42,52 +33,60 @@ export default class Notifications extends Component {
   render() {
     const { notifications, displayDrawer } = this.props;
 
-  // Titre toujours visible
-  const Title = (
-    <div className="notification-title" data-testid="notifications-title">
-      <p>Your notifications</p>
-    </div>
-  );
-
-  // Contenu du tiroir (uniquement si displayDrawer === true)
-  const Drawer = displayDrawer ? (
-    <div className="notifications">
-      <div className="notification-items">
-        {notifications.length > 0 ? (
-          <>
-            <p>Here is the list of notifications</p>
-            <button
-              onClick={() => console.log('Close button has been clicked')}
-              aria-label="Close"
-              className="notifications-close"
-            >
-              <img src={closebtn} alt="Close" />
-            </button>
-            <ul>
-              {notifications.map((n) => (
-                <NotificationItem
-                  key={n.id}
-                  id={n.id}
-                  type={n.type}
-                  value={n.value}
-                  html={n.html}
-                  markAsRead={this.markAsRead}
-                />
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p className="notifications-empty">No new notification for now</p>
-        )}
+    // Titre toujours visible en haut à droite
+    const Title = (
+      <div
+        className="text-right pr-4 font-bold text-lg text-[var(--main-color)]"
+        data-testid="notifications-title"
+      >
+        Your notifications
       </div>
-    </div>
-  ) : null;
+    );
 
-  return (
-    <>
-      {Title}
-      {Drawer}
-    </>
-  );
-}
+    // Panneau (uniquement quand displayDrawer = true)
+    const Drawer = displayDrawer ? (
+      <div className="w-full flex justify-end mt-2">
+        <div
+          className="relative p-4 border-2 border-dashed rounded-md bg-white"
+          style={{ borderColor: 'var(--main-color)' }}
+        >
+          {notifications.length === 0 ? (
+            <p className="notifications-empty">No new notification for now</p>
+          ) : (
+            <>
+              <p>Here is the list of notifications</p>
+
+              <button
+                aria-label="Close"
+                className="absolute top-2 right-2"
+                onClick={() => console.log('Close button has been clicked')}
+              >
+                <img src={closeIcon} alt="Close" className="w-3 h-3" />
+              </button>
+
+              <ul className="list-none p-0 m-0">
+                {notifications.map((n) => (
+                  <NotificationItem
+                    key={n.id}
+                    id={n.id}
+                    type={n.type}
+                    value={n.value}
+                    html={n.html}
+                    markAsRead={this.markAsRead}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
+    ) : null;
+
+    return (
+      <>
+        {Title}
+        {Drawer}
+      </>
+    );
+  }
 }
