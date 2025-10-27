@@ -21,7 +21,6 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
-  // Ne rerender que si la longueur change (exigence du projet)
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
@@ -35,7 +34,7 @@ export default class Notifications extends Component {
 
     return (
       <div className="w-full flex flex-col items-end">
-        {/* Titre toujours visible, à droite, non gras */}
+        {/* Titre à droite, non gras, taille normale */}
         <div
           className="text-right font-normal text-base text-black"
           data-testid="notifications-title"
@@ -43,14 +42,14 @@ export default class Notifications extends Component {
           Your notifications
         </div>
 
-        {/* Panneau */}
+        {/* Panneau EXACT : bordure rouge en pointillés, 1px, sans arrondis, sans espace parasite */}
         {displayDrawer && (
           <div
-            className="mt-1 relative p-2 border border-dashed rounded-none bg-white"
+            className="mt-0 relative p-2 border border-dashed rounded-none bg-white"
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
-              <p className="notifications-empty text-sm text-gray-600 m-0">
+              <p className="notifications-empty text-black m-0">
                 No new notification for now
               </p>
             ) : (
@@ -65,7 +64,6 @@ export default class Notifications extends Component {
                   <img src={closeIcon} alt="Close" className="w-3 h-3" />
                 </button>
 
-                {/* Liste avec puces visibles (voir .notifications-list dans main.css) */}
                 <ul className="notifications-list">
                   {notifications.map((n) => (
                     <NotificationItem
