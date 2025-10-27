@@ -55,16 +55,18 @@
   body { @apply font-sans; }
 }
 
-/* Puces carrées + couleurs via variables */
+/* Liste Notifications : puces carrées visibles et colorées */
 .notifications-list{
-  list-style-type: square;      /* carrés visibles */
-  padding-left: 1.25rem;        /* équiv. pl-5 */
+  list-style-type: square;      /* carrés */
+  padding-left: 1.25rem;        /* ~ pl-5 */
   margin: 0;
 }
+.notifications-list li::marker{ font-size: 0.85rem; }
 .notifications-list li[data-notification-type="default"]::marker{
   color: var(--default-notification-item); /* blue */
 }
 .notifications-list li[data-notification-type="urgent"]::marker{
   color: var(--urgent-notification-item);  /* red */
 }
+
 

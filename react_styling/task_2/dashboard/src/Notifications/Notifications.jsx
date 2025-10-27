@@ -47,7 +47,7 @@ export default class Notifications extends Component {
     const Drawer = displayDrawer ? (
       <div className="w-full flex justify-end mt-2">
         <div
-          className="relative p-3 border-2 border-dashed rounded-md bg-white"
+          className="relative p-3 border border-dashed rounded-md bg-white"
           style={{ borderColor: 'var(--main-color)' }}
         >
           {notifications.length === 0 ? (
