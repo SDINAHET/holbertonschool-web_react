@@ -36,7 +36,7 @@ export default class Notifications extends Component {
     // Titre toujours visible
     const Title = (
       <div
-        className="text-right pr-4 font-medium text-base text-black"
+        className="text-right font-normal text-base text-black"
         data-testid="notifications-title"
       >
         Your notifications
@@ -86,10 +86,10 @@ export default class Notifications extends Component {
     ) : null;
 
     return (
-      <>
+      <div className="w-full flex flex-col items-end">
         {Title}
         {Drawer}
-      </>
+      </div>
     );
   }
 }
