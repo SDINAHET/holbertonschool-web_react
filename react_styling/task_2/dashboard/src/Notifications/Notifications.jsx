@@ -21,7 +21,7 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
-  // Ne rerender que si la longueur change
+  // Ne rerender que si la longueur change (exigence du projet)
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
@@ -33,59 +33,55 @@ export default class Notifications extends Component {
   render() {
     const { notifications, displayDrawer } = this.props;
 
-    // Titre toujours visible
-    const Title = (
-      <div
-        className="text-right font-normal text-base text-black"
-        data-testid="notifications-title"
-      >
-        Your notifications
-      </div>
-    );
-
-    // Panneau
-    const Drawer = displayDrawer ? (
-      <div
-        className="mt-1 relative p-2 border border-dotted rounded-none bg-white"
-        style={{ borderColor: 'var(--main-color)' }}
-      >
-        {notifications.length === 0 ? (
-          <p className="notifications-empty text-sm text-gray-600 m-0">
-            No new notification for now
-          </p>
-        ) : (
-          <>
-            <p className="text-base mb-2 m-0">Here is the list of notifications</p>
-
-            <button
-              aria-label="Close"
-              className="absolute top-2 right-2"
-              onClick={() => console.log('Close button has been clicked')}
-            >
-              <img src={closeIcon} alt="Close" className="w-3 h-3" />
-            </button>
-
-            <ul className="notifications-list">
-              {notifications.map((n) => (
-                <NotificationItem
-                  key={n.id}
-                  id={n.id}
-                  type={n.type}
-                  value={n.value}
-                  html={n.html}
-                  markAsRead={this.markAsRead}
-                />
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-    ) : null;
-
     return (
       <div className="w-full flex flex-col items-end">
-        {Title}
-        {Drawer}
+        {/* Titre toujours visible, à droite, non gras */}
+        <div
+          className="text-right font-normal text-base text-black"
+          data-testid="notifications-title"
+        >
+          Your notifications
+        </div>
+
+        {/* Panneau */}
+        {displayDrawer && (
+          <div
+            className="mt-1 relative p-2 border border-dashed rounded-none bg-white"
+            style={{ borderColor: 'var(--main-color)' }}
+          >
+            {notifications.length === 0 ? (
+              <p className="notifications-empty text-sm text-gray-600 m-0">
+                No new notification for now
+              </p>
+            ) : (
+              <>
+                <p className="text-base mb-2 m-0">Here is the list of notifications</p>
+
+                <button
+                  aria-label="Close"
+                  className="absolute top-2 right-2"
+                  onClick={() => console.log('Close button has been clicked')}
+                >
+                  <img src={closeIcon} alt="Close" className="w-3 h-3" />
+                </button>
+
+                {/* Liste avec puces visibles (voir .notifications-list dans main.css) */}
+                <ul className="notifications-list">
+                  {notifications.map((n) => (
+                    <NotificationItem
+                      key={n.id}
+                      id={n.id}
+                      type={n.type}
+                      value={n.value}
+                      html={n.html}
+                      markAsRead={this.markAsRead}
+                    />
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
       </div>
     );
   }
