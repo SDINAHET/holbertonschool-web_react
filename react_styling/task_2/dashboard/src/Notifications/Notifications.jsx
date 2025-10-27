@@ -21,7 +21,7 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
-  // Task 7: rerender uniquement si la longueur change
+  // Ne rerender que si la longueur change
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications.length !== this.props.notifications.length;
   }
@@ -33,28 +33,30 @@ export default class Notifications extends Component {
   render() {
     const { notifications, displayDrawer } = this.props;
 
-    // Titre toujours visible en haut à droite
+    // Titre toujours visible
     const Title = (
       <div
-        className="text-right pr-4 font-bold text-lg text-[var(--main-color)]"
+        className="text-right pr-4 font-normal text-lg text-black"
         data-testid="notifications-title"
       >
         Your notifications
       </div>
     );
 
-    // Panneau (uniquement quand displayDrawer = true)
+    // Panneau
     const Drawer = displayDrawer ? (
       <div className="w-full flex justify-end mt-2">
         <div
-          className="relative p-4 border-2 border-dashed rounded-md bg-white"
+          className="relative p-3 border-2 border-dashed rounded-md bg-white"
           style={{ borderColor: 'var(--main-color)' }}
         >
           {notifications.length === 0 ? (
-            <p className="notifications-empty">No new notification for now</p>
+            <p className="notifications-empty text-sm text-gray-600">
+              No new notification for now
+            </p>
           ) : (
             <>
-              <p>Here is the list of notifications</p>
+              <p className="text-base mb-2">Here is the list of notifications</p>
 
               <button
                 aria-label="Close"
@@ -64,7 +66,8 @@ export default class Notifications extends Component {
                 <img src={closeIcon} alt="Close" className="w-3 h-3" />
               </button>
 
-              <ul className="list-none p-0 m-0">
+              {/* Liste avec puces visibles */}
+              <ul className="pl-5 m-0">
                 {notifications.map((n) => (
                   <NotificationItem
                     key={n.id}
