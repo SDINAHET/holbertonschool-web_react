@@ -3,14 +3,14 @@ import holbertonLogo from '../assets/holberton-logo.jpg';
 
 export default function Header() {
   return (
-    <header className="App-header flex items-center gap-4 border-b-[3px] border-[var(--main-color)] py-5">
+    <header className="App-header flex items-center p-[10px]">
       <img
-        className="App-logo h-[200px] block"
+        className="App-logo h-[200px] mr-5"
         src={holbertonLogo}
         alt="Holberton logo"
       />
       <h1 className="text-[var(--main-color)] text-4xl font-bold">
-        School dashboard
+        School Dashboard
       </h1>
     </header>
   );
