@@ -67,7 +67,8 @@ export default class Notifications extends Component {
               </button>
 
               {/* Liste avec puces visibles */}
-              <ul className="pl-5 m-0">
+              {/* <ul className="pl-5 m-0"> */}
+              <ul className="notifications-list">
                 {notifications.map((n) => (
                   <NotificationItem
                     key={n.id}
