@@ -45,7 +45,7 @@ export default class Notifications extends Component {
         {/* Panneau EXACT : bordure rouge en pointillés, 1px, sans arrondis, sans espace parasite */}
         {displayDrawer && (
           <div
-            className="mt-0 relative p-2 border border-dottedrounded-none bg-white"
+            className="mt-0 relative p-2 border border-dotted rounded-none bg-white"
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
