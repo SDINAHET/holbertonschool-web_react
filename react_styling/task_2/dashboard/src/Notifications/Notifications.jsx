@@ -50,7 +50,7 @@ export default class Notifications extends Component {
           >
             {notifications.length === 0 ? (
               <p className="notifications-empty m-0">
-                No new notification for now
+                no new notification for now
               </p>
             ) : (
               <>
