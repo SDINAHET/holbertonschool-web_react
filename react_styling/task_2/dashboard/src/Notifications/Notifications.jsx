@@ -36,7 +36,7 @@ export default class Notifications extends Component {
     // Titre toujours visible
     const Title = (
       <div
-        className="text-right pr-4 font-normal text-lg text-black"
+        className="text-right pr-4 font-medium text-base text-black"
         data-testid="notifications-title"
       >
         Your notifications
@@ -45,9 +45,9 @@ export default class Notifications extends Component {
 
     // Panneau
     const Drawer = displayDrawer ? (
-      <div className="w-full flex justify-end mt-2">
+      <div className="w-full flex justify-end mt-1">
         <div
-          className="relative p-3 border border-dashed rounded-md bg-white"
+          className="relative p-2 border border-dotted rounded-none bg-white"
           style={{ borderColor: 'var(--main-color)' }}
         >
           {notifications.length === 0 ? (
