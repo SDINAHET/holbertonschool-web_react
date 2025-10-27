@@ -55,16 +55,16 @@
   body { @apply font-sans; }
 }
 
-/* Puces carrées + couleur via variables */
+/* Puces carrées + couleurs via variables */
 .notifications-list{
-  list-style-type: square;
-  padding-left: 1.25rem; /* ~ pl-5 */
+  list-style-type: square;      /* carrés visibles */
+  padding-left: 1.25rem;        /* équiv. pl-5 */
   margin: 0;
 }
-.notifications-list li::marker{ font-size: 0.8rem; }
 .notifications-list li[data-notification-type="default"]::marker{
-  color: var(--default-notification-item);
+  color: var(--default-notification-item); /* blue */
 }
 .notifications-list li[data-notification-type="urgent"]::marker{
-  color: var(--urgent-notification-item);
+  color: var(--urgent-notification-item);  /* red */
 }
+
