@@ -69,4 +69,43 @@
   color: var(--urgent-notification-item);  /* red */
 }
 
+/*Body section*/
+/* bloc principal */
+.bodySection {}
 
+/* marge bas demandée pour le conteneur spécialisé */
+.bodySectionWithMargin {
+  margin-bottom: 40px;
+}
+
+/*Header*/
+.App-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 3px solid #e0354b;
+  padding: 20px 0;
+}
+.App-logo {
+  height: 200px;
+}
+
+
+/*Footer*/
+.App-footer {
+  border-top: 3px solid #e0354b;
+  padding: 10px 0;
+  text-align: center;
+  font-style: italic;
+}
+
+/*Login*/
+.App-body {
+  padding: 10px;
+}
+.App-body label {
+  margin: 0 8px 0 16px;
+}
+.App-body input {
+  margin-right: 8px;
+}

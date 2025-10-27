@@ -1,5 +1,4 @@
 import React from 'react';
-import './Login.css';
 import WithLogging from '../HOC/WithLogging';
 
 // export default function Login() {
