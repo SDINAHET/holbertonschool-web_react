@@ -3,7 +3,7 @@ import React from 'react';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="App-footer">
+    <footer className="App-footer border-t-[3px] border-[var(--main-color)] py-2 text-center italic">
       <p>Copyright {year} - Holberton School</p>
     </footer>
   );
