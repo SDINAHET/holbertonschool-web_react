@@ -47,11 +47,15 @@ function Login() {
             ].join(' ')}
           />
 
+          {/* Petit bouton OK */}
           <button
             className={[
-              'px-3 py-1 border rounded text-xs',
-              // Optional but nice on mobile: make the button full width to match inputs
-              'max-[520px]:w-full',
+              'border rounded-sm text-[11px] leading-tight',
+              'px-2 py-0.5',                     // compact
+              'hover:bg-[var(--main-color)]/10', // léger hover
+              'focus:outline-none focus:ring-1 focus:ring-[var(--main-color)]',
+              // sur mobile, garder petit et aligné à gauche
+              'max-[520px]:self-start',
             ].join(' ')}
           >
             OK

@@ -63,7 +63,7 @@ class App extends Component {
 
     return (
       <>
-        <Notifications displayDrawer={true} notifications={defaultNotifications} />
+        <Notifications displayDrawer={false} notifications={defaultNotifications} />
 
         {/* App wrapper: responsive container + flex layout */}
         <div
