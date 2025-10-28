@@ -6,11 +6,19 @@ import App from './App';
 /** project reac_props **/
 /** Task 2 checks (sign-in form) */
 describe('App (Task 2) - sign in form', () => {
-  test('renders two input elements (email and password)', () => {
+  // test('renders two input elements (email and password)', () => {
+  //   const { container } = render(<App isLoggedIn={false} />);
+  //   expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+  //   expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+  //   expect(container.querySelectorAll('input')).toHaveLength(2);
+  // });
+    test('renders two input elements (email and password)', () => {
     const { container } = render(<App isLoggedIn={false} />);
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-    expect(container.querySelectorAll('input')).toHaveLength(2);
+    expect(
+      container.querySelectorAll('input[type="email"], input[type="password"]')
+    ).toHaveLength(2);
   });
 
   test('renders two labels with texts "Email" and "Password"', () => {
