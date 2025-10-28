@@ -35,28 +35,30 @@ export default class Notifications extends Component {
     return (
       <div
         className={[
-          // Position par défaut
+          // Desktop/tablet default
           'fixed top-4 right-4 z-50 text-right',
-          // En ≤ 912px : plein écran, mais on NE change PAS l’alignement (reste à droite)
-          'max-[912px]:inset-0 max-[912px]:w-screen max-[912px]:h-screen',
+          // On <= 912px: occupy full screen and reset text alignment
+          'max-[912px]:inset-0 max-[912px]:w-screen max-[912px]:h-screen max-[912px]:text-left',
         ].join(' ')}
       >
-        {/* Titre : toujours aligné à droite */}
+        {/* Title */}
         <div
-          className="text-right font-normal text-base text-black px-2"
+          className="text-right max-[912px]:text-left font-normal text-base text-black px-1"
           data-testid="notifications-title"
         >
           Your notifications
         </div>
 
-        {/* Panneau */}
+        {/* Panel */}
         {displayDrawer && (
           <div
             className={[
               'relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white',
-              // Mobile/tablette : plein écran, scroll interne, pas de bordure
+              // Brand border color via CSS var
+              // Mobile/tablet full screen panel
               'max-[912px]:mt-0 max-[912px]:block max-[912px]:w-full max-[912px]:h-[calc(100vh-2.5rem)]',
               'max-[912px]:p-4 max-[912px]:border-0 max-[912px]:rounded-none max-[912px]:overflow-y-auto',
+              // Give it a subtle elevation on small screens
               'max-[912px]:shadow-none',
             ].join(' ')}
             style={{ borderColor: 'var(--main-color)' }}
@@ -85,8 +87,10 @@ export default class Notifications extends Component {
                 <ul
                   className={[
                     'notifications-list list-disc pl-5',
-                    // En ≤ 912px : pas de puces, padding retiré, bord à bord propre
-                    'max-[912px]:list-none max-[912px]:pl-0 max-[912px]:-mx-1',
+                    // On <= 912px: remove bullets and left padding
+                    'max-[912px]:list-none max-[912px]:pl-0',
+                    // Make sure items don’t stick to the edges on mobile
+                    'max-[912px]:-mx-1',
                   ].join(' ')}
                 >
                   {notifications.map((n) => (
@@ -105,12 +109,12 @@ export default class Notifications extends Component {
           </div>
         )}
 
-        {/* Styles mobiles pour <li> sans modifier NotificationItem */}
+        {/* Mobile-specific styles for list items without changing NotificationItem */}
         <style>{`
           @media (max-width: 912px) {
             .notifications-list > li {
               padding: 12px 14px;
-              border-bottom: 1px solid #e5e7eb; /* gray-200 */
+              border-bottom: 1px solid #e5e7eb; /* Tailwind gray-200 */
             }
             .notifications-list > li:last-child {
               border-bottom: none;
