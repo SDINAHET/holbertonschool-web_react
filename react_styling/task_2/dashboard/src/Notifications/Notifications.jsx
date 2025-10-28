@@ -49,7 +49,7 @@ export default class Notifications extends Component {
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
-              <p className="notifications-empty m-0">No new notification for now</p>
+              <p className="notifications-empty m-0">no new notification for now</p>
             ) : (
               <>
                 <p className="text-base mb-2 m-0">Here is the list of notifications</p>
