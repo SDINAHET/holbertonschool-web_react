@@ -31,12 +31,18 @@ export default class Notifications extends Component {
 
   render() {
     const { notifications, displayDrawer } = this.props;
+    const hasNotifications = notifications.length > 0;
+
+    // ✅ Bounce when there are notifications AND displayDrawer is false
+    const titleClasses = `text-right font-normal text-base text-black ${
+      hasNotifications && !displayDrawer ? 'animate-bounce' : ''
+    }`;
 
     return (
       <div className="w-full flex flex-col items-end pr-4">
         {/* Titre aligné à droite */}
         <div
-          className="text-right font-normal text-base text-black"
+          className={titleClasses}
           data-testid="notifications-title"
         >
           Your notifications
