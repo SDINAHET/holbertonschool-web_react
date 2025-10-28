@@ -42,17 +42,21 @@ export default class Notifications extends Component {
           Your notifications
         </div>
 
-        {/* Panneau : bordure pointillée rouge sans arrondi */}
+        {/* Panneau de notifications */}
         {displayDrawer && (
           <div
-            className="relative mt-1 block p-2 border border-dotted rounded-none bg-white w-[520px]"
+            className="relative mt-1 block p-2 border border-dashed rounded-none bg-white w-[520px]"
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
-              <p className="notifications-empty m-0">No new notification for now</p>
+              <p className="notifications-empty m-0">
+                No new notification for now
+              </p>
             ) : (
               <>
-                <p className="text-base mb-2 m-0">Here is the list of notifications</p>
+                <p className="text-base mb-2 m-0">
+                  Here is the list of notifications
+                </p>
 
                 <button
                   aria-label="Close"
