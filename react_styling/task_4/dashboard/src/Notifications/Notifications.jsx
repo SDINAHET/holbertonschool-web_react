@@ -33,21 +33,34 @@ export default class Notifications extends Component {
     const { notifications, displayDrawer } = this.props;
 
     return (
-      // <div className="w-full flex flex-col items-end pr-4">
-      <div className="fixed top-4 right-4 z-50 text-right">
-
-        {/* Titre aligné à droite */}
+      <div
+        className={[
+          // Desktop/tablet default
+          'fixed top-4 right-4 z-50 text-right',
+          // On <= 912px: occupy full screen and reset text alignment
+          'max-[912px]:inset-0 max-[912px]:w-screen max-[912px]:h-screen max-[912px]:text-left',
+        ].join(' ')}
+      >
+        {/* Title */}
         <div
-          className="text-right font-normal text-base text-black"
+          className="text-right max-[912px]:text-left font-normal text-base text-black px-1"
           data-testid="notifications-title"
         >
           Your notifications
         </div>
 
-        {/* Panneau : bordure pointillée rouge sans arrondi */}
+        {/* Panel */}
         {displayDrawer && (
           <div
-            className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
+            className={[
+              'relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white',
+              // Brand border color via CSS var
+              // Mobile/tablet full screen panel
+              'max-[912px]:mt-0 max-[912px]:block max-[912px]:w-full max-[912px]:h-[calc(100vh-2.5rem)]',
+              'max-[912px]:p-4 max-[912px]:border-0 max-[912px]:rounded-none max-[912px]:overflow-y-auto',
+              // Give it a subtle elevation on small screens
+              'max-[912px]:shadow-none',
+            ].join(' ')}
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
@@ -58,13 +71,28 @@ export default class Notifications extends Component {
 
                 <button
                   aria-label="Close"
-                  className="absolute top-2 right-2"
+                  className={[
+                    'absolute top-2 right-2',
+                    'max-[912px]:top-4 max-[912px]:right-4',
+                  ].join(' ')}
                   onClick={() => console.log('Close button has been clicked')}
                 >
-                  <img src={closeIcon} alt="Close" className="w-3 h-3" />
+                  <img
+                    src={closeIcon}
+                    alt="Close"
+                    className="w-3 h-3 max-[912px]:w-4 max-[912px]:h-4"
+                  />
                 </button>
 
-                <ul className="notifications-list">
+                <ul
+                  className={[
+                    'notifications-list list-disc pl-5',
+                    // On <= 912px: remove bullets and left padding
+                    'max-[912px]:list-none max-[912px]:pl-0',
+                    // Make sure items don’t stick to the edges on mobile
+                    'max-[912px]:-mx-1',
+                  ].join(' ')}
+                >
                   {notifications.map((n) => (
                     <NotificationItem
                       key={n.id}
@@ -80,6 +108,19 @@ export default class Notifications extends Component {
             )}
           </div>
         )}
+
+        {/* Mobile-specific styles for list items without changing NotificationItem */}
+        <style>{`
+          @media (max-width: 912px) {
+            .notifications-list > li {
+              padding: 12px 14px;
+              border-bottom: 1px solid #e5e7eb; /* Tailwind gray-200 */
+            }
+            .notifications-list > li:last-child {
+              border-bottom: none;
+            }
+          }
+        `}</style>
       </div>
     );
   }
