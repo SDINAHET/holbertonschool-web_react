@@ -1,3 +1,4 @@
+// task_5/dashboard/src/Notifications/Notifications.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../assets/close-button.png';
@@ -32,18 +33,25 @@ export default class Notifications extends Component {
   render() {
     const { notifications, displayDrawer } = this.props;
 
+    // Bounce uniquement si > 0 notifs ET drawer fermé
+    const shouldBounce = notifications.length > 0 && !displayDrawer;
+
     return (
-      // <div className="w-full flex flex-col items-end pr-4">
-      <div className="fixed top-4 right-4 z-50 text-right">
-        {/* Titre aligné à droite */}
+      <div
+        className="fixed z-50 text-right"
+        style={{ position: 'fixed', top: '1rem', right: '1rem', left: 'auto' }}
+      >
+        {/* Titre (on garde la classe/ID du projet et on ajoute le bounce si besoin) */}
         <div
-          className="text-right font-normal text-base text-black"
+          className={`menuItem text-right font-normal text-base text-black ${
+            shouldBounce ? 'animate-bounce' : ''
+          }`}
           data-testid="notifications-title"
         >
           Your notifications
         </div>
 
-        {/* Panneau : bordure pointillée rouge sans arrondi */}
+        {/* Drawer : bordure pointillée rouge sans arrondi */}
         {displayDrawer && (
           <div
             className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
