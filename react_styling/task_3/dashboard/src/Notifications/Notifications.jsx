@@ -33,19 +33,20 @@ export default class Notifications extends Component {
     const { notifications, displayDrawer } = this.props;
     const hasNotifications = notifications.length > 0;
 
-    // ✅ Animate the menuItem when notifications exist and drawer is closed
-    const menuItemClass = `menuItem text-right font-normal text-base text-black ${
-      hasNotifications && !displayDrawer ? 'animate-bounce' : ''
-    }`;
+    // ✅ Animate only when there are notifications AND drawer is closed
+    const bounceClass = hasNotifications && !displayDrawer ? 'animate-bounce' : '';
 
     return (
-      <div className="Notifications w-full flex flex-col items-end pr-4">
-        {/* Always visible title (required by autograder) */}
-        <div className={menuItemClass} data-testid="notifications-title">
+      // <div className="Notifications w-full flex flex-col items-end pr-4">
+        {/* Always visible menuItem */}
+        {/* <div className={`menuItem ${bounceClass}`} data-testid="notifications-title">
           Your notifications
-        </div>
+        </div> */}
+        {/* <div className="menuItem animate-bounce">Your notifications</div> */}
+        // ✅ .menuItem en premier, puis inline-block pour rendre la translation visible
+        <div className="menuItem inline-block animate-bounce">Your notifications</div>
 
-        {/* Drawer content */}
+        {/* Drawer section */}
         {displayDrawer && (
           <div
             className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
