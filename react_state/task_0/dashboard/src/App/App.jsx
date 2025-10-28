@@ -49,6 +49,19 @@ class App extends Component {
     logOut: () => {},
   };
 
+  // --- Task 0: local state for notifications ---
+  state = {
+    displayDrawer: false,
+  };
+
+  handleDisplayDrawer = () => {
+    this.setState({ displayDrawer: true });
+  };
+
+  handleHideDrawer = () => {
+    this.setState({ displayDrawer: false });
+  };
+
   handleKeyDown = (e) => {
     // Safeguard keys access & accept both 'h' and 'H'
     const key = e && typeof e.key === 'string' ? e.key : '';
@@ -68,20 +81,16 @@ class App extends Component {
 
   render() {
     const { isLoggedIn, courses } = this.props;
+    const { displayDrawer } = this.state;
 
     return (
-      // <>
-      //   <Notifications displayDrawer={false} notifications={defaultNotifications} />
-      //   <div className="App">
-      //     <Header />
-      //     <main className="App-body">
-      //       {isLoggedIn ? <CourseList courses={courses} /> : <Login />}
-      //     </main>
-      //     <Footer />
-      //   </div>
-      // </>
-            <>
-        <Notifications displayDrawer={false} notifications={defaultNotifications} />
+      <>
+        <Notifications
+          displayDrawer={displayDrawer}
+          notifications={defaultNotifications}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
         <div className="App">
           <Header />
 

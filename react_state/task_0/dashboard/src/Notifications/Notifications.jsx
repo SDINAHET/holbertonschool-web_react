@@ -15,15 +15,22 @@ export default class Notifications extends Component {
       })
     ),
     displayDrawer: PropTypes.bool,
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func,
   };
 
   static defaultProps = {
     notifications: [],
     displayDrawer: false,
+    handleDisplayDrawer: undefined,
+    handleHideDrawer: undefined,
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.notifications.length !== this.props.notifications.length;
+    return (
+      nextProps.notifications.length !== this.props.notifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    );
   }
 
   markAsRead = (id) => {
@@ -41,12 +48,20 @@ export default class Notifications extends Component {
         className="fixed z-50 text-right"
         style={{ position: 'fixed', top: '1rem', right: '1rem', left: 'auto' }}
       >
-        {/* Titre (on garde la classe/ID du projet et on ajoute le bounce si besoin) */}
+        {/* Titre (cliquable pour ouvrir le drawer) */}
         <div
           className={`menuItem text-right font-normal text-base text-black ${
             shouldBounce ? 'animate-bounce' : ''
           }`}
           data-testid="notifications-title"
+          role="button"
+          tabIndex={0}
+          onClick={() => this.props.handleDisplayDrawer && this.props.handleDisplayDrawer()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              this.props.handleDisplayDrawer && this.props.handleDisplayDrawer();
+            }
+          }}
         >
           Your notifications
         </div>
@@ -66,7 +81,11 @@ export default class Notifications extends Component {
                 <button
                   aria-label="Close"
                   className="absolute top-2 right-2"
-                  onClick={() => console.log('Close button has been clicked')}
+                  onClick={() =>
+                    this.props.handleHideDrawer
+                      ? this.props.handleHideDrawer()
+                      : console.log('Close button has been clicked')
+                  }
                 >
                   <img src={closeIcon} alt="Close" className="w-3 h-3" />
                 </button>
