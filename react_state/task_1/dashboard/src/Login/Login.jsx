@@ -14,7 +14,13 @@ class Login extends Component {
   }
 
   // Validation email simple (suffisante pour l’exercice)
-  isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  isValidEmail = (email) => {
+    // Exige au moins 2 lettres après le dernier point du domaine
+    const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    // Empêche les doubles points dans le domaine (ex: a@b..com)
+    return re.test(email) && !/\.\./.test(email.split('@')[1] || '');
+  };
 
   updateEnableSubmit = (email, password) => {
     const ok =
