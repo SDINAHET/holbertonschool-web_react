@@ -18,8 +18,41 @@ class Login extends Component {
   isValidEmail = (email) => {
     // Valide les e-mails avec sous-domaines, +tag, tirets, etc.
     // Refuse les TLD d'une seule lettre, les doubles points, ou les domaines incomplets
-    const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    return re.test(email) && !/\.{2,}/.test(email) && !/@.*@/.test(email);
+  //   const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  //   return re.test(email) && !/\.{2,}/.test(email) && !/@.*@/.test(email);
+  // };
+    // 1) forme générale : local@domaine.tld avec TLD >= 2 lettres
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(email)) return false;
+
+    const parts = email.split('@');
+    if (parts.length !== 2) return false;
+
+    const local = parts[0];
+    const domain = parts[1];
+
+    // local et domaine non vides
+    if (!local || !domain) return false;
+
+    // 2) pas de doubles points dans le domaine
+    if (domain.includes('..')) return false;
+
+    // 3) le domaine ne doit pas commencer/finir par '.' ou '-'
+    if (domain.startsWith('.') || domain.endsWith('.') ||
+        domain.startsWith('-') || domain.endsWith('-')) {
+      return false;
+    }
+
+    // 4) chaque label du domaine doit être non vide et ne pas commencer/finir par '-'
+    const labels = domain.split('.');
+    if (labels.some(l => l.length === 0 || l.startsWith('-') || l.endsWith('-'))) {
+      return false;
+    }
+
+    // 5) TLD = seulement des lettres et >= 2
+    const tld = labels[labels.length - 1];
+    if (!/^[A-Za-z]{2,}$/.test(tld)) return false;
+
+    return true;
   };
 
   updateEnableSubmit = (email, password) => {
