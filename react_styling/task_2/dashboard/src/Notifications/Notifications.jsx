@@ -45,7 +45,7 @@ export default class Notifications extends Component {
         {/* Panneau de notifications */}
         {displayDrawer ? (
           <div
-            className="relative mt-1 block p-2 border border-dashed rounded-none bg-white w-[520px]"
+            className="relative mt-1 block p-2 border border-dotted rounded-none bg-white w-[520px]"
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
