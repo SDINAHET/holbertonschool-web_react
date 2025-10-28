@@ -41,13 +41,18 @@ class Login extends Component {
     return true;
   };
 
+  // updateEnableSubmit = (email, password) => {
+  //   const ok =
+  //     email.trim().length > 0 &&
+  //     password.trim().length > 0 &&
+  //     this.isValidEmail(email) &&
+  //     password.length >= 8;
+  //   this.setState({ enableSubmit: ok });
+  // };
   updateEnableSubmit = (email, password) => {
-    const ok =
-      email.trim().length > 0 &&
-      password.trim().length > 0 &&
-      this.isValidEmail(email) &&
-      password.length >= 8;
-    this.setState({ enableSubmit: ok });
+    this.setState({
+      enableSubmit: this.isValidEmail(email) && password.length >= 8
+    });
   };
 
   handleChangeEmail = (e) => {
