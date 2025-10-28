@@ -16,10 +16,10 @@ class Login extends Component {
   // Validation email simple (suffisante pour l’exercice)
   // isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   isValidEmail = (email) => {
-    // Exige au moins 2 lettres après le dernier point du domaine
+    // Valide les e-mails avec sous-domaines, +tag, tirets, etc.
+    // Refuse les TLD d'une seule lettre, les doubles points, ou les domaines incomplets
     const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    // Empêche les doubles points dans le domaine (ex: a@b..com)
-    return re.test(email) && !/\.\./.test(email.split('@')[1] || '');
+    return re.test(email) && !/\.{2,}/.test(email) && !/@.*@/.test(email);
   };
 
   updateEnableSubmit = (email, password) => {
