@@ -39,7 +39,7 @@ export default class Notifications extends Component {
           className="text-right font-normal text-base text-black"
           data-testid="notifications-title"
         >
-          Your notifications
+          your notifications
         </div>
 
         {/* Panneau de notifications */}
@@ -50,7 +50,7 @@ export default class Notifications extends Component {
           >
             {notifications.length === 0 ? (
               <p className="notifications-empty m-0">
-                No new notification for now
+                no new notification for now
               </p>
             ) : (
               <>
