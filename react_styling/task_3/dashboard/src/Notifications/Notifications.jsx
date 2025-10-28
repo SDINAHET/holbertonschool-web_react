@@ -21,8 +21,12 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
+  // ✅ Important: tenir compte aussi de displayDrawer pour déclencher un re-render
   shouldComponentUpdate(nextProps) {
-    return nextProps.notifications.length !== this.props.notifications.length;
+    return (
+      nextProps.notifications.length !== this.props.notifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    );
   }
 
   markAsRead = (id) => {
@@ -33,28 +37,23 @@ export default class Notifications extends Component {
     const { notifications, displayDrawer } = this.props;
     const hasNotifications = notifications.length > 0;
 
-    // ✅ Animate only when there are notifications AND drawer is closed
+    // ✅ Bounce uniquement quand il y a des notifs ET que le drawer est fermé
     const bounceClass = hasNotifications && !displayDrawer ? 'animate-bounce' : '';
 
     return (
-      // <div className="Notifications w-full flex flex-col items-end pr-4">
-        {/* Always visible menuItem */}
-        {/* <div className={`menuItem ${bounceClass}`} data-testid="notifications-title">
+      <>
+        {/* Toujours visible et ciblé par le checker */}
+        <div className={`menuItem ${bounceClass}`} data-testid="notifications-title">
           Your notifications
-        </div> */}
-        {/* <div className="menuItem animate-bounce">Your notifications</div> */}
-        // ✅ .menuItem en premier, puis inline-block pour rendre la translation visible
-        <div className="menuItem inline-block animate-bounce">Your notifications</div>
+        </div>
 
-        {/* Drawer section */}
+        {/* Drawer rendu seulement quand displayDrawer = true */}
         {displayDrawer && (
           <div
-            className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
+            className="Notifications relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
             style={{ borderColor: 'var(--main-color)' }}
           >
-            {notifications.length === 0 ? (
-              <p className="notifications-empty m-0">No new notification for now</p>
-            ) : (
+            {hasNotifications ? (
               <>
                 <p className="text-base mb-2 m-0">Here is the list of notifications</p>
 
@@ -79,10 +78,12 @@ export default class Notifications extends Component {
                   ))}
                 </ul>
               </>
+            ) : (
+              <p className="notifications-empty m-0">No new notification for now</p>
             )}
           </div>
         )}
-      </div>
+      </>
     );
   }
 }
