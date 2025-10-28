@@ -33,7 +33,8 @@ export default class Notifications extends Component {
     const { notifications, displayDrawer } = this.props;
 
     return (
-      <div className="w-full flex flex-col items-end pr-4">
+      // <div className="w-full flex flex-col items-end pr-4">
+      <div className="fixed top-4 right-4 z-50 text-right">
         {/* Titre aligné à droite */}
         <div
           className="text-right font-normal text-base text-black"
