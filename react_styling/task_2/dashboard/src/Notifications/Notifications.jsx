@@ -43,14 +43,14 @@ export default class Notifications extends Component {
         </div>
 
         {/* Panneau de notifications */}
-        {displayDrawer && (
+        {displayDrawer ? (
           <div
             className="relative mt-1 block p-2 border border-dashed rounded-none bg-white w-[520px]"
             style={{ borderColor: 'var(--main-color)' }}
           >
             {notifications.length === 0 ? (
               <p className="notifications-empty m-0">
-                no new notification for now
+                No new notification for now
               </p>
             ) : (
               <>
@@ -81,7 +81,7 @@ export default class Notifications extends Component {
               </>
             )}
           </div>
-        )}
+        ) : null}
       </div>
     );
   }
