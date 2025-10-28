@@ -11,7 +11,7 @@ export default function Header() {
         src={holbertonLogo}
         alt="Holberton logo"
       />
-      <h1>School dashboard</h1>
+      <h1>School Dashboard</h1>
     </header>
   );
 }
