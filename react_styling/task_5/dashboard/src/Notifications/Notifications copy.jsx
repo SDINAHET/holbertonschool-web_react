@@ -21,12 +21,8 @@ export default class Notifications extends Component {
     displayDrawer: false,
   };
 
-  // ✅ Important: tenir compte aussi de displayDrawer pour déclencher un re-render
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.notifications.length !== this.props.notifications.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer
-    );
+    return nextProps.notifications.length !== this.props.notifications.length;
   }
 
   markAsRead = (id) => {
@@ -35,25 +31,26 @@ export default class Notifications extends Component {
 
   render() {
     const { notifications, displayDrawer } = this.props;
-    const hasNotifications = notifications.length > 0;
-
-    // ✅ Bounce uniquement quand il y a des notifs ET que le drawer est fermé
-    const bounceClass = hasNotifications && !displayDrawer ? 'animate-bounce' : '';
 
     return (
-      <>
-        {/* Toujours visible et ciblé par le checker */}
-        <div className={`menuItem ${bounceClass}`} data-testid="notifications-title">
+      <div className="w-full flex flex-col items-end pr-4">
+        {/* Titre aligné à droite */}
+        <div
+          className="text-right font-normal text-base text-black"
+          data-testid="notifications-title"
+        >
           Your notifications
         </div>
 
-        {/* Drawer rendu seulement quand displayDrawer = true */}
+        {/* Panneau : bordure pointillée rouge sans arrondi */}
         {displayDrawer && (
           <div
-            className="Notifications relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
+            className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white"
             style={{ borderColor: 'var(--main-color)' }}
           >
-            {hasNotifications ? (
+            {notifications.length === 0 ? (
+              <p className="notifications-empty m-0">No new notification for now</p>
+            ) : (
               <>
                 <p className="text-base mb-2 m-0">Here is the list of notifications</p>
 
@@ -78,12 +75,10 @@ export default class Notifications extends Component {
                   ))}
                 </ul>
               </>
-            ) : (
-              <p className="notifications-empty m-0">No new notification for now</p>
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
