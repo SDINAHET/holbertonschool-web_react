@@ -1,4 +1,4 @@
-name: CI - React Components (auto-discovery)
+name: CI - React Styling (auto-discovery)
 
 on:
   push:
@@ -18,16 +18,16 @@ jobs:
       - name: Quick scan (diagnostic)
         run: |
           echo "Repo root:"; pwd; ls -la
-          echo "First 200 paths under react_components:"
-          find react_components -maxdepth 3 -print 2>/dev/null | sort | sed -n '1,200p' || true
+          echo "First 200 paths under react_styling:"
+          find react_stylling -maxdepth 3 -print 2>/dev/null | sort | sed -n '1,200p' || true
 
       - id: discover
         shell: bash
         run: |
           set -e
-          # Ne garder que react_components/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
+          # Ne garder que react_stylling/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
           mapfile -t DIRS < <(
-            find react_components \
+            find react_stylling \
               -regextype posix-extended \
               -type f \
               -regex '.*/task_[0-9]+/dashboard/package\.json' \
@@ -39,7 +39,7 @@ jobs:
 
           if [ "$COUNT" -eq 0 ]; then
             echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
-            echo "No numeric task dashboards found under react_components."
+            echo "No numeric task dashboards found under react_styling."
             exit 0
           fi
 
