@@ -95,6 +95,15 @@ describe('App (Task 1) - lifecycle & keyboard', () => {
       expect(screen.queryByLabelText(/password/i)).toBeNull();
     });
 
+    // test('displays "News from the School" block with its paragraph by default', () => {
+    //   render(<App />); // isLoggedIn false par défaut
+    //   // h2 rendu par BodySection
+    //   expect(
+    //     screen.getByRole('heading', { level: 2, name: /News from the School/i })
+    //   ).toBeInTheDocument();
+    //   // paragraphe demandé
+    //   expect(screen.getByText(/Holberton School News goes here/i)).toBeInTheDocument();
+    // });
     test('displays "News from the School" block with its paragraph by default', () => {
       render(<App />); // isLoggedIn false par défaut
       // h2 rendu par BodySection
@@ -102,7 +111,7 @@ describe('App (Task 1) - lifecycle & keyboard', () => {
         screen.getByRole('heading', { level: 2, name: /News from the School/i })
       ).toBeInTheDocument();
       // paragraphe demandé
-      expect(screen.getByText(/Holberton School News goes here/i)).toBeInTheDocument();
+      expect(screen.getByText(/ipsum Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, asperiores architecto blanditiis fuga doloribus sit illum aliquid ea distinctio minus accusantium, impedit quo voluptatibus ut magni dicta. Recusandae, quia dicta?/i)).toBeInTheDocument();
     });
   });
 });
