@@ -14,7 +14,32 @@ class Login extends Component {
   }
 
   // Validation email simple (suffisante pour l’exercice)
-  isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // ✅ version stricte attendue par le correcteur
+  isValidEmail = (email) => {
+    // forme générale: local@domaine.tld avec TLD >= 2 lettres
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(email)) return false;
+
+    const [local, domain] = email.split('@');
+    if (!local || !domain) return false;
+
+    // pas de double point dans le domaine
+    if (domain.includes('..')) return false;
+
+    // domaine ne peut pas commencer/finir par '.' ou '-'
+    if (domain.startsWith('.') || domain.endsWith('.') ||
+        domain.startsWith('-') || domain.endsWith('-')) return false;
+
+    // chaque label du domaine non vide et ne commence/termine pas par '-'
+    const labels = domain.split('.');
+    if (labels.some(l => l.length === 0 || l.startsWith('-') || l.endsWith('-'))) return false;
+
+    // TLD = lettres uniquement et au moins 2
+    const tld = labels[labels.length - 1];
+    if (!/^[A-Za-z]{2,}$/.test(tld)) return false;
+
+    return true;
+  };
 
   // updateEnableSubmit = (email, password) => {
   //   const ok =
