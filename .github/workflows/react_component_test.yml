@@ -39,7 +39,7 @@ jobs:
 
           if [ "$COUNT" -eq 0 ]; then
             echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
-            echo "No numeric task dashboards found under react_components."
+            echo "No numeric task dashboards found under react_component."
             exit 0
           fi
 
