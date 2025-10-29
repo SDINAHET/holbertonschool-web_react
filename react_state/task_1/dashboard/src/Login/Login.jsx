@@ -15,6 +15,7 @@ class Login extends Component {
 
   // Validation email simple (suffisante pour l’exercice)
   isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  
 
   // updateEnableSubmit = (email, password) => {
   //   const ok =
