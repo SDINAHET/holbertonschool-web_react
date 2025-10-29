@@ -34,7 +34,7 @@ class Login extends Component {
     const p = password.trim();
     this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
   };
-  
+
 
   handleChangeEmail = (e) => {
     const email = e.target.value;
@@ -95,6 +95,7 @@ class Login extends Component {
             <input
               type="submit"
               value="OK"
+              role="button"
               disabled={!enableSubmit}
               className="px-3 py-1 border rounded text-xs disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="OK"
