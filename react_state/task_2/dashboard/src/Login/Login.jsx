@@ -6,9 +6,11 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
-      email: '',
-      password: '',
+      // isLoggedIn: false,
+      // email: '',
+      // password: '',
+      email: props.email || '',
+      password: props.password || '',
       enableSubmit: false,
     };
   }
@@ -69,10 +71,10 @@ class Login extends Component {
   //   this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
   // };
   updateEnableSubmit = (email, password) => {
-    const e = email;
-    const p = password.trim();
+    const e = email;              // on valide l'email brut (pas de trim)
+    const p = password.trim();    // on peut trim le mdp pour la longueur
 
-    // On ne tolère pas d'espaces autour de l'email
+    // On ne tolère pas d'espaces autour de l'email --> ne fonctionne pas
     const hasOuterSpaces = e !== e.trim();
 
     const ok =
@@ -99,10 +101,19 @@ class Login extends Component {
     });
   };
 
+  // handleLoginSubmit = (e) => {
+  //   e.preventDefault(); // ne pas recharger la page
+  //   if (this.state.enableSubmit) {
+  //     this.setState({ isLoggedIn: true });
+  //   }
+  // };
+
   handleLoginSubmit = (e) => {
-    e.preventDefault(); // ne pas recharger la page
-    if (this.state.enableSubmit) {
-      this.setState({ isLoggedIn: true });
+    e.preventDefault();
+    const { email, password, enableSubmit } = this.state;
+    // ✅ Appelle logIn depuis les props (fourni par App via Context/state)
+    if (enableSubmit && typeof this.props.logIn === 'function') {
+      this.props.logIn(email, password);
     }
   };
 
@@ -155,5 +166,11 @@ class Login extends Component {
     );
   }
 }
+
+Login.defaultProps = {
+  email: '',
+  password: '',
+  logIn: () => {},
+};
 
 export default WithLogging(Login);

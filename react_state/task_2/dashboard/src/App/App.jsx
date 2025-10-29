@@ -31,29 +31,41 @@ const defaultCourses = [
 
 // class App extends React.Component {
 class App extends Component {
-  static propTypes = {
-    isLoggedIn: PropTypes.bool,
-    courses: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        credit: PropTypes.number.isRequired,
-      })
-    ),
-    logOut: PropTypes.func,
-  };
+  // static propTypes = {
+  //   isLoggedIn: PropTypes.bool,
+  //   courses: PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       id: PropTypes.number.isRequired,
+  //       name: PropTypes.string.isRequired,
+  //       credit: PropTypes.number.isRequired,
+  //     })
+  //   ),
+  //   logOut: PropTypes.func,
+  // };
 
-  static defaultProps = {
-    isLoggedIn: false,
-    courses: defaultCourses,
-    logOut: () => {},
-  };
+  // static defaultProps = {
+  //   isLoggedIn: false,
+  //   courses: defaultCourses,
+  //   logOut: () => {},
+  // };
 
-  // --- Task 0: local state for notifications ---
+  // --- Task 0 + Task 2: local state for notifications ---
   state = {
     displayDrawer: false,
+    user: { ...defaultUser },
+    logOut: this.logOut, // référence stable pour le Provider
   };
 
+  // === Task 2: auth ===
+  logIn = (email, password) => {
+    this.setState({ user: { email, password, isLoggedIn: true } });
+  };
+
+  logOut = () => {
+    this.setState({ user: { ...defaultUser } });
+  };
+
+  // === Task 0: Notifications drawer ===
   handleDisplayDrawer = () => {
     this.setState({ displayDrawer: true });
   };
@@ -63,6 +75,7 @@ class App extends Component {
   };
 
   handleKeyDown = (e) => {
+    // Ctrl+H -> logout (via contexte/state, plus via props)
     // Safeguard keys access & accept both 'h' and 'H'
     const key = e && typeof e.key === 'string' ? e.key : '';
     if (e?.ctrlKey && (key === 'h' || key === 'H')) {
@@ -80,40 +93,44 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, courses } = this.props;
-    const { displayDrawer } = this.state;
+    const { displayDrawer, user } = this.state;
 
     return (
-      <>
-        <Notifications
-          displayDrawer={displayDrawer}
-          notifications={defaultNotifications}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-        />
-        <div className="App">
-          <Header />
+      <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
+        <>
+          <Notifications
+            displayDrawer={displayDrawer}
+            notifications={defaultNotifications}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+          />
+          <div className="App">
+            <Header />
 
-          <main className="App-body">
-            {!isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList courses={courses} />
-              </BodySectionWithMarginBottom>
-            )}
+            <main className="App-body">
+              {!user.isLoggedIn ? (
+                <BodySectionWithMarginBottom title="Log in to continue">
+                  <Login
+                    logIn={this.logIn}
+                    email={user.email || ''}
+                    password={user.password || ''}
+                  />
+                </BodySectionWithMarginBottom>
+              ) : (
+                <BodySectionWithMarginBottom title="Course list">
+                  <CourseList courses={defaultCourses} />
+                </BodySectionWithMarginBottom>
+              )}
 
-            {/* Bloc d’actualité demandé */}
-            <BodySection title="News from the School">
-              <p>Holberton School News goes here</p>
-            </BodySection>
-          </main>
+              <BodySection title="News from the School">
+                <p>Holberton School News goes here</p>
+              </BodySection>
+            </main>
 
-          <Footer />
-        </div>
-      </>
+            <Footer />
+          </div>
+        </>
+      </AppContext.Provider>
     );
   }
 }
