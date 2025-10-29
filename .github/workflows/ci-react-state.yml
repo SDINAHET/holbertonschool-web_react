@@ -122,31 +122,48 @@ jobs:
         working-directory: ${{ matrix.dir }}
         env:
           CI: "true"
+        shell: bash
         run: |
           set -euo pipefail
+          LOG="$RUNNER_TEMP/dev.log"
           HAS_DEV=$(node -e "console.log((require('./package.json').scripts||{}).dev ? 'yes' : 'no')")
           if [ "$HAS_DEV" = "yes" ]; then
             # Run dev server briefly to ensure it starts without immediate crash.
             # We intentionally time it out after 15s; exit code 124 means timeout, which we treat as success.
             set +e
-            timeout 15s npm run dev 2>&1 | tee "$RUNNER_TEMP/dev.log"
+            timeout 15s npm run dev 2>&1 | tee "$LOG"
             EXIT_CODE=${PIPESTATUS[0]}
             set -e
             if [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 124 ]; then
               echo "Dev server exited with code $EXIT_CODE (not a timeout)"; exit "$EXIT_CODE"
             fi
           else
-            echo "No dev script found; skipping." | tee "$RUNNER_TEMP/dev.log"
+            echo "No dev script found; skipping." | tee "$LOG"
           fi
+
+      - name: Compute safe artifact name
+        shell: bash
+        run: |
+          SAFE="$(echo "${{ matrix.dir }}" | sed 's#[/\\\":<>|?*]#-#g')"
+          echo "ARTIFACT_NAME=logs-${SAFE}" >> "$GITHUB_ENV"
 
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: logs-${{ matrix.dir }}
+          name: ${{ env.ARTIFACT_NAME }}
           path: |
             ${{ runner.temp }}/install.log
             ${{ runner.temp }}/test.log
             ${{ runner.temp }}/build.log
             ${{ runner.temp }}/dev.log
+          if-no-files-found: warn
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: |
+            ${{ runner.temp }}/coverage
           if-no-files-found: warn
