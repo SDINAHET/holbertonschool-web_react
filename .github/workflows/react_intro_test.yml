@@ -1,0 +1,85 @@
+name: CI - React Intro (auto-discovery)
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      count: ${{ steps.discover.outputs.count }}
+      matrix: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quick scan (diagnostic)
+        run: |
+          echo "Repo root:"; pwd; ls -la
+          echo "First 200 paths under react_intro:"
+          find react_intro -maxdepth 3 -print 2>/dev/null | sort | sed -n '1,200p' || true
+
+      - id: discover
+        shell: bash
+        run: |
+          set -e
+          # Trouver les dashboards react_intro/task_*/dashboard contenant un package.json
+          mapfile -t DIRS < <(find react_intro -maxdepth 3 -type f -name package.json \
+                              -path "*/task_*/dashboard/package.json" -printf '%h\n' 2>/dev/null | sort)
+          COUNT=${#DIRS[@]}
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
+            echo "No dashboards found under react_intro."
+            exit 0
+          fi
+
+          echo "Found dashboards:"
+          printf ' - %s\n' "${DIRS[@]}"
+
+          # Construire la matrice JSON {"include":[{"dir":"..."}, ...]}
+          JSON='{"include":['
+          SEP=""
+          for d in "${DIRS[@]}"; do
+            JSON="$JSON$SEP{\"dir\":\"$d\"}"
+            SEP=","
+          done
+          JSON="$JSON]}"
+          echo "matrix=$JSON" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    if: needs.discover.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    name: ${{ matrix.dir }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ${{ matrix.dir }}/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.dir }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run tests
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+          COLUMNS: "120"
+        run: npm test -- --watchAll=false
