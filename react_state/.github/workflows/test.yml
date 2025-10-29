@@ -1,18 +1,24 @@
-name: CI - Dashboards tests (task_0 → task_9)
+name: CI - React State (task_0..task_10)
 
 on:
   push:
     branches: ["**"]
+    paths:
+      - "react_state/task_*/dashboard/**"
+      - ".github/workflows/test-react-state.yml"
   pull_request:
+    paths:
+      - "react_state/task_*/dashboard/**"
+      - ".github/workflows/test-react-state.yml"
 
 jobs:
   test:
-    name: Task ${{ matrix.task }} / dashboard
+    name: react_state/task_${{ matrix.task }}/dashboard
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        task: [0,1,2,3,4,5,6,7,8,9]
+        task: [0,1,2,3,4,5,6,7,8,9,10]
 
     steps:
       - name: Checkout
@@ -21,7 +27,7 @@ jobs:
       - name: Compute path & existence
         id: meta
         run: |
-          DIR="task_${{ matrix.task }}/dashboard"
+          DIR="react_state/task_${{ matrix.task }}/dashboard"
           echo "dir=$DIR" >> "$GITHUB_OUTPUT"
           if [ -d "$DIR" ]; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -57,16 +63,19 @@ jobs:
       #   working-directory: ${{ steps.meta.outputs.dir }}
       #   run: npm run build
 
-      - name: Run tests
+      - name: Run tests (with coverage)
         if: steps.meta.outputs.exists == 'true'
         env:
           CI: "true"
-          COLUMNS: "120"   # évite le bug de reporter Jest sous TTY étroit
+          COLUMNS: "120"   # évite un bug possible du reporter Jest
         working-directory: ${{ steps.meta.outputs.dir }}
-        run: npm test -- --watchAll=false
-        # Alternative plus silencieuse :
-        # run: npm test -- --watchAll=false --reporters=summary
+        run: npm test -- --watchAll=false --coverage
 
-      - name: Upload coverage
+      - name: Upload coverage to Codecov
         if: steps.meta.outputs.exists == 'true'
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}           # requis si repo privé
+          files: ${{ steps.meta.outputs.dir }}/coverage/lcov.info
+          flags: task-${{ matrix.task }}
+          fail_ci_if_error: false                       # n’échoue pas la CI si l’upload échoue
