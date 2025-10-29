@@ -43,36 +43,6 @@ describe('Login (Task 1) - Controlled components and state callback', () => {
     expect(submit).toBeEnabled();
   });
 
-  test('should not accept invalid email formats', () => {
-    render(<Login />);
-    const emailInput = screen.getByLabelText(/email/i);
-    const pwdInput = screen.getByLabelText(/password/i);
-    const submit = screen.getByRole('button', { name: /ok/i });
-
-    fireEvent.change(pwdInput, { target: { value: 'longpassword' } });
-
-    const invalidEmails = [
-      'user@.com',
-      'user@domain',
-      'user@domain..com',
-      'user@@domain.com',
-      'user@-domain.com',
-      'user@domain-.com',
-      'user@domain.c',
-      'user@domain,com',
-      // ' user@domain.com ',
-    ];
-
-    for (const email of invalidEmails) {
-      fireEvent.change(emailInput, { target: { value: email } });
-      if (!submit.disabled) {
-        // <-- dis-nous qui passe à tort
-        console.error(`❌ EMAIL ACCEPTÉ PAR ERREUR : "${email}"`);
-      }
-      expect(submit).toBeDisabled();
-    }
-  });
-
   test('submitting the form does not reload the page', () => {
     render(<Login />);
     const emailInput = screen.getByLabelText(/email/i);

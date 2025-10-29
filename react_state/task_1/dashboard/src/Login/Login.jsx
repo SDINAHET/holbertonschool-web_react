@@ -17,11 +17,13 @@ class Login extends Component {
   // isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   // isValidEmail = (email) => /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email);
   isValidEmail = (email) => {
-    // Vérifie le pattern général
+    // Rejette les emails avec espaces ou séparateurs avant/après
+    if (email !== email.trim()) return false; // refuse " user@domain.com "
+    if (/\s/.test(email)) return false;       // refuse les espaces internes
+
     const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!pattern.test(email)) return false;
 
-    // Sépare la partie locale et le domaine
     const parts = email.split('@');
     if (parts.length !== 2) return false;
     const domain = parts[1];
@@ -61,12 +63,27 @@ class Login extends Component {
   //     enableSubmit: this.isValidEmail(email) && password.length >= 8
   //   });
   // };
+  // updateEnableSubmit = (email, password) => {
+  //   const e = email.trim();
+  //   const p = password.trim();
+  //   this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
+  // };
   updateEnableSubmit = (email, password) => {
-    const e = email.trim();
+    const e = email;
     const p = password.trim();
-    this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
-  };
 
+    // On ne tolère pas d'espaces autour de l'email
+    const hasOuterSpaces = e !== e.trim();
+
+    const ok =
+      !hasOuterSpaces &&                 // empêche " user@domain.com "
+      e.length > 0 &&
+      p.length > 0 &&
+      this.isValidEmail(e) &&
+      p.length >= 8;
+
+    this.setState({ enableSubmit: ok });
+  }
 
   handleChangeEmail = (e) => {
     const email = e.target.value;
