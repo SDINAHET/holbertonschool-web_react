@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PLD Quiz – React State & Hooks (29/10/2025)</title>
+  <style>
+    :root {
+      --bg: #0f172a;       /* slate-900 */
+      --panel: #111827;    /* gray-900 */
+      --accent: #8b5cf6;   /* violet-500 */
+      --accent-2: #22c55e; /* green-500 */
+      --accent-3: #f59e0b; /* amber-500 */
+      --muted: #94a3b8;    /* slate-400 */
+      --text: #e5e7eb;     /* gray-200 */
+      --danger: #ef4444;   /* red-500 */
+      --ok: #10b981;       /* emerald-500 */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% 0%, #1f2937 0%, var(--bg) 40%),
+                  radial-gradient(800px 600px at 90% 10%, #0b1020 0%, var(--bg) 60%);
+      color: var(--text); line-height: 1.5;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+    header {
+      display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom: 18px;
+    }
+    .title {
+      font-size: clamp(22px, 3.6vw, 36px); font-weight: 800; letter-spacing: 0.3px;
+      background: linear-gradient(90deg, #fff, #c4b5fd, #86efac);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .meta { color: var(--muted); font-size: 14px; }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(148,163,184,0.12);
+      border-radius: 18px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .row { display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 880px){ .row { grid-template-columns: 1.4fr 1fr; } }
+
+    /* Progress */
+    .progress { height: 10px; background: #0b1220; border-radius: 999px; overflow: hidden; border: 1px solid rgba(148,163,184,0.15); }
+    .progress > div { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .3s ease; }
+
+    /* Question card */
+    .card { background: var(--panel); border: 1px solid rgba(148,163,184,0.12); border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    .q { font-weight:700; font-size: 18px; margin-bottom: 12px; }
+    .choices { display:grid; gap:10px; }
+    .choice { border: 1px solid rgba(148,163,184,0.2); background: #0b1220; color: var(--text); padding: 12px 14px; border-radius: 12px; cursor: pointer; transition: transform .05s ease, border-color .2s, background .2s; }
+    .choice:hover { border-color: var(--accent); }
+    .choice.selected { outline: 2px solid var(--accent); transform: translateY(-1px); }
+    .choice.correct { background: rgba(16,185,129,0.12); border-color: var(--ok); }
+    .choice.incorrect { background: rgba(239,68,68,0.12); border-color: var(--danger); }
+
+    .controls { display:flex; gap: 12px; flex-wrap: wrap; }
+    button { background: linear-gradient(180deg, var(--accent), #6d28d9); color:#fff; border: none; padding: 10px 14px; border-radius: 12px; font-weight:700; cursor:pointer; box-shadow: 0 8px 24px rgba(139,92,246,0.25); }
+    button.secondary { background: #111827; color:#e5e7eb; border:1px solid rgba(148,163,184,0.2); box-shadow:none; }
+    button.ghost { background: transparent; border: 1px dashed rgba(148,163,184,0.35); color: var(--muted); }
+
+    .explain { margin-top: 10px; color: #c7d2fe; font-size: 14px; display:none; }
+    .badge { display:inline-flex; align-items:center; gap:6px; padding: 6px 10px; border-radius: 999px; background: rgba(139,92,246,0.15); color:#e9d5ff; border:1px solid rgba(139,92,246,0.35); font-size: 12px; }
+
+    /* Sidebar */
+    .side { display:grid; gap: 16px; }
+    .score { font-size: 32px; font-weight: 900; }
+    .timer { font-variant-numeric: tabular-nums; }
+
+    .small { font-size: 12px; color: var(--muted); }
+    .hidden { display:none; }
+    .success { color: var(--accent-2); }
+    .danger { color: var(--danger); }
+    .note { color: #93c5fd; }
+    .textarea { width: 100%; min-height: 120px; resize: vertical; border-radius: 12px; background: #0b1220; color: var(--text); border:1px solid rgba(148,163,184,0.25); padding: 10px 12px; }
+    .pill { padding: 4px 10px; border-radius: 999px; border:1px solid rgba(148,163,184,0.25); color: var(--muted); }
+    footer { margin-top: 18px; color: var(--muted); font-size: 12px; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="title">PLD Quiz – React State & Hooks</div>
+        <div class="meta">Session du <strong>29/10/2025</strong> · Thèmes : <span class="pill">State</span> <span class="pill">Hooks</span> · Durée cible: 10 min</div>
+      </div>
+      <div>
+        <span class="badge">Participants : Axel · Hugo · Stéphane · Scandere · Saber · Fanuel · Marilyne</span>
+      </div>
+    </header>
+
+    <div class="row">
+      <main class="panel">
+        <div class="progress" aria-label="Progression"><div id="bar"></div></div>
+        <div id="quiz"></div>
+
+        <div class="controls" style="margin-top:14px;">
+          <button id="prev" class="secondary" aria-label="Question précédente">⟵ Précédent</button>
+          <button id="next" aria-label="Question suivante">Suivant ⟶</button>
+          <button id="submit" class="ghost" aria-label="Soumettre le quiz">Soumettre</button>
+          <button id="retry" class="secondary hidden" aria-label="Recommencer">Recommencer</button>
+        </div>
+
+        <section class="card" style="margin-top:16px;">
+          <div class="q">⭐ Bonus (non noté) : Pourquoi les Hooks simplifient les tests et la maintenance ?</div>
+          <textarea id="bonus" class="textarea" placeholder="Votre réponse libre (facultatif)"></textarea>
+        </section>
+      </main>
+
+      <aside class="side">
+        <section class="card">
+          <div class="q">Score</div>
+          <div class="score"><span id="score">0</span>/<span id="total">0</span></div>
+          <div class="small">Les réponses correctes s'affichent en vert après soumission.</div>
+        </section>
+
+        <section class="card">
+          <div class="q">Minuteur</div>
+          <div class="timer"><span id="time">10:00</span></div>
+          <div class="small">Le quiz se soumet automatiquement à 0:00.</div>
+        </section>
+
+        <section class="card">
+          <div class="q">Options</div>
+          <div class="controls">
+            <button id="shuffle" class="secondary">🔀 Mélanger</button>
+            <button id="reveal" class="ghost">👀 Tout révéler</button>
+            <button id="export" class="secondary">⬇️ Exporter résultats</button>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <footer>
+      © PLD C#24 – FT1 & FT2 · React State & Hooks · Conçu pour une session en groupe.
+    </footer>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      {
+        q: "Qu’est-ce que le state dans un composant React, et en quoi diffère-t-il des props ?",
+        choices: [
+          "Le state vient du parent, les props sont locales",
+          "Le state est local et mutable, les props sont externes et immuables",
+          "Le state sert uniquement à afficher des valeurs statiques",
+          "Props et state sont identiques"
+        ],
+        answer: 1,
+        explain: "Le state appartient au composant et peut changer, alors que les props sont fournies par le parent et immuables."
+      },
+      {
+        q: "Comment initialise-t-on le state dans un composant fonctionnel React ?",
+        choices: ["Avec this.state", "Avec new State()", "Avec le Hook useState()", "Avec componentDidMount()"],
+        answer: 2,
+        explain: "On utilise useState(valeurInitiale) qui retourne [valeur, setValeur]."
+      },
+      {
+        q: "Pourquoi utiliser setState / le setter de useState plutôt que modifier l'état directement ?",
+        choices: [
+          "Parce que React planifie et regroupe les mises à jour",
+          "Parce que c’est plus rapide",
+          "Parce que le state est global",
+          "Ce n’est pas obligatoire"
+        ],
+        answer: 0,
+        explain: "setState / setter garantit un re-render correct, des mises à jour ordonnées et potentiellement groupées."
+      },
+      {
+        q: "Comment React fusionne-t-il les mises à jour de state ?",
+        choices: [
+          "Fusion profonde automatique",
+          "Remplacement total dans tous les cas",
+          "Dans les classes: fusion superficielle; avec useState: remplacement",
+          "Il ne fusionne jamais"
+        ],
+        answer: 2,
+        explain: "setState (classe) fait un shallow-merge; useState remplace la valeur, donc fusion manuelle si nécessaire."
+      },
+      {
+        q: "Qu’est-ce qu’un composant contrôlé (controlled component) ?",
+        choices: [
+          "Un composant géré uniquement par le DOM",
+          "Un composant dont la valeur est pilotée par le state via value/onChange",
+          "Un composant parent qui contrôle les enfants",
+          "Un composant sans formulaire"
+        ],
+        answer: 1,
+        explain: "La source de vérité est le state React, l'input reçoit value et émet onChange."
+      },
+      {
+        q: "Pourquoi les Hooks ont-ils été introduits ?",
+        choices: [
+          "Pour remplacer les classes et simplifier la gestion du state",
+          "Pour ajouter du style CSS",
+          "Pour créer des API",
+          "Pour manipuler le DOM plus facilement"
+        ],
+        answer: 0,
+        explain: "Hooks = logique réutilisable, composants plus lisibles, sans classes ni this."
+      },
+      {
+        q: "Quand doit-on utiliser useState ?",
+        choices: [
+          "Pour stocker un état global",
+          "Pour gérer un état local temporaire (formulaires, toggles...)",
+          "Pour exécuter du code asynchrone",
+          "Pour manipuler le DOM"
+        ],
+        answer: 1,
+        explain: "useState est idéal pour un état local UI. Pour le partagé/global: context, reducer, store externe."
+      },
+      {
+        q: "Qu’est-ce qu’un custom Hook ?",
+        choices: [
+          "Un Hook créé par React",
+          "Un Hook maison pour réutiliser une logique avec d'autres Hooks",
+          "Une fonction de classe",
+          "Une méthode privée"
+        ],
+        answer: 1,
+        explain: "Un custom hook (useX) factorise la logique stateful réutilisable."
+      },
+      {
+        q: "Quelles sont les deux règles d'or des Hooks ?",
+        choices: [
+          "Les appeler uniquement dans les composants de classe",
+          "Les appeler dans des boucles",
+          "Les appeler en haut des fonctions React et dans des custom hooks seulement",
+          "Les appeler à chaque condition"
+        ],
+        answer: 2,
+        explain: "Ordre d'appel stable = mappage correct de l'état/effets entre rendus."
+      },
+      {
+        q: "Comment useEffect remplace-t-il les méthodes du cycle de vie ?",
+        choices: [
+          "useEffect(()=>{}, []) = didMount; useEffect(()=>{}, [deps]) = didUpdate; return ()=>{} = willUnmount",
+          "useEffect remplace setState",
+          "useEffect équivaut à shouldComponentUpdate",
+          "useEffect ne remplace rien"
+        ],
+        answer: 0,
+        explain: "Selon le tableau des dépendances et le cleanup, on couvre mount/update/unmount."
+      }
+    ];
+
+    // --- State ---
+    let current = 0;
+    let userAnswers = Array(QUESTIONS.length).fill(null);
+    let shuffled = false;
+    let order = [...QUESTIONS.keys()];
+
+    const els = {
+      quiz: document.getElementById('quiz'),
+      bar: document.getElementById('bar'),
+      score: document.getElementById('score'),
+      total: document.getElementById('total'),
+      prev: document.getElementById('prev'),
+      next: document.getElementById('next'),
+      submit: document.getElementById('submit'),
+      retry: document.getElementById('retry'),
+      shuffle: document.getElementById('shuffle'),
+      reveal: document.getElementById('reveal'),
+      export: document.getElementById('export'),
+      time: document.getElementById('time'),
+    };
+
+    els.total.textContent = QUESTIONS.length;
+
+    function formatTime(sec){
+      const m = Math.floor(sec/60).toString().padStart(2,'0');
+      const s = (sec%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    // 10 minutes timer
+    let remaining = 10*60; els.time.textContent = formatTime(remaining);
+    const timer = setInterval(()=>{
+      remaining--; els.time.textContent = formatTime(Math.max(0, remaining));
+      if(remaining<=0){ clearInterval(timer); submitQuiz(); }
+    }, 1000);
+
+    function renderQuestion(idx){
+      const qIndex = order[idx];
+      const data = QUESTIONS[qIndex];
+      const saved = userAnswers[qIndex];
+
+      els.bar.style.width = `${((idx)/QUESTIONS.length)*100}%`;
+
+      const wrap = document.createElement('section');
+      wrap.className = 'card';
+      const q = document.createElement('div');
+      q.className = 'q';
+      q.textContent = `Q${idx+1}. ${data.q}`;
+
+      const choices = document.createElement('div');
+      choices.className = 'choices';
+
+      data.choices.forEach((cText, i)=>{
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'choice';
+        btn.textContent = cText;
+        if(saved === i) btn.classList.add('selected');
+        btn.addEventListener('click', ()=>{
+          userAnswers[qIndex] = i;
+          [...choices.children].forEach(ch => ch.classList.remove('selected'));
+          btn.classList.add('selected');
+          updateScorePreview();
+        });
+        choices.appendChild(btn);
+      });
+
+      const exp = document.createElement('div');
+      exp.className = 'explain';
+      exp.textContent = `Explication : ${data.explain}`;
+
+      wrap.appendChild(q);
+      wrap.appendChild(choices);
+      wrap.appendChild(exp);
+
+      els.quiz.innerHTML = '';
+      els.quiz.appendChild(wrap);
+
+      updateNav();
+    }
+
+    function updateNav(){
+      els.prev.disabled = current === 0;
+      els.next.disabled = current === QUESTIONS.length - 1;
+    }
+
+    function updateScorePreview(){
+      const score = userAnswers.reduce((acc, ans, qi)=> acc + (ans === QUESTIONS[qi].answer ? 1 : 0), 0);
+      els.score.textContent = score;
+    }
+
+    function submitQuiz(){
+      // reveal explanations and mark answers
+      const qIndex = order[current];
+      const data = QUESTIONS[qIndex];
+      const wrap = els.quiz.querySelector('.card');
+      const exp = wrap.querySelector('.explain');
+      exp.style.display = 'block';
+      const choices = wrap.querySelectorAll('.choice');
+
+      choices.forEach((btn, i)=>{
+        btn.classList.remove('selected');
+        if(i === data.answer) btn.classList.add('correct');
+        if(userAnswers[qIndex] === i && i !== data.answer) btn.classList.add('incorrect');
+        btn.disabled = true;
+      });
+
+      // compute final score across all answered questions
+      const final = userAnswers.reduce((acc, ans, qi)=> acc + (ans === QUESTIONS[qi].answer ? 1 : 0), 0);
+      els.score.textContent = final;
+      els.bar.style.width = '100%';
+      els.submit.disabled = true;
+      els.next.disabled = true;
+      els.prev.disabled = true;
+      els.retry.classList.remove('hidden');
+      clearInterval(timer);
+    }
+
+    function revealAll(){
+      // iterate all questions quickly
+      const prevCurrent = current;
+      for(let i=0;i<QUESTIONS.length;i++){
+        current = i; renderQuestion(current); submitQuiz();
+      }
+      current = prevCurrent; renderQuestion(current);
+    }
+
+    function shuffleQuestions(){
+      order = order.sort(()=> Math.random()-0.5);
+      shuffled = true; current = 0; renderQuestion(current);
+    }
+
+    function retry(){
+      userAnswers = Array(QUESTIONS.length).fill(null);
+      current = 0; shuffled = false; order = [...QUESTIONS.keys()];
+      els.submit.disabled = false; els.next.disabled = false; els.prev.disabled = true;
+      els.retry.classList.add('hidden');
+      remaining = 10*60; els.time.textContent = formatTime(remaining);
+      // restart timer
+      clearInterval(timer);
+      location.reload(); // simplest reset to clear button states
+    }
+
+    // Event bindings
+    els.prev.addEventListener('click', ()=>{ if(current>0){ current--; renderQuestion(current); } });
+    els.next.addEventListener('click', ()=>{ if(current<QUESTIONS.length-1){ current++; renderQuestion(current); } });
+    els.submit.addEventListener('click', submitQuiz);
+    els.retry.addEventListener('click', retry);
+    els.shuffle.addEventListener('click', shuffleQuestions);
+    els.reveal.addEventListener('click', revealAll);
+    els.export.addEventListener('click', ()=>{
+      const rows = [
+        ['Question','Votre choix','Correct ?','Bonne réponse','Explication']
+      ];
+      order.forEach((qi)=>{
+        const q = QUESTIONS[qi];
+        const ua = userAnswers[qi];
+        const ok = ua === q.answer;
+        rows.push([
+          q.q,
+          ua !== null ? q.choices[ua] : '',
+          ok ? 'Oui' : 'Non',
+          q.choices[q.answer],
+          q.explain
+        ]);
+      });
+      const bonus = document.getElementById('bonus').value.replace(/\n/g, ' ');
+      rows.push(['Bonus (réponse libre)', bonus, '', '', '']);
+
+      const csv = rows.map(r => r.map(x => '"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'PLD-Quiz-React-State-Hooks.csv'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial render
+    renderQuestion(current);
+    updateScorePreview();
+  </script>
+</body>
+</html>

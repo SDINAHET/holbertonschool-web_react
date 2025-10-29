@@ -25,15 +25,20 @@ jobs:
         shell: bash
         run: |
           set -e
-          # Trouver les dashboards react_intro/task_*/dashboard contenant un package.json
-          mapfile -t DIRS < <(find react_intro -maxdepth 3 -type f -name package.json \
-                              -path "*/task_*/dashboard/package.json" -printf '%h\n' 2>/dev/null | sort)
+          # Ne garder que react_intro/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
+          mapfile -t DIRS < <(
+            find react_intro \
+              -regextype posix-extended \
+              -type f \
+              -regex '.*/task_[0-9]+/dashboard/package\.json' \
+              -printf '%h\n' 2>/dev/null | sort
+          )
           COUNT=${#DIRS[@]}
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
           if [ "$COUNT" -eq 0 ]; then
             echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
-            echo "No dashboards found under react_intro."
+            echo "No numeric task dashboards found under react_intro."
             exit 0
           fi
 
