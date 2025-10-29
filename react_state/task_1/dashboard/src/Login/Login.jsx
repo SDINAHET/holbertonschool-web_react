@@ -17,22 +17,33 @@ class Login extends Component {
   // isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   // isValidEmail = (email) => /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email);
   isValidEmail = (email) => {
-    // forme générale
-    const basic = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-    if (!basic.test(email)) return false;
+    // Vérifie le pattern général
+    const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!pattern.test(email)) return false;
 
-    const [, domain] = email.split('@');
+    // Sépare la partie locale et le domaine
+    const parts = email.split('@');
+    if (parts.length !== 2) return false;
+    const domain = parts[1];
 
-    // domaine ne commence/termine pas par '.' ou '-'
-    if (!domain || domain.startsWith('.') || domain.endsWith('.') ||
-        domain.startsWith('-') || domain.endsWith('-')) return false;
-
-    // pas de double point dans le domaine (ex: domain..com)
+    // Rejette les domaines avec deux points consécutifs
     if (domain.includes('..')) return false;
 
-    // chaque label non vide et ne commence/termine pas par '-'
+    // Rejette les domaines commençant/terminant par '.' ou '-'
+    if (
+      domain.startsWith('.') ||
+      domain.endsWith('.') ||
+      domain.startsWith('-') ||
+      domain.endsWith('-')
+    ) {
+      return false;
+    }
+
+    // Chaque label du domaine doit être non vide et ne pas commencer/terminer par '-'
     const labels = domain.split('.');
-    if (labels.some(l => l.length === 0 || l.startsWith('-') || l.endsWith('-'))) return false;
+    if (labels.some(label => label.length === 0 || label.startsWith('-') || label.endsWith('-'))) {
+      return false;
+    }
 
     return true;
   };
