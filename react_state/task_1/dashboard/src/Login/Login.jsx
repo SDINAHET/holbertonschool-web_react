@@ -12,7 +12,6 @@ class Login extends Component {
       enableSubmit: false,
     };
   }
-  
 
   // Validation email simple (suffisante pour l’exercice)
   isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -25,10 +24,15 @@ class Login extends Component {
   //     password.length >= 8;
   //   this.setState({ enableSubmit: ok });
   // };
+  // updateEnableSubmit = (email, password) => {
+  //   this.setState({
+  //     enableSubmit: this.isValidEmail(email) && password.length >= 8
+  //   });
+  // };
   updateEnableSubmit = (email, password) => {
-    this.setState({
-      enableSubmit: this.isValidEmail(email) && password.length >= 8
-    });
+    const e = email.trim();
+    const p = password.trim();
+    this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
   };
 
   handleChangeEmail = (e) => {
