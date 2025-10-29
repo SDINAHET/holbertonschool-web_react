@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          # Ne garder que react_components/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
+          # Ne garder que react_component/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
           mapfile -t DIRS < <(
             find react_component \
               -regextype posix-extended \

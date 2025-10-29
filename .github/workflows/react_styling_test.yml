@@ -25,9 +25,9 @@ jobs:
         shell: bash
         run: |
           set -e
-          # Ne garder que react_stylling/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
+          # Ne garder que react_styling/task_[0-9]+/dashboard (exclut task_3b, task_4c, etc.)
           mapfile -t DIRS < <(
-            find react_stylling \
+            find react_styling \
               -regextype posix-extended \
               -type f \
               -regex '.*/task_[0-9]+/dashboard/package\.json' \
