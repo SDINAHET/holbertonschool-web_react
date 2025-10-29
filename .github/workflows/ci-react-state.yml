@@ -1,0 +1,152 @@
+name: CI - React State (auto-discovery)
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      count: ${{ steps.discover.outputs.count }}
+      matrix: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quick scan (diagnostic)
+        run: |
+          echo "Repo root:"; pwd; ls -la
+          echo "First 200 paths under react_state:"
+          find react_state -maxdepth 3 -print 2>/dev/null | sort | sed -n '1,200p' || true
+
+      - id: discover
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Keep only react_state/task_[0-9]+/dashboard (exclude task_3b, task_4c, etc.)
+          mapfile -t DIRS < <(
+            find react_state \
+              -regextype posix-extended \
+              -type f \
+              -regex '.*/task_[0-9]+/dashboard/package\.json' \
+              -printf '%h\n' 2>/dev/null | sort
+          )
+
+          COUNT=${#DIRS[@]}
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
+            echo "No numeric task dashboards found under react_state."
+            exit 0
+          fi
+
+          echo "Found dashboards:"
+          printf ' - %s\n' "${DIRS[@]}"
+
+          JSON='{"include":['
+          SEP=""
+          for d in "${DIRS[@]}"; do
+            JSON="${JSON}${SEP}{\"dir\":\"${d}\"}"
+            SEP=","
+          done
+          JSON="${JSON}]}"
+          echo "matrix=${JSON}" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    if: needs.discover.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    name: ${{ matrix.dir }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ${{ matrix.dir }}/package-lock.json
+
+      - name: Install dependencies
+        id: install
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            npm ci 2>&1 | tee "$RUNNER_TEMP/install.log"
+          else
+            npm install 2>&1 | tee "$RUNNER_TEMP/install.log"
+          fi
+
+      - name: Run tests (if script exists)
+        id: tests
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+          COLUMNS: "120"
+        run: |
+          set -euo pipefail
+          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')")
+          if [ "$HAS_TEST" = "yes" ]; then
+            # Avoid watch mode if present
+            npm test -- --watchAll=false 2>&1 | tee "$RUNNER_TEMP/test.log"
+          else
+            echo "No test script found; skipping." | tee "$RUNNER_TEMP/test.log"
+          fi
+
+      - name: Build (if script exists)
+        id: build
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+        run: |
+          set -euo pipefail
+          HAS_BUILD=$(node -e "console.log((require('./package.json').scripts||{}).build ? 'yes' : 'no')")
+          if [ "$HAS_BUILD" = "yes" ]; then
+            npm run build 2>&1 | tee "$RUNNER_TEMP/build.log"
+          else
+            echo "No build script found; skipping." | tee "$RUNNER_TEMP/build.log"
+          fi
+
+      - name: Dev (15s smoke run if script exists)
+        id: dev
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+        run: |
+          set -euo pipefail
+          HAS_DEV=$(node -e "console.log((require('./package.json').scripts||{}).dev ? 'yes' : 'no')")
+          if [ "$HAS_DEV" = "yes" ]; then
+            # Run dev server briefly to ensure it starts without immediate crash.
+            # We intentionally time it out after 15s; exit code 124 means timeout, which we treat as success.
+            set +e
+            timeout 15s npm run dev 2>&1 | tee "$RUNNER_TEMP/dev.log"
+            EXIT_CODE=${PIPESTATUS[0]}
+            set -e
+            if [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 124 ]; then
+              echo "Dev server exited with code $EXIT_CODE (not a timeout)"; exit "$EXIT_CODE"
+            fi
+          else
+            echo "No dev script found; skipping." | tee "$RUNNER_TEMP/dev.log"
+          fi
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ matrix.dir }}
+          path: |
+            ${{ runner.temp }}/install.log
+            ${{ runner.temp }}/test.log
+            ${{ runner.temp }}/build.log
+            ${{ runner.temp }}/dev.log
+          if-no-files-found: warn
