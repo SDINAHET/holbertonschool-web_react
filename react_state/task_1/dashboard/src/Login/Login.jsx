@@ -34,6 +34,7 @@ class Login extends Component {
     const p = password.trim();
     this.setState({ enableSubmit: this.isValidEmail(e) && p.length >= 8 });
   };
+  
 
   handleChangeEmail = (e) => {
     const email = e.target.value;
