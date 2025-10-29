@@ -1,0 +1,92 @@
+name: CI - React State (auto-discovery)
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      count: ${{ steps.discover.outputs.count }}
+      matrix: ${{ steps.discover.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: discover
+        shell: bash
+        run: |
+          set -e
+          # Trouver tous les dossiers react_state/task_*/dashboard qui contiennent un package.json
+          mapfile -t DIRS < <(find react_state -maxdepth 3 -type f -name package.json \
+                              -path "*/task_*/dashboard/package.json" -printf '%h\n' 2>/dev/null | sort)
+          COUNT=${#DIRS[@]}
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo 'matrix={"include":[]}' >> "$GITHUB_OUTPUT"
+            echo "No dashboards found."
+            exit 0
+          fi
+
+          echo "Found dashboards:"
+          printf ' - %s\n' "${DIRS[@]}"
+
+          # Construire la matrice JSON {"include":[{"dir":"..."}, ...]}
+          JSON='{"include":['
+          SEP=""
+          for d in "${DIRS[@]}"; do
+            JSON="$JSON$SEP{\"dir\":\"$d\"}"
+            SEP=","
+          done
+          JSON="$JSON]}"
+          echo "matrix=$JSON" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    if: needs.discover.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    name: ${{ matrix.dir }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ${{ matrix.dir }}/package-lock.json
+
+      - name: Install deps
+        working-directory: ${{ matrix.dir }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # - name: Build (si nécessaire)
+      #   working-directory: ${{ matrix.dir }}
+      #   run: npm run build
+
+      - name: Run tests
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+          COLUMNS: "120"
+        run: npm test -- --watchAll=false
+
+      # (Optionnel) Coverage Codecov :
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}   # requis si repo privé
+      #     files: ${{ matrix.dir }}/coverage/lcov.info
+      #     flags: ${{ matrix.dir }}
+      #     fail_ci_if_error: false

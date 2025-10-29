@@ -12,6 +12,7 @@ class Login extends Component {
       enableSubmit: false,
     };
   }
+  
 
   // Validation email simple (suffisante pour l’exercice)
   isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
