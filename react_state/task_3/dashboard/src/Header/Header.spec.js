@@ -30,7 +30,8 @@ describe('Header (Task 3) - context / logout section', () => {
 
     expect(screen.queryByText(/welcome/i)).toBeNull();
     expect(screen.queryByText(/logout/i)).toBeNull();
-    expect(screen.queryByTestId?.('logoutSection')).toBeUndefined(); // just in case
+    // expect(screen.queryByTestId?.('logoutSection')).toBeUndefined(); // just in case
+    expect(screen.queryByTestId('logoutSection')).toBeNull();
     expect(document.querySelector('#logoutSection')).toBeNull();
   });
 
@@ -49,7 +50,9 @@ describe('Header (Task 3) - context / logout section', () => {
 
     const section = document.querySelector('#logoutSection');
     expect(section).not.toBeNull();
-    expect(screen.getByText(/welcome test@holberton.io/i)).toBeInTheDocument();
+    // expect(screen.getByText(/welcome test@holberton.io/i)).toBeInTheDocument();
+    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
+    expect(screen.getByText('test@holberton.io')).toBeInTheDocument();
     expect(screen.getByText(/\(logout\)/i)).toBeInTheDocument();
   });
 

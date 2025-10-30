@@ -199,6 +199,7 @@ describe('App (Task 2) - Context login behavior', () => {
     expect(screen.queryByLabelText(/email/i)).toBeNull();
     expect(screen.queryByLabelText(/password/i)).toBeNull();
   });
+});
 
 /* ================================
  * react_state – Task 3 – Header logout integration
@@ -228,7 +229,10 @@ describe('react_state / Task 3 – Header logout integration', () => {
     // bloc dans le header
     const section = document.querySelector('#logoutSection');
     expect(section).not.toBeNull();
-    expect(screen.getByText(/welcome user@test.com/i)).toBeInTheDocument();
+    // expect(screen.getByText(/welcome user@test.com/i)).toBeInTheDocument();
+    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
+    expect(screen.getByText('user@test.com')).toBeInTheDocument();
+    expect(screen.getByText(/\(logout\)/i)).toBeInTheDocument();
   });
 
   test('clicking on "(logout)" logs the user out and shows login form again', () => {
