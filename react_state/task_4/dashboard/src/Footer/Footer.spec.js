@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import Footer from './Footer';
 import AppContext from '../Context/context';
 
-describe('Footer', () => {
+describe('Footer component (context consumer)', () => {
   test('renders copyright with current year', () => {
     render(<Footer />);
     const year = new Date().getFullYear().toString();
@@ -12,8 +12,8 @@ describe('Footer', () => {
     const p = screen.getByText(/copyright/i);
     expect(p).toBeInTheDocument();
     expect(p).toHaveTextContent(year);
-    // Don’t over-specify getFooterCopy(false); we just ensure visible text is correct
   });
+
   test('does not display “Contact us” when user is logged out', () => {
     const contextValue = { user: { isLoggedIn: false } };
     render(

@@ -134,10 +134,12 @@ class App extends Component {
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
           />
-          <div className="App">
+          {/* <div className="App"> */}
+          <div className="App min-h-screen flex flex-col">
             <Header />
 
-            <main className="App-body">
+            {/* <main className="App-body"> */}
+            <main className="App-body flex-1">
               {!user.isLoggedIn ? (
                 <BodySectionWithMarginBottom title="Log in to continue">
                   <Login

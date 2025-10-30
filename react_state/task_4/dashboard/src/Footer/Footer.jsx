@@ -1,8 +1,11 @@
-import React from 'react';
+// import React from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../Context/context';
 
 export default function Footer() {
-  const { user } = useContext(AppContext);
+  const context = useContext(AppContext) || {};
+  // const { user } = useContext(AppContext);
+  const { user } = context;
   const year = new Date().getFullYear();
 
   return (
