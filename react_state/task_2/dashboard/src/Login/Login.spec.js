@@ -73,6 +73,24 @@ describe('Login (Task 1) - Controlled components and state callback', () => {
     }
   });
 
+  test('calls logIn(email, password) when form is valid and submitted', () => {
+    const logIn = jest.fn();
+    render(<Login logIn={logIn} />);
+
+    const emailInput = screen.getByLabelText(/email/i);
+    const pwdInput = screen.getByLabelText(/password/i);
+    const submit = screen.getByRole('button', { name: /ok/i });
+
+    fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
+    fireEvent.change(pwdInput, { target: { value: 'longpass' } }); // >= 8
+    expect(submit).toBeEnabled();
+
+    fireEvent.click(submit);
+    expect(logIn).toHaveBeenCalledTimes(1);
+    expect(logIn).toHaveBeenCalledWith('user@test.com', 'longpass');
+  });
+// });
+
   test('submitting the form does not reload the page', () => {
     render(<Login />);
     const emailInput = screen.getByLabelText(/email/i);

@@ -1,5 +1,4 @@
-// src/App/App.jsx
-// import React from 'react';
+// task_2/dashboard/src/App/App.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,13 +12,13 @@ import { getLatestNotification } from '../utils/utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
+import AppContext, { defaultUser } from '../Context/context';
+
 const defaultNotifications = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
   { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
 ];
-
-// const defaultNotifications = [];
 
 const defaultCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -27,45 +26,56 @@ const defaultCourses = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-// const defaultCourses = [];
-
-// class App extends React.Component {
 class App extends Component {
-  // static propTypes = {
-  //   isLoggedIn: PropTypes.bool,
-  //   courses: PropTypes.arrayOf(
-  //     PropTypes.shape({
-  //       id: PropTypes.number.isRequired,
-  //       name: PropTypes.string.isRequired,
-  //       credit: PropTypes.number.isRequired,
-  //     })
-  //   ),
-  //   logOut: PropTypes.func,
-  // };
-
-  // static defaultProps = {
-  //   isLoggedIn: false,
-  //   courses: defaultCourses,
-  //   logOut: () => {},
-  // };
-
-  // --- Task 0 + Task 2: local state for notifications ---
-  state = {
-    displayDrawer: false,
-    user: { ...defaultUser },
-    logOut: this.logOut, // référence stable pour le Provider
+  static propTypes = {
+    // ⚠️ dans task_2 on n’en a plus besoin, mais on laisse pour compat
+    isLoggedIn: PropTypes.bool,
+    courses: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        credit: PropTypes.number.isRequired,
+      })
+    ),
+    logOut: PropTypes.func,
   };
 
-  // === Task 2: auth ===
+  static defaultProps = {
+    isLoggedIn: false,
+    courses: defaultCourses,
+    logOut: () => {},
+  };
+
+  constructor(props) {
+    super(props);
+
+    // état local de l’app, version context
+    this.state = {
+      displayDrawer: false,
+      user: { ...defaultUser },
+      // très important : on met une **référence** à la méthode d’instance
+      logOut: this.logOut,
+    };
+  }
+
+  // === Auth ===
   logIn = (email, password) => {
-    this.setState({ user: { email, password, isLoggedIn: true } });
+    this.setState({
+      user: {
+        email,
+        password,
+        isLoggedIn: true,
+      },
+    });
   };
 
   logOut = () => {
-    this.setState({ user: { ...defaultUser } });
+    this.setState({
+      user: { ...defaultUser },
+    });
   };
 
-  // === Task 0: Notifications drawer ===
+  // === Notifications drawer ===
   handleDisplayDrawer = () => {
     this.setState({ displayDrawer: true });
   };
@@ -74,13 +84,13 @@ class App extends Component {
     this.setState({ displayDrawer: false });
   };
 
+  // === Keyboard (Ctrl+H) ===
   handleKeyDown = (e) => {
-    // Ctrl+H -> logout (via contexte/state, plus via props)
-    // Safeguard keys access & accept both 'h' and 'H'
     const key = e && typeof e.key === 'string' ? e.key : '';
     if (e?.ctrlKey && (key === 'h' || key === 'H')) {
       window.alert('Logging you out');
-      this.props.logOut();
+      // on utilise maintenant le contexte (state)
+      this.state.logOut();
     }
   };
 
@@ -96,7 +106,14 @@ class App extends Component {
     const { displayDrawer, user } = this.state;
 
     return (
-      <AppContext.Provider value={{ user: this.state.user, logOut: this.state.logOut }}>
+      <AppContext.Provider
+        // ⚠️ on ne recrée pas un objet à chaque render avec des littéraux différents
+        // mais ici, on dépend quand même du state → c’est l’approche demandée
+        value={{
+          user: this.state.user,
+          logOut: this.state.logOut,
+        }}
+      >
         <>
           <Notifications
             displayDrawer={displayDrawer}
@@ -118,7 +135,9 @@ class App extends Component {
                 </BodySectionWithMarginBottom>
               ) : (
                 <BodySectionWithMarginBottom title="Course list">
-                  <CourseList courses={defaultCourses} />
+                  <div id="CourseList">
+                    <CourseList courses={defaultCourses} />
+                  </div>
                 </BodySectionWithMarginBottom>
               )}
 

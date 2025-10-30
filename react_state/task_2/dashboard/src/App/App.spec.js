@@ -1,6 +1,7 @@
 // src/App/App.spec.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import App from './App';
 
 /** project reac_props **/
@@ -136,4 +137,33 @@ describe('App (Task 0) - notifications drawer state', () => {
     // Drawer fermé => le titre de liste disparaît
     expect(screen.queryByText(/Here is the list of notifications/i)).not.toBeInTheDocument();
   });
+
+/** Task 2 checks (Context-based login) */
+describe('App (Task 2) - Context login behavior', () => {
+  test('updates user state and displays CourseList after successful login', () => {
+    const { container } = render(<App />);
+
+    // Avant login : le formulaire est visible, pas la liste des cours
+    const emailInput = screen.getByLabelText(/email/i);
+    const pwdInput = screen.getByLabelText(/password/i);
+    const submit = screen.getByRole('button', { name: /ok/i });
+
+    expect(emailInput).toBeInTheDocument();
+    expect(pwdInput).toBeInTheDocument();
+    expect(submit).toBeDisabled();
+
+    // Remplir le formulaire avec des valeurs valides
+    fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
+    fireEvent.change(pwdInput, { target: { value: 'longpass' } });
+    expect(submit).toBeEnabled();
+
+    // Soumettre le formulaire
+    fireEvent.click(submit);
+
+    // Après login : le formulaire disparaît et CourseList est rendu
+    expect(container.querySelector('#CourseList')).not.toBeNull();
+    expect(screen.queryByLabelText(/email/i)).toBeNull();
+    expect(screen.queryByLabelText(/password/i)).toBeNull();
+  });
+});
 });
