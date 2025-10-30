@@ -28,7 +28,7 @@ const defaultCourses = [
 
 class App extends Component {
   static propTypes = {
-    // ⚠️ dans task_2 on n’en a plus besoin, mais on laisse pour compat
+    // gardé pour compat avec les anciens tests
     isLoggedIn: PropTypes.bool,
     courses: PropTypes.arrayOf(
       PropTypes.shape({
@@ -49,29 +49,46 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // état local de l’app, version context
+    const user = { ...defaultUser };
+
     this.state = {
       displayDrawer: false,
-      user: { ...defaultUser },
-      // très important : on met une **référence** à la méthode d’instance
+      user,
       logOut: this.logOut,
+      // 👇 valeur de contexte unique et stockée dans le state
+      contextValue: {
+        user,
+        logOut: this.logOut,
+      },
     };
   }
 
   // === Auth ===
   logIn = (email, password) => {
+    const user = {
+      email,
+      password,
+      isLoggedIn: true,
+    };
+
     this.setState({
-      user: {
-        email,
-        password,
-        isLoggedIn: true,
+      user,
+      contextValue: {
+        user,
+        logOut: this.logOut,
       },
     });
   };
 
   logOut = () => {
+    const user = { ...defaultUser };
+
     this.setState({
-      user: { ...defaultUser },
+      user,
+      contextValue: {
+        user,
+        logOut: this.logOut,
+      },
     });
   };
 
@@ -89,7 +106,6 @@ class App extends Component {
     const key = e && typeof e.key === 'string' ? e.key : '';
     if (e?.ctrlKey && (key === 'h' || key === 'H')) {
       window.alert('Logging you out');
-      // on utilise maintenant le contexte (state)
       this.state.logOut();
     }
   };
@@ -106,14 +122,7 @@ class App extends Component {
     const { displayDrawer, user } = this.state;
 
     return (
-      <AppContext.Provider
-        // ⚠️ on ne recrée pas un objet à chaque render avec des littéraux différents
-        // mais ici, on dépend quand même du state → c’est l’approche demandée
-        value={{
-          user: this.state.user,
-          logOut: this.state.logOut,
-        }}
-      >
+      <AppContext.Provider value={this.state.contextValue}>
         <>
           <Notifications
             displayDrawer={displayDrawer}
