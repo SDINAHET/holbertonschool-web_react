@@ -87,7 +87,8 @@ jobs:
             npm install 2>&1 | tee "$RUNNER_TEMP/install.log"
           fi
 
-      - name: Run tests (if script exists)
+      # 1) TEST GLOBAL : npm test (comme avant)
+      - name: Run tests (global, if script exists)
         id: tests
         working-directory: ${{ matrix.dir }}
         env:
@@ -97,10 +98,71 @@ jobs:
           set -euo pipefail
           HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')")
           if [ "$HAS_TEST" = "yes" ]; then
-            # Avoid watch mode if present
             npm test -- --watchAll=false 2>&1 | tee "$RUNNER_TEMP/test.log"
           else
             echo "No test script found; skipping." | tee "$RUNNER_TEMP/test.log"
+          fi
+
+      # 2) TESTS PAR FICHIER : npm test --runTestsByPath <file>
+      - name: Run tests per file (Jest auto-discovery)
+        id: tests-per-file
+        working-directory: ${{ matrix.dir }}
+        env:
+          CI: "true"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Vérifier qu'on a bien un script test
+          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')")
+          if [ "$HAS_TEST" != "yes" ]; then
+            echo "No test script in package.json; skipping per-file tests."
+            exit 0
+          fi
+
+          echo "Discovering Jest test files..."
+          # On prend les patterns les plus courants
+          mapfile -t TEST_FILES < <(find src -type f \( -name "*test.js" -o -name "*spec.js" -o -name "*test.jsx" -o -name "*spec.jsx" \) | sort || true)
+
+          if [ "${#TEST_FILES[@]}" -eq 0 ]; then
+            echo "No individual test files found under src/; skipping per-file runs."
+            exit 0
+          fi
+
+          LOG_DIR="$RUNNER_TEMP/per-file-tests"
+          mkdir -p "$LOG_DIR"
+
+          STATUS=0
+          for file in "${TEST_FILES[@]}"; do
+            SAFE_NAME=$(echo "$file" | sed 's#[/\\\":<>|?*]#-#g')
+            LOG_FILE="$LOG_DIR/$SAFE_NAME.log"
+
+            echo "-----------------------------------------"
+            echo "Running single test: $file"
+            echo "Log: $LOG_FILE"
+            echo "-----------------------------------------"
+
+            # On n'arrête pas tout si un test échoue : on continue la boucle
+            set +e
+            npm test -- --runTestsByPath "$file" --watchAll=false 2>&1 | tee "$LOG_FILE"
+            EXIT_CODE=${PIPESTATUS[0]}
+            set -e
+
+            if [ "$EXIT_CODE" -ne 0 ]; then
+              echo "❌ Test failed: $file"
+              STATUS=1
+            else
+              echo "✅ Test passed: $file"
+            fi
+          done
+
+          # On stocke un petit index
+          printf '%s\n' "${TEST_FILES[@]}" > "$LOG_DIR/_index.txt"
+
+          # Si au moins un test a échoué, on fait échouer l'étape
+          if [ "$STATUS" -ne 0 ]; then
+            echo "One or more per-file tests failed."
+            exit 1
           fi
 
       - name: Build (if script exists)
@@ -128,8 +190,6 @@ jobs:
           LOG="$RUNNER_TEMP/dev.log"
           HAS_DEV=$(node -e "console.log((require('./package.json').scripts||{}).dev ? 'yes' : 'no')")
           if [ "$HAS_DEV" = "yes" ]; then
-            # Run dev server briefly to ensure it starts without immediate crash.
-            # We intentionally time it out after 15s; exit code 124 means timeout, which we treat as success.
             set +e
             timeout 15s npm run dev 2>&1 | tee "$LOG"
             EXIT_CODE=${PIPESTATUS[0]}
@@ -157,6 +217,7 @@ jobs:
             ${{ runner.temp }}/test.log
             ${{ runner.temp }}/build.log
             ${{ runner.temp }}/dev.log
+            ${{ runner.temp }}/per-file-tests
           if-no-files-found: warn
 
       - name: Upload coverage
