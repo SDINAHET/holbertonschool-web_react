@@ -199,4 +199,57 @@ describe('App (Task 2) - Context login behavior', () => {
     expect(screen.queryByLabelText(/email/i)).toBeNull();
     expect(screen.queryByLabelText(/password/i)).toBeNull();
   });
+
+/* ================================
+ * react_state – Task 3 – Header logout integration
+ *
+ * ================================ */
+describe('react_state / Task 3 – Header logout integration', () => {
+  test('does NOT render the logoutSection by default', () => {
+    render(<App />);
+    expect(document.querySelector('#logoutSection')).toBeNull();
+  });
+
+  test('after logging in, header shows logoutSection with email', () => {
+    const { container } = render(<App />);
+
+    // login
+    fireEvent.change(screen.getByLabelText(/email/i), {
+      target: { value: 'user@test.com' },
+    });
+    fireEvent.change(screen.getByLabelText(/password/i), {
+      target: { value: 'longpass' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /ok/i }));
+
+    // CourseList ok
+    expect(container.querySelector('#CourseList')).not.toBeNull();
+
+    // bloc dans le header
+    const section = document.querySelector('#logoutSection');
+    expect(section).not.toBeNull();
+    expect(screen.getByText(/welcome user@test.com/i)).toBeInTheDocument();
+  });
+
+  test('clicking on "(logout)" logs the user out and shows login form again', () => {
+    render(<App />);
+
+    // login
+    fireEvent.change(screen.getByLabelText(/email/i), {
+      target: { value: 'user@test.com' },
+    });
+    fireEvent.change(screen.getByLabelText(/password/i), {
+      target: { value: 'longpass' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /ok/i }));
+
+    // click logout in header
+    const logoutLink = screen.getByText(/\(logout\)/i);
+    fireEvent.click(logoutLink);
+
+    // check UI reset
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    expect(document.querySelector('#logoutSection')).toBeNull();
+  });
 });
