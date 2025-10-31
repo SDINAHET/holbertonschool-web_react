@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function NotificationItem({ id, type = 'default', value, html, markAsRead }) {
+export default function NotificationItem({
+  id,
+  type = 'default',
+  value,
+  html,
+  markAsRead,
+  markNotificationAsRead
+ }) {
   const color = type === 'urgent'
     ? 'var(--urgent-notification-item)'
     : 'var(--default-notification-item)';
