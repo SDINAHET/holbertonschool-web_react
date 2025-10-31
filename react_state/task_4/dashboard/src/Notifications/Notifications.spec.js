@@ -171,3 +171,24 @@ describe('Notifications (Task 7 - shouldComponentUpdate)', () => {
     expect(screen.getByText('C')).toBeInTheDocument();
   });
 });
+
+describe('Notifications (task 4)', () => {
+  test('clicking on a notification logs the expected string even without prop', () => {
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    const notifs = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+    ];
+
+    render(<Notifications displayDrawer={true} notifications={notifs} />);
+
+    fireEvent.click(screen.getByText('New course available'));
+
+    expect(logSpy).toHaveBeenCalledWith(
+      'Notification 1 has been marked as read'
+    );
+
+    logSpy.mockRestore();
+  });
+});
