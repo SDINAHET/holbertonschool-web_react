@@ -31,9 +31,16 @@ export default class Notifications extends PureComponent {
     handleHideDrawer: undefined,
     // markNotificationAsRead: undefined,
     // markNotificationAsRead: () => {},
+  //   markNotificationAsRead: (id) => {
+  //     console.log(`Notification ${id} has been marked as read`);
+  // },
+
     markNotificationAsRead: (id) => {
-      console.log(`Notification ${id} has been marked as read`);
+    const msg = `Notification ${id} has been marked as read`;
+    console.log(msg);
+    process.stdout.write(msg + '\n');
   },
+
 };
   // shouldComponentUpdate(nextProps) {
   //   return (

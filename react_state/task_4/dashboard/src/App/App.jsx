@@ -118,6 +118,7 @@ class App extends Component {
     }));
   };
 
+
   // === Keyboard (Ctrl+H) ===
   handleKeyDown = (e) => {
     const key = e && typeof e.key === 'string' ? e.key : '';
