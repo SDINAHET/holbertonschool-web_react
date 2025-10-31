@@ -6,10 +6,11 @@ export default function NotificationItem({
   type = 'default',
   value,
   html,
-  markAsRead,
+  // markAsRead,
   markNotificationAsRead
  }) {
-  const color = type === 'urgent'
+  const color =
+  type === 'urgent'
     ? 'var(--urgent-notification-item)'
     : 'var(--default-notification-item)';
 
@@ -42,5 +43,6 @@ NotificationItem.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
-  markAsRead: PropTypes.func,
+  // markAsRead: PropTypes.func,
+  markNotificationAsRead: PropTypes.func,
 };
