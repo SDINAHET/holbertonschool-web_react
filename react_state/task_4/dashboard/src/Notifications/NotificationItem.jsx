@@ -7,7 +7,8 @@ export default function NotificationItem({ id, type = 'default', value, html, ma
     : 'var(--default-notification-item)';
 
   const onClick = () => {
-    if (markAsRead) markAsRead(id);
+    // if (markAsRead) markAsRead(id);
+    if (markNotificationAsRead) markNotificationAsRead(id);
   };
 
   return html ? (

@@ -112,7 +112,8 @@ export default class Notifications extends PureComponent {
                       value={n.value}
                       html={n.html}
                       // markAsRead={this.markAsRead}
-                      markAsRead={markNotificationAsRead}
+                      // markAsRead={markNotificationAsRead}
+                       markNotificationAsRead={markNotificationAsRead}
                     />
                   ))}
                 </ul>
