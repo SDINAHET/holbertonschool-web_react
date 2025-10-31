@@ -1,4 +1,4 @@
-// task_2/dashboard/src/App/App.jsx
+// task_4/dashboard/src/App/App.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 

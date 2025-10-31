@@ -30,9 +30,11 @@ export default class Notifications extends PureComponent {
     handleDisplayDrawer: undefined,
     handleHideDrawer: undefined,
     // markNotificationAsRead: undefined,
-    markNotificationAsRead: () => {},
-  };
-
+    // markNotificationAsRead: () => {},
+    markNotificationAsRead: (id) => {
+      console.log(`Notification ${id} has been marked as read`);
+  },
+};
   // shouldComponentUpdate(nextProps) {
   //   return (
   //     nextProps.notifications.length !== this.props.notifications.length ||
@@ -40,9 +42,9 @@ export default class Notifications extends PureComponent {
   //   );
   // }
 
-  markAsRead = (id) => {
-    console.log(`Notification ${id} has been marked as read`);
-  };
+  // markAsRead = (id) => {
+  //   console.log(`Notification ${id} has been marked as read`);
+  // };
 
   render() {
     const {
