@@ -58,7 +58,12 @@ class App extends Component {
     this.state = {
       displayDrawer: false,
       user,
-      logOut: this.logOut,
+      // 👇 demandés par la task 4
+      // notifications: notificationsList,
+      // courses: coursesList,
+      notifications: defaultNotifications,
+      courses: defaultCourses,
+      // logOut: this.logOut,
       // 👇 valeur de contexte unique et stockée dans le state
       contextValue: {
         user,
@@ -105,12 +110,22 @@ class App extends Component {
     this.setState({ displayDrawer: false });
   };
 
+  // === Task 4: markNotificationAsRead ===
+  markNotificationAsRead = (id) => {
+    console.log(`Notification ${id} has been marked as read`);
+    this.setState((prevState) => ({
+      notifications: prevState.notifications.filter((n) => n.id !== id),
+    }));
+  };
+
   // === Keyboard (Ctrl+H) ===
   handleKeyDown = (e) => {
     const key = e && typeof e.key === 'string' ? e.key : '';
     if (e?.ctrlKey && (key === 'h' || key === 'H')) {
       window.alert('Logging you out');
-      this.state.logOut();
+      // this.state.logOut();
+      // ✅ on passe par la méthode de classe
+      this.logOut();
     }
   };
 
@@ -123,16 +138,20 @@ class App extends Component {
   }
 
   render() {
-    const { displayDrawer, user } = this.state;
+    const { displayDrawer, user, notifications, courses } = this.state;
 
     return (
       <AppContext.Provider value={this.state.contextValue}>
         <>
           <Notifications
             displayDrawer={displayDrawer}
-            notifications={defaultNotifications}
+            // notifications={defaultNotifications}
+            // ✅ on passe les notifs DU STATE (sinon le checker gueule)
+            notifications={notifications}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
+            // 👇 très important
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           {/* <div className="App"> */}
           <div className="App min-h-screen flex flex-col">
@@ -151,7 +170,9 @@ class App extends Component {
               ) : (
                 <BodySectionWithMarginBottom title="Course list">
                   <div id="CourseList">
-                    <CourseList courses={defaultCourses} />
+                    {/* ✅ on utilise aussi le state ici */}
+                    <CourseList courses={courses} />
+                    {/* <CourseList courses={defaultCourses} /> */}
                   </div>
                 </BodySectionWithMarginBottom>
               )}

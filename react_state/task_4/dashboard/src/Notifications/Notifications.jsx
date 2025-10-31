@@ -1,10 +1,13 @@
 // task_5/dashboard/src/Notifications/Notifications.jsx
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
+import { getLatestNotification } from '../utils/utils';
 
-export default class Notifications extends Component {
+// export default class Notifications extends Component {
+export default class Notifications extends PureComponent {
   static propTypes = {
     notifications: PropTypes.arrayOf(
       PropTypes.shape({
@@ -17,6 +20,8 @@ export default class Notifications extends Component {
     displayDrawer: PropTypes.bool,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
+    // 👇 ajout demandé
+    markNotificationAsRead: PropTypes.func,
   };
 
   static defaultProps = {
@@ -24,21 +29,28 @@ export default class Notifications extends Component {
     displayDrawer: false,
     handleDisplayDrawer: undefined,
     handleHideDrawer: undefined,
+    markNotificationAsRead: undefined,
   };
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.notifications.length !== this.props.notifications.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer
-    );
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return (
+  //     nextProps.notifications.length !== this.props.notifications.length ||
+  //     nextProps.displayDrawer !== this.props.displayDrawer
+  //   );
+  // }
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`);
   };
 
   render() {
-    const { notifications, displayDrawer } = this.props;
+    const {
+      notifications,
+      displayDrawer,
+      handleDisplayDrawer,
+      handleHideDrawer,
+      markNotificationAsRead,
+    } = this.props;
 
     // Bounce uniquement si > 0 notifs ET drawer fermé
     const shouldBounce = notifications.length > 0 && !displayDrawer;
@@ -98,7 +110,8 @@ export default class Notifications extends Component {
                       type={n.type}
                       value={n.value}
                       html={n.html}
-                      markAsRead={this.markAsRead}
+                      // markAsRead={this.markAsRead}
+                      markAsRead={markNotificationAsRead}
                     />
                   ))}
                 </ul>
