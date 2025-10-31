@@ -37,7 +37,6 @@ export default class Notifications extends PureComponent {
     markNotificationAsRead: (id) => {
       const msg = `Notification ${id} has been marked as read`;
       console.log(msg);
-      // on protège pour le runner Node
       if (
         typeof process !== 'undefined' &&
         process.stdout &&
