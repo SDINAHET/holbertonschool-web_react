@@ -1,4 +1,4 @@
-// task_5/dashboard/src/Notifications/Notifications.jsx
+// task_4/dashboard/src/Notifications/Notifications.jsx
 // import React, { Component } from 'react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
@@ -29,7 +29,8 @@ export default class Notifications extends PureComponent {
     displayDrawer: false,
     handleDisplayDrawer: undefined,
     handleHideDrawer: undefined,
-    markNotificationAsRead: undefined,
+    // markNotificationAsRead: undefined,
+    markNotificationAsRead: () => {},
   };
 
   // shouldComponentUpdate(nextProps) {

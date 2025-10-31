@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom';
 import Notifications from "./Notifications";
 import { getLatestNotification } from "../utils/utils.js";
 
@@ -58,15 +59,32 @@ describe('Notifications', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  test('Clicking a notification item logs "Notification {id} has been marked as read"', () => {
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
+  // test('Clicking a notification item logs "Notification {id} has been marked as read"', () => {
+  //   const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  //   render(<Notifications notifications={mockNotifications} displayDrawer={true} />);
 
     // On clique l’item avec value "New resume available" (id = 2)
-    fireEvent.click(screen.getByText('New resume available'));
-    expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+    // fireEvent.click(screen.getByText('New resume available'));
+    // expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+//     expect(handler).toHaveBeenCalledWith(2);
 
-    spy.mockRestore();
+//     spy.mockRestore();
+//   });
+// });
+
+  test('Clicking a notification item calls markNotificationAsRead with the right id', () => {
+    const handler = jest.fn();
+    render(
+      <Notifications
+        notifications={mockNotifications}
+        displayDrawer={true}
+        markNotificationAsRead={handler}
+      />
+    );
+
+    fireEvent.click(screen.getByText('New resume available'));
+
+    expect(handler).toHaveBeenCalledWith(2);
   });
 });
 
@@ -126,10 +144,13 @@ describe('Notifications (Task 7 - shouldComponentUpdate)', () => {
     rerender(<Notifications notifications={sameLenDifferentContent} displayDrawer={true} />);
 
     // Pas de re-render (longueur identique)
-    expect(screen.queryByText('C')).toBeNull();
-    expect(screen.queryByText('D')).toBeNull();
-    expect(screen.getByText('A')).toBeInTheDocument();
-    expect(screen.getByText('B')).toBeInTheDocument();
+    // expect(screen.queryByText('C')).toBeNull();
+    // expect(screen.queryByText('D')).toBeNull();
+    // expect(screen.getByText('A')).toBeInTheDocument();
+    // expect(screen.getByText('B')).toBeInTheDocument();
+    // Avec un PureComponent, un changement de props → re-render
+    expect(screen.getByText('C')).toBeInTheDocument();
+    expect(screen.getByText('D')).toBeInTheDocument();
   });
 
   test('re-renders when notifications length changes', () => {

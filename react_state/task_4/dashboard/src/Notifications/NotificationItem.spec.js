@@ -54,12 +54,23 @@ describe('Notifications component (Task 5)', () => {
 
     test('clicking a notification item logs "Notification {id} has been marked as read"', () => {
       const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
-      render(<Notifications displayDrawer notifications={sample} />);
+      // render(<Notifications displayDrawer notifications={sample} />);
+      // ✅ AJOUTE CETTE LIGNE
+      const handler = jest.fn();
+
+      render(
+        <Notifications
+          displayDrawer
+          notifications={sample}
+          markNotificationAsRead={handler}
+        />
+      );
 
       // On clique sur l'item dont la valeur = "New resume available" (id = 2)
       fireEvent.click(screen.getByText('New resume available'));
 
-      expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+      // expect(spy).toHaveBeenCalledWith('Notification 2 has been marked as read');
+      expect(handler).toHaveBeenCalledWith(2);
 
       spy.mockRestore();
     });
