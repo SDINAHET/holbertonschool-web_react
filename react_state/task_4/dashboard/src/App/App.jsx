@@ -59,7 +59,8 @@ class App extends Component {
 
   static defaultProps = {
     isLoggedIn: false,
-    courses: defaultCourses,
+    // courses: defaultCourses,
+    courses: [],
     logOut: () => {},
   };
 
