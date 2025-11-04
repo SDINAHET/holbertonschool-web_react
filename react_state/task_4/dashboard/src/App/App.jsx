@@ -84,6 +84,9 @@ class App extends Component {
         logOut: this.logOut,
       },
     };
+
+    // ✅ bind au bon endroit
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   // === Auth ===
@@ -125,7 +128,8 @@ class App extends Component {
   };
 
   // === Task 4: markNotificationAsRead ===
-  markNotificationAsRead = (id) => {
+  // markNotificationAsRead = (id) => {
+  markNotificationAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
     this.setState((prevState) => ({
       notifications: prevState.notifications.filter((n) => n.id !== id),
