@@ -2,11 +2,11 @@
 // import React, { Component } from 'react';
 import React, { useContext } from 'react';
 import holbertonLogo from '../assets/holberton-logo.jpg';
-import AppContext from '../Context/context';
+import NewContext from '../Context/context';
 
 
 export default function Header() {
-  const { user, logOut } = useContext(AppContext);
+  const { user, logOut } = useContext(NewContext);
 
   const handleLogout = (e) => {
     e.preventDefault();
