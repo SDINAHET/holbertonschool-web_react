@@ -128,11 +128,17 @@ class App extends Component {
   };
 
 // === Task 4: markNotificationAsRead ===
+  // markNotificationAsRead(id) {
+  //   const target = Number(id);
+  //   console.log(`Notification ${target} has been marked as read`);
+  //   this.setState((prev) => ({
+  //     notifications: (prev.notifications || []).filter((n) => Number(n.id) !== target),
+  //   }));
+  // }
   markNotificationAsRead(id) {
-    const target = Number(id);
-    console.log(`Notification ${target} has been marked as read`);
-    this.setState((prev) => ({
-      notifications: (prev.notifications || []).filter((n) => Number(n.id) !== target),
+    console.log(`Notification ${id} has been marked as read`);
+    this.setState(({ notifications }) => ({
+      notifications: notifications.filter((n) => Number(n.id) !== Number(id)),
     }));
   }
 
