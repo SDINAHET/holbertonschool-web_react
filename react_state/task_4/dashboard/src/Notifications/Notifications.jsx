@@ -31,27 +31,27 @@ export default class Notifications extends PureComponent {
     handleHideDrawer: undefined,
     // markNotificationAsRead: undefined,
     // markNotificationAsRead: () => {},
-  //   markNotificationAsRead: (id) => {
-  //     console.log(`Notification ${id} has been marked as read`);
-  // },
     markNotificationAsRead: (id) => {
-      const msg = `Notification ${id} has been marked as read`;
-      console.log(msg);
-      if (
-        typeof process !== 'undefined' &&
-        process.stdout &&
-        typeof process.stdout.write === 'function'
-      ) {
-        process.stdout.write(msg + '\n');
-      }
-    },
-  };
+      console.log(`Notification ${id} has been marked as read`);
+  },
+  //   markNotificationAsRead: (id) => {
+  //     const msg = `Notification ${id} has been marked as read`;
+  //     console.log(msg);
+  //     if (
+  //       typeof process !== 'undefined' &&
+  //       process.stdout &&
+  //       typeof process.stdout.write === 'function'
+  //     ) {
+  //       process.stdout.write(msg + '\n');
+  //     }
+  //   },
+  // };
   // shouldComponentUpdate(nextProps) {
   //   return (
   //     nextProps.notifications.length !== this.props.notifications.length ||
   //     nextProps.displayDrawer !== this.props.displayDrawer
-  //   );
-  // }
+    // );
+  }
 
   // markAsRead = (id) => {
   //   console.log(`Notification ${id} has been marked as read`);
@@ -127,6 +127,7 @@ export default class Notifications extends PureComponent {
                       // markAsRead={this.markAsRead}
                       // markAsRead={markNotificationAsRead}
                       markNotificationAsRead={markNotificationAsRead}
+                      markAsRead={() => markNotificationAsRead(n.id)}
                     />
                   ))}
                 </ul>
