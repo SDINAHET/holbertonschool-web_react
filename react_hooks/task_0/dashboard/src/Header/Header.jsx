@@ -1,50 +1,37 @@
 // task_0/dashboard/src/Header/Header.jsx
-// import React, { Component } from 'react';
 import React, { useContext } from 'react';
 import holbertonLogo from '../assets/holberton-logo.jpg';
-import NewContext from '../Context/context';
-
+import AppContext, { defaultUser } from '../Context/context';
 
 export default function Header() {
-  const { user, logOut } = useContext(NewContext);
+  const ctx = useContext(AppContext) || {};
+  const user = ctx.user ?? defaultUser;
+  const logOut = typeof ctx.logOut === 'function' ? ctx.logOut : () => {};
 
   const handleLogout = (e) => {
     e.preventDefault();
-    if (typeof logOut === 'function') {
-      logOut();
-    }
+    logOut();
   };
 
-  const isLoggedIn = user && user.isLoggedIn;
-  const email = (user && user.email) || '';
-
   return (
-    <header className="App-header flex items-center p-[10px]">
+    <header className="App-header d-flex align-items-center p-2">
       <img
-        className="App-logo h-[200px] mr-5"
         src={holbertonLogo}
         alt="Holberton logo"
+        className="App-logo img-fluid me-3"
       />
-      <div>
-        <h1 className="text-[var(--main-color)] text-4xl font-bold">
-          School Dashboard
-        </h1>
+      <h1 className="text-primary display-5 fw-bold mb-0">School Dashboard</h1>
 
-        {isLoggedIn && (
-          <div id="logoutSection" className="text-sm mt-2" data-testid="logoutSection">
-            <span>
-              Welcome <strong>{email}</strong>{' '}
-            </span>
-            <a
-              href="#logout"
-              onClick={handleLogout}
-              className="text-blue-500 underline"
-            >
-              (logout)
-            </a>
-          </div>
-        )}
-      </div>
+      {user.isLoggedIn && (
+        <div id="logoutSection" data-testid="logoutSection" className="ms-3 small">
+          <span>
+            Welcome <strong>{user.email}</strong>
+          </span>{' '}
+          <a href="#logout" onClick={handleLogout} className="text-decoration-underline">
+            (logout)
+          </a>
+        </div>
+      )}
     </header>
   );
 }
