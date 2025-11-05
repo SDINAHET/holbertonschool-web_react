@@ -6,6 +6,8 @@ export default function NotificationItem({
   type = 'default',
   value,
   html,
+  // ✅ accepte les deux noms de handler
+  markAsRead,
   markNotificationAsRead,
 }) {
   const color =
@@ -16,8 +18,9 @@ export default function NotificationItem({
   const onClick = () => {
     if (typeof markNotificationAsRead === 'function') {
       markNotificationAsRead(id);
+    } else if (typeof markAsRead === 'function') {
+      markAsRead(id);
     } else {
-      // fallback (ne gêne pas les tests)
       console.log(`Notification ${id} has been marked as read`);
     }
   };
@@ -41,5 +44,6 @@ NotificationItem.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
+  markAsRead: PropTypes.func,
   markNotificationAsRead: PropTypes.func,
 };
