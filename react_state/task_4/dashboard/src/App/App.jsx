@@ -86,7 +86,7 @@ class App extends Component {
     };
 
     // ✅ bind au bon endroit
-    // this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   // === Auth ===
@@ -128,26 +128,13 @@ class App extends Component {
   };
 
 // === Task 4: markNotificationAsRead ===
-  markNotificationAsRead = (id) => {
-    const numId = Number(id);                       // ← normalise l'ID
-    const msg = `Notification ${numId} has been marked as read`;
-
-    console.log(msg);                               // ← requis par le checker
-    // Compat runner Node qui lit process.stdout :
-    if (
-      typeof process !== 'undefined' &&
-      process.stdout &&
-      typeof process.stdout.write === 'function'
-    ) {
-      try { process.stdout.write(msg + '\n'); } catch { /* ignore */ }
-    }
-
+  markNotificationAsRead(id) {
+    const target = Number(id);
+    console.log(`Notification ${target} has been marked as read`);
     this.setState((prev) => ({
-      notifications: (prev.notifications || []).filter(
-        (n) => Number(n.id) !== numId
-      ),
+      notifications: (prev.notifications || []).filter((n) => Number(n.id) !== target),
     }));
-  };
+  }
 
   // === Keyboard (Ctrl+H) ===
   handleKeyDown = (e) => {
