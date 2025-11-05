@@ -6,17 +6,20 @@ export default function NotificationItem({
   type = 'default',
   value,
   html,
-  // markAsRead,
-  markNotificationAsRead
- }) {
+  markNotificationAsRead,
+}) {
   const color =
-  type === 'urgent'
-    ? 'var(--urgent-notification-item)'
-    : 'var(--default-notification-item)';
+    type === 'urgent'
+      ? 'var(--urgent-notification-item)'
+      : 'var(--default-notification-item)';
 
   const onClick = () => {
-    // if (markAsRead) markAsRead(id);
-    if (markNotificationAsRead) markNotificationAsRead(id);
+    if (typeof markNotificationAsRead === 'function') {
+      markNotificationAsRead(id);
+    } else {
+      // fallback (ne gêne pas les tests)
+      console.log(`Notification ${id} has been marked as read`);
+    }
   };
 
   return html ? (
@@ -24,15 +27,10 @@ export default function NotificationItem({
       data-notification-type={type}
       style={{ color }}
       onClick={onClick}
-      // html: { __html: '...' }
       dangerouslySetInnerHTML={html}
     />
   ) : (
-    <li
-      data-notification-type={type}
-      style={{ color }}
-      onClick={onClick}
-    >
+    <li data-notification-type={type} style={{ color }} onClick={onClick}>
       {value}
     </li>
   );
@@ -43,6 +41,5 @@ NotificationItem.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
-  // markAsRead: PropTypes.func,
   markNotificationAsRead: PropTypes.func,
 };

@@ -1,12 +1,8 @@
-// task_4/dashboard/src/Notifications/Notifications.jsx
-// import React, { Component } from 'react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../assets/close-button.png';
 import NotificationItem from './NotificationItem';
-import { getLatestNotification } from '../utils/utils';
 
-// export default class Notifications extends Component {
 export default class Notifications extends PureComponent {
   static propTypes = {
     notifications: PropTypes.arrayOf(
@@ -20,7 +16,7 @@ export default class Notifications extends PureComponent {
     displayDrawer: PropTypes.bool,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
-    // 👇 ajout demandé
+    /** nouvelle méthode reçue en prop (exigée par la task) */
     markNotificationAsRead: PropTypes.func,
   };
 
@@ -29,33 +25,13 @@ export default class Notifications extends PureComponent {
     displayDrawer: false,
     handleDisplayDrawer: undefined,
     handleHideDrawer: undefined,
-    // markNotificationAsRead: undefined,
-    // markNotificationAsRead: () => {},
+    // Valeur par défaut simple côté navigateur (aucune méthode locale dans le composant)
     markNotificationAsRead: (id) => {
       console.log(`Notification ${id} has been marked as read`);
-  },
-  //   markNotificationAsRead: (id) => {
-  //     const msg = `Notification ${id} has been marked as read`;
-  //     console.log(msg);
-  //     if (
-  //       typeof process !== 'undefined' &&
-  //       process.stdout &&
-  //       typeof process.stdout.write === 'function'
-  //     ) {
-  //       process.stdout.write(msg + '\n');
-  //     }
-  //   },
-  // };
-  // shouldComponentUpdate(nextProps) {
-  //   return (
-  //     nextProps.notifications.length !== this.props.notifications.length ||
-  //     nextProps.displayDrawer !== this.props.displayDrawer
-    // );
-  }
+    },
+  };
 
-  // markAsRead = (id) => {
-  //   console.log(`Notification ${id} has been marked as read`);
-  // };
+  // ✅ PureComponent => plus besoin de shouldComponentUpdate
 
   render() {
     const {
@@ -66,7 +42,6 @@ export default class Notifications extends PureComponent {
       markNotificationAsRead,
     } = this.props;
 
-    // Bounce uniquement si > 0 notifs ET drawer fermé
     const shouldBounce = notifications.length > 0 && !displayDrawer;
 
     return (
@@ -74,7 +49,7 @@ export default class Notifications extends PureComponent {
         className="fixed z-50 text-right"
         style={{ position: 'fixed', top: '1rem', right: '1rem', left: 'auto' }}
       >
-        {/* Titre (cliquable pour ouvrir le drawer) */}
+        {/* Titre cliquable (ouvre le drawer) */}
         <div
           className={`menuItem text-right font-normal text-base text-black ${
             shouldBounce ? 'animate-bounce' : ''
@@ -82,17 +57,16 @@ export default class Notifications extends PureComponent {
           data-testid="notifications-title"
           role="button"
           tabIndex={0}
-          onClick={() => this.props.handleDisplayDrawer && this.props.handleDisplayDrawer()}
+          onClick={() => handleDisplayDrawer && handleDisplayDrawer()}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-              this.props.handleDisplayDrawer && this.props.handleDisplayDrawer();
+              handleDisplayDrawer && handleDisplayDrawer();
             }
           }}
         >
           Your notifications
         </div>
 
-        {/* Drawer : bordure pointillée rouge sans arrondi */}
         {displayDrawer && (
           <div
             className="relative mt-1 inline-block p-2 border border-dotted rounded-none bg-white w-[520px] text-left"
@@ -108,8 +82,8 @@ export default class Notifications extends PureComponent {
                   aria-label="Close"
                   className="absolute top-2 right-2"
                   onClick={() =>
-                    this.props.handleHideDrawer
-                      ? this.props.handleHideDrawer()
+                    handleHideDrawer
+                      ? handleHideDrawer()
                       : console.log('Close button has been clicked')
                   }
                 >
@@ -124,10 +98,8 @@ export default class Notifications extends PureComponent {
                       type={n.type}
                       value={n.value}
                       html={n.html}
-                      // markAsRead={this.markAsRead}
-                      // markAsRead={markNotificationAsRead}
+                      /** 👉 pas de méthode locale : on passe la méthode reçue en prop */
                       markNotificationAsRead={markNotificationAsRead}
-                      markAsRead={() => markNotificationAsRead(n.id)}
                     />
                   ))}
                 </ul>
