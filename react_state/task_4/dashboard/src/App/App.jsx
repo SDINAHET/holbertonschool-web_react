@@ -86,7 +86,7 @@ class App extends Component {
     };
 
     // ✅ bind au bon endroit
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+    // this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   // === Auth ===
@@ -129,29 +129,12 @@ class App extends Component {
 
   // === Task 4: markNotificationAsRead ===
   // markNotificationAsRead = (id) => {
-markNotificationAsRead(id) {
-  const msg = `Notification ${id} has been marked as read`;
-  // log standard
-  console.log(msg);
-  // log compatible runner Node (stdout direct)
-  if (
-    typeof process !== 'undefined' &&
-    process.stdout &&
-    typeof process.stdout.write === 'function'
-  ) {
-    try {
-      process.stdout.write(msg + '\n');
-    } catch (_) {
-      /* ignore si indisponible */
-    }
-  }
-  // suppression robuste (string/number)
-  this.setState((prevState) => ({
-    notifications: (prevState.notifications || []).filter(
-      (n) => Number(n.id) !== Number(id)
-    ),
-  }));
-}
+  markNotificationAsRead = (id) => {
+    console.log(`Notification ${id} has been marked as read`);
+    this.setState((prevState) => ({
+      notifications: (prevState.notifications || []).filter((n) => n.id !== id),
+    }));
+  };
 
   // === Keyboard (Ctrl+H) ===
   handleKeyDown = (e) => {
