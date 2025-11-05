@@ -25,8 +25,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          # Keep only react_hooks/task_[0-9]+/dashboard (exclude task_3b, task_4c, etc.)
           mapfile -t DIRS < <(
             find react_hooks \
               -regextype posix-extended \
@@ -67,6 +65,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Définir le nom d'artifact le plus tôt possible
+      - name: Compute safe artifact name
+        if: always()
+        shell: bash
+        run: |
+          SAFE="$(echo "${{ matrix.dir }}" | sed 's#[/\\\":<>|?*]#-#g')"
+          echo "ARTIFACT_NAME=logs-${SAFE}" >> "$GITHUB_ENV"
+
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -87,7 +93,6 @@ jobs:
             npm install 2>&1 | tee "$RUNNER_TEMP/install.log"
           fi
 
-      # 1) TEST GLOBAL : npm test (comme avant)
       - name: Run tests (global, if script exists)
         id: tests
         working-directory: ${{ matrix.dir }}
@@ -96,14 +101,13 @@ jobs:
           COLUMNS: "120"
         run: |
           set -euo pipefail
-          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')"))
+          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')")
           if [ "$HAS_TEST" = "yes" ]; then
             npm test -- --watchAll=false 2>&1 | tee "$RUNNER_TEMP/test.log"
           else
             echo "No test script found; skipping." | tee "$RUNNER_TEMP/test.log"
           fi
 
-      # 2) TESTS PAR FICHIER : npm test --runTestsByPath <file>
       - name: Run tests per file (Jest auto-discovery)
         id: tests-per-file
         working-directory: ${{ matrix.dir }}
@@ -113,15 +117,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Vérifier qu'on a bien un script test
-          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')"))
+          HAS_TEST=$(node -e "console.log((require('./package.json').scripts||{}).test ? 'yes' : 'no')")
           if [ "$HAS_TEST" != "yes" ]; then
             echo "No test script in package.json; skipping per-file tests."
             exit 0
           fi
 
           echo "Discovering Jest test files..."
-          # On prend les patterns les plus courants
           mapfile -t TEST_FILES < <(find src -type f \( -name "*test.js" -o -name "*spec.js" -o -name "*test.jsx" -o -name "*spec.jsx" \) | sort || true)
 
           if [ "${#TEST_FILES[@]}" -eq 0 ]; then
@@ -142,7 +144,6 @@ jobs:
             echo "Log: $LOG_FILE"
             echo "-----------------------------------------"
 
-            # On n'arrête pas tout si un test échoue : on continue la boucle
             set +e
             npm test -- --runTestsByPath "$file" --watchAll=false 2>&1 | tee "$LOG_FILE"
             EXIT_CODE=${PIPESTATUS[0]}
@@ -156,10 +157,8 @@ jobs:
             fi
           done
 
-          # On stocke un petit index
           printf '%s\n' "${TEST_FILES[@]}" > "$LOG_DIR/_index.txt"
 
-          # Si au moins un test a échoué, on fait échouer l'étape
           if [ "$STATUS" -ne 0 ]; then
             echo "One or more per-file tests failed."
             exit 1
@@ -172,7 +171,7 @@ jobs:
           CI: "true"
         run: |
           set -euo pipefail
-          HAS_BUILD=$(node -e "console.log((require('./package.json').scripts||{}).build ? 'yes' : 'no')"))
+          HAS_BUILD=$(node -e "console.log((require('./package.json').scripts||{}).build ? 'yes' : 'no')")
           if [ "$HAS_BUILD" = "yes" ]; then
             npm run build 2>&1 | tee "$RUNNER_TEMP/build.log"
           else
@@ -188,7 +187,7 @@ jobs:
         run: |
           set -euo pipefail
           LOG="$RUNNER_TEMP/dev.log"
-          HAS_DEV=$(node -e "console.log((require('./package.json').scripts||{}).dev ? 'yes' : 'no')"))
+          HAS_DEV=$(node -e "console.log((require('./package.json').scripts||{}).dev ? 'yes' : 'no')")
           if [ "$HAS_DEV" = "yes" ]; then
             set +e
             timeout 15s npm run dev 2>&1 | tee "$LOG"
@@ -200,12 +199,6 @@ jobs:
           else
             echo "No dev script found; skipping." | tee "$LOG"
           fi
-
-      - name: Compute safe artifact name
-        shell: bash
-        run: |
-          SAFE="$(echo "${{ matrix.dir }}" | sed 's#[/\\\":<>|?*]#-#g')"
-          echo "ARTIFACT_NAME=logs-${SAFE}" >> "$GITHUB_ENV"
 
       - name: Upload logs
         if: always()
