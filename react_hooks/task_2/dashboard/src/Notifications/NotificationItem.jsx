@@ -1,12 +1,12 @@
-import React from 'react';
+// task_2/dashboard/src/Notifications/NotificationItem.jsx
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
-export default function NotificationItem({
+function NotificationItem({
   id,
   type = 'default',
   value,
   html,
-  // ✅ accepte les deux noms de handler
   markAsRead,
   markNotificationAsRead,
 }) {
@@ -21,6 +21,8 @@ export default function NotificationItem({
     } else if (typeof markAsRead === 'function') {
       markAsRead(id);
     } else {
+      // fallback (comportement historique)
+      // eslint-disable-next-line no-console
       console.log(`Notification ${id} has been marked as read`);
     }
   };
@@ -47,3 +49,20 @@ NotificationItem.propTypes = {
   markAsRead: PropTypes.func,
   markNotificationAsRead: PropTypes.func,
 };
+
+// Mémoïsation façon PureComponent :
+// on ignore les changements d'identité des handlers,
+// on compare seulement les données utiles à l'affichage.
+const areEqual = (prev, next) => {
+  if (prev.id !== next.id) return false;
+  if (prev.type !== next.type) return false;
+  if (prev.value !== next.value) return false;
+
+  const prevHtml = prev.html?.__html ?? null;
+  const nextHtml = next.html?.__html ?? null;
+  if (prevHtml !== nextHtml) return false;
+
+  return true; // pas de re-render sinon
+};
+
+export default memo(NotificationItem, areEqual);
