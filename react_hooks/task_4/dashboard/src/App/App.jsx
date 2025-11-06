@@ -1,5 +1,5 @@
 // task_4/dashboard/src/App/App.jsx
-import React, { Component } from 'react';
+import React, { useState, useCallback, useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Notifications from '../Notifications/Notifications';
@@ -14,22 +14,6 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 
 import AppContext, { defaultUser } from '../Context/context';
 
-// const defaultNotifications = [
-//   { id: 1, type: 'default', value: 'New course available' },
-//   { id: 2, type: 'urgent', value: 'New resume available' },
-//   { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-// ];
-
-// const defaultNotifications = [];
-
-// const defaultCourses = [
-//   { id: 1, name: 'ES6', credit: 60 },
-//   { id: 2, name: 'Webpack', credit: 20 },
-//   { id: 3, name: 'React', credit: 40 },
-// ];
-
-// const defaultCourses = [];
-
 // 👉 le checker veut CES NOMS-LÀ
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
@@ -43,170 +27,100 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-class App extends Component {
-  static propTypes = {
-    // gardé pour compat avec les anciens tests
-    isLoggedIn: PropTypes.bool,
-    courses: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        credit: PropTypes.number.isRequired,
-      })
-    ),
-    logOut: PropTypes.func,
-  };
+export default function App({ isLoggedIn: _isLoggedInProp, courses: _coursesProp, logOut: _logOutProp }) {
+  // user initial depuis le contexte (fallback sur defaultUser)
+  const ctx = useContext(AppContext) || {};
+  const initialUser = ctx.user ?? defaultUser;
 
-  static defaultProps = {
-    isLoggedIn: false,
-    // courses: defaultCourses,
-    courses: [],
-    logOut: () => {},
-  };
+  // === state (hooks) ===
+  // NB: consigne = displayDrawer initialisé à true
+  const [displayDrawer, setDisplayDrawer] = useState(true);
+  const [user, setUser] = useState(initialUser);
+  const [notifications, setNotifications] = useState(notificationsList);
+  const [courses] = useState(coursesList);
 
-  constructor(props) {
-    super(props);
+  // === handlers mémoïsés (références stables entre re-renders) ===
+  const handleDisplayDrawer = useCallback(() => {
+    setDisplayDrawer(true);
+  }, []);
 
-    const user = { ...defaultUser };
+  const handleHideDrawer = useCallback(() => {
+    setDisplayDrawer(false);
+  }, []);
 
-    this.state = {
-      displayDrawer: false,
-      user,
-      // 👇 demandés par la task 4
-      notifications: notificationsList,
-      courses: coursesList,
-      // notifications: defaultNotifications,
-      // courses: defaultCourses,
-      // logOut: this.logOut,
-      // 👇 valeur de contexte unique et stockée dans le state
-      contextValue: {
-        user,
-        logOut: this.logOut,
-      },
-    };
-
-    // ✅ bind au bon endroit
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
-  }
-
-  // === Auth ===
-  logIn = (email, password) => {
-    const user = {
-      email,
-      password,
-      isLoggedIn: true,
-    };
-
-    this.setState({
-      user,
-      contextValue: {
-        user,
-        logOut: this.logOut,
-      },
-    });
-  };
-
-  logOut = () => {
-    const user = { ...defaultUser };
-
-    this.setState({
-      user,
-      contextValue: {
-        user,
-        logOut: this.logOut,
-      },
-    });
-  };
-
-  // === Notifications drawer ===
-  handleDisplayDrawer = () => {
-    this.setState({ displayDrawer: true });
-  };
-
-  handleHideDrawer = () => {
-    this.setState({ displayDrawer: false });
-  };
-
-// === Task 4: markNotificationAsRead ===
-  markNotificationAsRead(id) {
+  const markNotificationAsRead = useCallback((id) => {
     const target = Number(id);
-    console.log(`Notification ${target} has been marked as read`);
-    this.setState((prev) => ({
-      notifications: (prev.notifications || []).filter((n) => Number(n.id) !== target),
-    }));
-  }
+    // maj immuable: on filtre l’élément lu
+    setNotifications((prev) => (prev || []).filter((n) => Number(n.id) !== target));
+  }, []);
 
-  // === Keyboard (Ctrl+H) ===
-  handleKeyDown = (e) => {
-    const key = e && typeof e.key === 'string' ? e.key : '';
-    if (e?.ctrlKey && (key === 'h' || key === 'H')) {
-      window.alert('Logging you out');
-      // this.state.logOut();
-      // ✅ on passe par la méthode de classe
-      this.logOut();
-    }
-  };
+  const logIn = useCallback((email, password) => {
+    setUser({ email, password, isLoggedIn: true });
+  }, []);
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
+  const logOut = useCallback(() => {
+    setUser({ ...defaultUser });
+  }, []);
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  }
+  // valeur de contexte stable
+  const contextValue = useMemo(() => ({ user, logOut }), [user, logOut]);
 
-  render() {
-    const { displayDrawer, user, notifications, courses } = this.state;
+  return (
+    <AppContext.Provider value={contextValue}>
+      <>
+        <Notifications
+          displayDrawer={displayDrawer}
+          notifications={notifications}
+          handleDisplayDrawer={handleDisplayDrawer}
+          handleHideDrawer={handleHideDrawer}
+          markNotificationAsRead={markNotificationAsRead}
+        />
 
-    return (
-      <AppContext.Provider value={this.state.contextValue}>
-        <>
-          <Notifications
-            displayDrawer={displayDrawer}
-            // notifications={defaultNotifications}
-            // ✅ on passe les notifs DU STATE (sinon le checker gueule)
-            notifications={notifications}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-            // 👇 très important
-            markNotificationAsRead={this.markNotificationAsRead}
-          />
-          {/* <div className="App"> */}
-          <div className="App min-h-screen flex flex-col">
-            <Header />
+        <div className="App min-h-screen flex flex-col">
+          <Header />
 
-            {/* <main className="App-body"> */}
-            <main className="App-body flex-1">
-              {!user.isLoggedIn ? (
-                <BodySectionWithMarginBottom title="Log in to continue">
-                  <Login
-                    logIn={this.logIn}
-                    email={user.email || ''}
-                    password={user.password || ''}
-                  />
-                </BodySectionWithMarginBottom>
-              ) : (
-                <BodySectionWithMarginBottom title="Course list">
-                  <div id="CourseList">
-                    {/* ✅ on utilise aussi le state ici */}
-                    <CourseList courses={courses} />
-                    {/* <CourseList courses={defaultCourses} /> */}
-                  </div>
-                </BodySectionWithMarginBottom>
-              )}
+          <main className="App-body flex-1">
+            {!user.isLoggedIn ? (
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <Login logIn={logIn} email={user.email || ''} password={user.password || ''} />
+              </BodySectionWithMarginBottom>
+            ) : (
+              <BodySectionWithMarginBottom title="Course list">
+                <div id="CourseList">
+                  <CourseList courses={courses} />
+                </div>
+              </BodySectionWithMarginBottom>
+            )}
 
-              <BodySection title="News from the School">
-                <p>Holberton School News goes here</p>
-              </BodySection>
-            </main>
+            <BodySection title="News from the School">
+              <p>Holberton School News goes here</p>
+            </BodySection>
+          </main>
 
-            <Footer />
-          </div>
-        </>
-      </AppContext.Provider>
-    );
-  }
+          <Footer />
+        </div>
+      </>
+    </AppContext.Provider>
+  );
 }
 
-export default App;
-export { notificationsList, coursesList }; // 👈 bonus : si le checker importe
+// PropTypes / defaultProps gardés pour compatibilité avec d’anciens tests
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      credit: PropTypes.number.isRequired,
+    })
+  ),
+  logOut: PropTypes.func,
+};
+
+App.defaultProps = {
+  isLoggedIn: false,
+  courses: [],
+  logOut: () => {},
+};
+
+export { notificationsList, coursesList };
