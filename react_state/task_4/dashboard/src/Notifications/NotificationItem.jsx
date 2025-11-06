@@ -7,7 +7,7 @@ export default function NotificationItem({
   value,
   html,
   // ✅ accepte les deux noms de handler
-  markAsRead,
+  // markAsRead,
   markNotificationAsRead,
 }) {
   const color =
