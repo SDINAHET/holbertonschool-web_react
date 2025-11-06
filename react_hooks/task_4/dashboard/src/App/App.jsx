@@ -27,7 +27,8 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-export default function App({ isLoggedIn: _isLoggedInProp, courses: _coursesProp, logOut: _logOutProp }) {
+// export default function App({ isLoggedIn: _isLoggedInProp, courses: _coursesProp, logOut: _logOutProp }) {
+export default function App() {
   // user initial depuis le contexte (fallback sur defaultUser)
   const ctx = useContext(AppContext) || {};
   const initialUser = ctx.user ?? defaultUser;
@@ -71,6 +72,7 @@ export default function App({ isLoggedIn: _isLoggedInProp, courses: _coursesProp
         <Notifications
           displayDrawer={displayDrawer}
           notifications={notifications}
+          listNotifications={notifications}
           handleDisplayDrawer={handleDisplayDrawer}
           handleHideDrawer={handleHideDrawer}
           markNotificationAsRead={markNotificationAsRead}
