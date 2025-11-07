@@ -116,10 +116,4 @@ App.propTypes = {
   logOut: PropTypes.func,
 };
 
-// App.defaultProps = {
-//   isLoggedIn: false,
-//   courses: [],
-//   logOut: () => {},
-// };
-
 export { notificationsList, coursesList };
