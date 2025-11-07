@@ -104,16 +104,16 @@ export default function App() {
 }
 
 // kept for backward compatibility with some older tests
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  courses: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      credit: PropTypes.number.isRequired,
-    })
-  ),
-  logOut: PropTypes.func,
-};
+// App.propTypes = {
+//   isLoggedIn: PropTypes.bool,
+//   courses: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       name: PropTypes.string.isRequired,
+//       credit: PropTypes.number.isRequired,
+//     })
+//   ),
+//   logOut: PropTypes.func,
+// };
 
 // export { notificationsList, coursesList };
