@@ -170,3 +170,14 @@ describe('react_state / Task 3 – Header logout integration', () => {
     expect(document.querySelector('#logoutSection')).toBeNull();
   });
 });
+
+describe('App – functional component shape', () => {
+  test('App is a function component (not a class)', () => {
+    // 1) une fonction JS
+    expect(typeof App).toBe('function');
+
+    // 2) pas de prototype React de classe (les classes ont isReactComponent)
+    //    -> doit être undefined pour un composant fonctionnel
+    expect(App.prototype?.isReactComponent).toBeUndefined();
+  });
+});

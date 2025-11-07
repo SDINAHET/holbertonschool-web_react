@@ -1,6 +1,6 @@
 // task_4/dashboard/src/App/App.jsx
 import React, { useState, useCallback, useMemo, useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
