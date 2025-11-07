@@ -14,7 +14,7 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 
 import AppContext, { defaultUser } from '../Context/context';
 
-// 👉 le checker veut CES NOMS-LÀ
+// Keep these exact names for the checker
 const notificationsList = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
@@ -27,20 +27,19 @@ const coursesList = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-// export default function App({ isLoggedIn: _isLoggedInProp, courses: _coursesProp, logOut: _logOutProp }) {
 export default function App() {
-  // user initial depuis le contexte (fallback sur defaultUser)
+  // initial user from context (fallback to defaultUser)
   const ctx = useContext(AppContext) || {};
   const initialUser = ctx.user ?? defaultUser;
 
   // === state (hooks) ===
-  // NB: consigne = displayDrawer initialisé à true
+  // per task: displayDrawer initial value should be true
   const [displayDrawer, setDisplayDrawer] = useState(true);
   const [user, setUser] = useState(initialUser);
   const [notifications, setNotifications] = useState(notificationsList);
   const [courses] = useState(coursesList);
 
-  // === handlers mémoïsés (références stables entre re-renders) ===
+  // === memoized handlers (stable references between renders) ===
   const handleDisplayDrawer = useCallback(() => {
     setDisplayDrawer(true);
   }, []);
@@ -51,7 +50,7 @@ export default function App() {
 
   const markNotificationAsRead = useCallback((id) => {
     const target = Number(id);
-    // maj immuable: on filtre l’élément lu
+    // immutable update: filter out the read notification
     setNotifications((prev) => (prev || []).filter((n) => Number(n.id) !== target));
   }, []);
 
@@ -63,50 +62,48 @@ export default function App() {
     setUser({ ...defaultUser });
   }, []);
 
-  // valeur de contexte stable
+  // stable context value
   const contextValue = useMemo(() => ({ user, logOut }), [user, logOut]);
 
   return (
     <AppContext.Provider value={contextValue}>
-      <>
-        <Notifications
-          displayDrawer={displayDrawer}
-          notifications={notifications}
-          listNotifications={notifications}
-          handleDisplayDrawer={handleDisplayDrawer}
-          handleHideDrawer={handleHideDrawer}
-          markNotificationAsRead={markNotificationAsRead}
-        />
+      <Notifications
+        displayDrawer={displayDrawer}
+        notifications={notifications}
+        listNotifications={notifications}
+        handleDisplayDrawer={handleDisplayDrawer}
+        handleHideDrawer={handleHideDrawer}
+        markNotificationAsRead={markNotificationAsRead}
+      />
 
-        <div className="App min-h-screen flex flex-col">
-          <Header />
+      <div className="App min-h-screen flex flex-col">
+        <Header />
 
-          <main className="App-body flex-1">
-            {!user.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={logIn} email={user.email || ''} password={user.password || ''} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Course list">
-                <div id="CourseList">
-                  <CourseList courses={courses} />
-                </div>
-              </BodySectionWithMarginBottom>
-            )}
+        <main className="App-body flex-1">
+          {!user.isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login logIn={logIn} email={user.email || ''} password={user.password || ''} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Course list">
+              <div id="CourseList">
+                <CourseList courses={courses} />
+              </div>
+            </BodySectionWithMarginBottom>
+          )}
 
-            <BodySection title="News from the School">
-              <p>Holberton School News goes here</p>
-            </BodySection>
-          </main>
+          <BodySection title="News from the School">
+            <p>Holberton School News goes here</p>
+          </BodySection>
+        </main>
 
-          <Footer />
-        </div>
-      </>
+        <Footer />
+      </div>
     </AppContext.Provider>
   );
 }
 
-// PropTypes / defaultProps gardés pour compatibilité avec d’anciens tests
+// kept for backward compatibility with some older tests
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
   courses: PropTypes.arrayOf(
