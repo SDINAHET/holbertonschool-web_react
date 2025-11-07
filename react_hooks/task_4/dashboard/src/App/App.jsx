@@ -116,4 +116,4 @@ App.propTypes = {
   logOut: PropTypes.func,
 };
 
-export { notificationsList, coursesList };
+// export { notificationsList, coursesList };
