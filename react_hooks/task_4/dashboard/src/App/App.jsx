@@ -69,7 +69,7 @@ export default function App() {
     <AppContext.Provider value={contextValue}>
       <Notifications
         displayDrawer={displayDrawer}
-        notifications={notifications}
+        // notifications={notifications}
         listNotifications={notifications}
         handleDisplayDrawer={handleDisplayDrawer}
         handleHideDrawer={handleHideDrawer}
