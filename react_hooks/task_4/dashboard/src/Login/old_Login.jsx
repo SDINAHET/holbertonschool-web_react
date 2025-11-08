@@ -1,18 +1,11 @@
 // task_1/dashboard/src/Login/Login.jsx
-// import React, { useState } from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import WithLogging from '../HOC/WithLogging';
 
-// function Login({ logIn = () => {} }) {
-function Login({ logIn = () => {}, email = '', password = '' }) {
+function Login({ logIn = () => {} }) {
   // états demandés
-  // const [enableSubmit, setEnableSubmit] = useState(false);
-  // const [formData, setFormData] = useState({ email: '', password: '' });
   const [enableSubmit, setEnableSubmit] = useState(false);
-  const [formData, setFormData] = useState({
-    email: email || '',
-    password: password || '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
   // --- validation identique à la version classe ---
   const isValidEmail = (email) => {
@@ -56,23 +49,6 @@ function Login({ logIn = () => {}, email = '', password = '' }) {
       p.length >= 8
     );
   };
-
-  // Synchroniser les inputs si les props changent (contexte → Login)
-  useEffect(() => {
-    setFormData((prev) => {
-      const next = { ...prev, email: email || '' };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  }, [email]);
-
-  useEffect(() => {
-    setFormData((prev) => {
-      const next = { ...prev, password: password || '' };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  }, [password]);
 
   // handlers demandés
   const handleChangeEmail = (e) => {
