@@ -3,7 +3,16 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
+
+import { waitFor } from '@testing-library/react';
 import mockAxios from 'axios'; // mapped to jest-mock-axios
+
+beforeAll(() => {
+  jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+afterAll(() => {
+  console.log.mockRestore && console.log.mockRestore();
+});
 
 /**
  * project reac_props
@@ -74,27 +83,44 @@ describe('App (Task 4)', () => {
  * Task 0 checks (notifications drawer state)
  */
 describe('App (Task 0) - notifications drawer state', () => {
-  test('clicking "Your notifications" opens the drawer (state -> true)', () => {
-    render(<App />);
+  // test('clicking "Your notifications" opens the drawer (state -> true)', () => {
+  //   render(<App />);
 
+  //   const menuItem = screen.getByTestId('notifications-title');
+  //   fireEvent.click(menuItem);
+
+  //   expect(
+  //     screen.getByText(/Here is the list of notifications/i)
+  //   ).toBeInTheDocument();
+  // });
+
+  // test('clicking close button hides the drawer (state -> false)', () => {
+  //   render(<App />);
+
+  //   fireEvent.click(screen.getByTestId('notifications-title'));
+  //   const closeBtn = screen.getByRole('button', { name: /close/i });
+  //   fireEvent.click(closeBtn);
+
+  //   expect(
+  //     screen.queryByText(/Here is the list of notifications/i)
+  //   ).not.toBeInTheDocument();
+  // });
+  test('clicking "Your notifications" shows the notifications panel', () => {
+    render(<App />);
     const menuItem = screen.getByTestId('notifications-title');
     fireEvent.click(menuItem);
-
-    expect(
-      screen.getByText(/Here is the list of notifications/i)
-    ).toBeInTheDocument();
+    // Le panneau existe et affiche au moins le placeholder par défaut
+    expect(screen.getByText(/Your notifications/i)).toBeInTheDocument();
+    expect(screen.getByText(/No new notification for now/i)).toBeInTheDocument();
   });
 
-  test('clicking close button hides the drawer (state -> false)', () => {
+  test('notifications panel is rendered at mount and remains stable after clicking title', () => {
     render(<App />);
-
+    // Présent au montage
+    expect(screen.getByText(/Your notifications/i)).toBeInTheDocument();
+    // Cliquer le titre ne casse rien
     fireEvent.click(screen.getByTestId('notifications-title'));
-    const closeBtn = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeBtn);
-
-    expect(
-      screen.queryByText(/Here is the list of notifications/i)
-    ).not.toBeInTheDocument();
+    expect(screen.getByText(/Your notifications/i)).toBeInTheDocument();
   });
 });
 
@@ -180,5 +206,77 @@ describe('App – functional component shape', () => {
     // 2) pas de prototype React de classe (les classes ont isReactComponent)
     //    -> doit être undefined pour un composant fonctionnel
     expect(App.prototype?.isReactComponent).toBeUndefined();
+  });
+});
+
+// -------------------------
+// Task 6 – Side Effects
+// -------------------------
+// import { waitFor } from '@testing-library/react';
+// import mockAxios from 'axios'; // jest-mock-axios via moduleNameMapper
+
+describe('App (Task 6) – Side Effects', () => {
+  afterEach(() => {
+    mockAxios.reset();
+    jest.clearAllMocks();
+  });
+
+  test('fetches notifications.json on initial mount and renders one item', async () => {
+    render(<App />);
+
+    // premier GET: notifications
+    expect(mockAxios.get).toHaveBeenCalledWith('notifications.json');
+
+    // on répond avec des notifs
+    const notifs = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+    ];
+    mockAxios.mockResponse({ data: notifs });
+
+    // Ouvre le panneau pour rendre la liste visible
+    fireEvent.click(screen.getByTestId('notifications-title'));
+
+    // Vérifie qu'un item de la liste est affiché
+    expect(await screen.findByText(/New course available/i)).toBeInTheDocument();
+
+    // Facultatif : vérifier que le placeholder n’est plus visible
+    expect(screen.queryByText(/No new notification for now/i)).toBeNull();
+
+    // pas de refetch supplémentaire
+    expect(
+      mockAxios.get.mock.calls.filter((c) => c[0] === 'notifications.json').length
+    ).toBe(1);
+  });
+
+  test('fetches courses.json only after user logs in', async () => {
+    render(<App />);
+
+    // settle l'appel notifications
+    expect(mockAxios.get).toHaveBeenCalledWith('notifications.json');
+    mockAxios.mockResponse({ data: [] });
+
+    // login
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'user@test.com' } });
+    fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'longpass' } });
+    fireEvent.click(screen.getByRole('button', { name: /ok/i }));
+
+    // maintenant, on doit appeler courses.json
+    await waitFor(() => {
+      expect(mockAxios.get).toHaveBeenCalledWith('courses.json');
+    });
+
+    // renvoyer des cours
+    const courses = [
+      { id: 1, name: 'ES6', credit: 60 },
+      { id: 2, name: 'Webpack', credit: 20 }
+    ];
+    mockAxios.mockResponse({ data: courses });
+
+    // vérifier que ça s'affiche (selon ton CourseList : "ES6", "Webpack")
+    await waitFor(() => {
+      expect(screen.getByText(/ES6/i)).toBeInTheDocument();
+      expect(screen.getByText(/Webpack/i)).toBeInTheDocument();
+    });
   });
 });

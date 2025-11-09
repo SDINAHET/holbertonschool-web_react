@@ -72,4 +72,31 @@ root@UID7E:/mnt/d/Users/steph/Documents/5ème_tr
 imestre/holbertonschool-web_react/react_hooks/task_4/dashboard#
 ```
 
+```bash
+http://localhost:5173/holbertonschool-web_react/notifications.json
+
+[
+  {
+    "id": 1,
+    "type": "default",
+    "value": "New course available"
+  },
+  {
+    "id": 2,
+    "type": "urgent",
+    "value": "New resume available"
+  },
+  {
+    "id": 3,
+    "type": "urgent",
+    "html": { "__html": "<strong>Urgent requirement</strong> - complete by EOD" }
+  }
+]
+```
+
+```bash
+
+```
+
+
 
