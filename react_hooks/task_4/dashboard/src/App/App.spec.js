@@ -7,9 +7,23 @@ import App from './App';
 import { waitFor } from '@testing-library/react';
 import mockAxios from 'axios'; // mapped to jest-mock-axios
 
+// beforeAll(() => {
+//   jest.spyOn(console, 'log').mockImplementation(() => {});
+// });
+// afterAll(() => {
+//   console.log.mockRestore && console.log.mockRestore();
+// });
+
 beforeAll(() => {
   jest.spyOn(console, 'log').mockImplementation(() => {});
 });
+
+// 🔧 Clean axios + mocks before every test to avoid cross-test leaks
+beforeEach(() => {
+  if (mockAxios.reset) mockAxios.reset();
+  jest.clearAllMocks();
+});
+
 afterAll(() => {
   console.log.mockRestore && console.log.mockRestore();
 });

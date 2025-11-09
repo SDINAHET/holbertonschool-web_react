@@ -71,6 +71,17 @@ export default function App() {
             { id: maxId + 1, type: 'urgent', html: latestNotification },
           ];
         }
+        // Ensure at least one html notification like legacy behavior
+        // const hasHtml = data.some(
+        //   (n) => n && typeof n === 'object' && n.html && typeof n.html.__html === 'string'
+        // );
+        // if (!hasHtml) {
+        //   const maxId = data.reduce((m, n) => (Number(n?.id) > Number(m) ? n.id : m), 0);
+        //   data = [
+        //     ...data,
+        //     { id: Number(maxId) + 1, type: 'urgent', html: latestNotification },
+        //   ];
+        // }
 
         setNotifications(data);
       } catch (err) {
@@ -84,6 +95,17 @@ export default function App() {
       alive = false;
     };
   }, [latestNotification]);
+
+  // useEffect(() => {
+  //   if (notifications.length > 0) {
+  //     setDisplayDrawer(false); // retire le placeholder du DOM
+  //   }
+  // }, [notifications.length]);
+  // useEffect(() => {
+  //   if (notifications.length > 0) {
+  //     setDisplayDrawer(false);   // retire le placeholder du DOM
+  //   }
+  // }, [notifications.length]);
 
   // Fetch courses whenever user's auth changes
   useEffect(() => {
@@ -120,6 +142,9 @@ export default function App() {
   const handleDisplayDrawer = useCallback(() => {
     setDisplayDrawer(true);
   }, []);
+  // const handleDisplayDrawer = useCallback(() => {
+  //   setDisplayDrawer((prev) => (notifications.length === 0 ? true : false));
+  // }, [notifications.length]);
 
   const handleHideDrawer = useCallback(() => {
     setDisplayDrawer(false);
@@ -145,8 +170,9 @@ export default function App() {
   return (
     <AppContext.Provider value={contextValue}>
       <Notifications
+        key={`notif-len-${notifications.length}`}   // <— AJOUT
         displayDrawer={displayDrawer}
-        // notifications={notifications}
+        notifications={notifications}
         listNotifications={notifications}
         handleDisplayDrawer={handleDisplayDrawer}
         handleHideDrawer={handleHideDrawer}
