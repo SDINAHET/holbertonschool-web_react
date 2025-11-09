@@ -1,104 +1,18 @@
-// task_1/dashboard/src/Login/Login.jsx
-// import React, { useState } from 'react';
-import React, { useState, useEffect } from 'react';
+// task_5/dashboard/src/Login/Login.jsx
+import React from 'react';
 import WithLogging from '../HOC/WithLogging';
+import useLogin from '../hooks/useLogin';
 
-// function Login({ logIn = () => {} }) {
 function Login({ logIn = () => {}, email = '', password = '' }) {
-  // états demandés
-  // const [enableSubmit, setEnableSubmit] = useState(false);
-  // const [formData, setFormData] = useState({ email: '', password: '' });
-  const [enableSubmit, setEnableSubmit] = useState(false);
-  const [formData, setFormData] = useState({
-    email: email || '',
-    password: password || '',
-  });
+  const {
+    email: emailValue,
+    password: passwordValue,
+    enableSubmit,
+    handleChangeEmail,
+    handleChangePassword,
+    handleSubmit,
+  } = useLogin(logIn, { email, password });
 
-  // --- validation identique à la version classe ---
-  const isValidEmail = (email) => {
-    if (email !== email.trim()) return false;
-    if (/\s/.test(email)) return false;
-
-    const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    if (!pattern.test(email)) return false;
-
-    const parts = email.split('@');
-    if (parts.length !== 2) return false;
-    const domain = parts[1];
-
-    if (domain.includes('..')) return false;
-    if (
-      domain.startsWith('.') ||
-      domain.endsWith('.') ||
-      domain.startsWith('-') ||
-      domain.endsWith('-')
-    ) {
-      return false;
-    }
-
-    const labels = domain.split('.');
-    if (labels.some((label) => label.length === 0 || label.startsWith('-') || label.endsWith('-'))) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const computeEnableSubmit = (email, password) => {
-    const e = email;
-    const p = password.trim();
-    const hasOuterSpaces = e !== e.trim();
-
-    return (
-      !hasOuterSpaces &&
-      e.length > 0 &&
-      isValidEmail(e) &&
-      p.length >= 8
-    );
-  };
-
-  // Synchroniser les inputs si les props changent (contexte → Login)
-  useEffect(() => {
-    setFormData((prev) => {
-      const next = { ...prev, email: email || '' };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  }, [email]);
-
-  useEffect(() => {
-    setFormData((prev) => {
-      const next = { ...prev, password: password || '' };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  }, [password]);
-
-  // handlers demandés
-  const handleChangeEmail = (e) => {
-    const email = e.target.value;
-    setFormData((prev) => {
-      const next = { ...prev, email };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  };
-
-  const handleChangePassword = (e) => {
-    const password = e.target.value;
-    setFormData((prev) => {
-      const next = { ...prev, password };
-      setEnableSubmit(computeEnableSubmit(next.email, next.password));
-      return next;
-    });
-  };
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault(); // toujours empêcher le submit par défaut
-    logIn(formData.email, formData.password); // appeler la prop avec les valeurs courantes
-  };
-
-  // --- JSX : même structure et classes que la version classe ---
   return (
     <div className="App-body p-[10px]">
       <div className="border-t-[3px] border-[var(--main-color)] pt-2">
@@ -106,7 +20,7 @@ function Login({ logIn = () => {}, email = '', password = '' }) {
 
         <form
           className="App-login inline-flex items-center gap-2 flex-wrap"
-          onSubmit={handleLoginSubmit}
+          onSubmit={handleSubmit}
         >
           <label htmlFor="email" className="ml-4 mr-2">
             Email
@@ -115,7 +29,7 @@ function Login({ logIn = () => {}, email = '', password = '' }) {
             id="email"
             name="email"
             type="email"
-            value={formData.email}
+            value={emailValue}
             onChange={handleChangeEmail}
             className="border border-gray-300 px-2 py-1 mr-2 rounded"
           />
@@ -127,7 +41,7 @@ function Login({ logIn = () => {}, email = '', password = '' }) {
             id="password"
             name="password"
             type="password"
-            value={formData.password}
+            value={passwordValue}
             onChange={handleChangePassword}
             className="border border-gray-300 px-2 py-1 mr-2 rounded"
           />
