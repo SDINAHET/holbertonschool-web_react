@@ -101,11 +101,11 @@ export default function App() {
   //     setDisplayDrawer(false); // retire le placeholder du DOM
   //   }
   // }, [notifications.length]);
-  useEffect(() => {
-    if (notifications.length > 0) {
-      setDisplayDrawer(false);   // retire le placeholder du DOM
-    }
-  }, [notifications.length]);
+  // useEffect(() => {
+  //   if (notifications.length > 0) {
+  //     setDisplayDrawer(false);   // retire le placeholder du DOM
+  //   }
+  // }, [notifications.length]);
 
   // Fetch courses whenever user's auth changes
   useEffect(() => {
