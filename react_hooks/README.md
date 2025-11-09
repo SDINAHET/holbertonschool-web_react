@@ -42,3 +42,34 @@ mestre/holbertonschool-web_react/react_hooks/task_0/dashboard# npm run lint
 > eslint -c eslint.config.js "src/**/*.{js,jsx}"
 
 ```
+
+
+
+
+
+
+
+# Task6
+```bash
+npm i axios jest-mock-axios --save
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_tr
+imestre/holbertonschool-web_react/react_hooks/task_4/dashboard# npm i axios jest-mock-axios --save
+
+added 200 packages, and audited 933 packages in 55s
+
+168 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+root@UID7E:/mnt/d/Users/steph/Documents/5ème_tr
+imestre/holbertonschool-web_react/react_hooks/task_4/dashboard#
+```
+
+
