@@ -1,71 +1,71 @@
-// App/appReducer.js
-
+// === appReducer.js ===
 export const APP_ACTIONS = {
-  LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT',
-  TOGGLE_DRAWER: 'TOGGLE_DRAWER',
-  MARK_NOTIFICATION_READ: 'MARK_NOTIFICATION_READ',
-  SET_NOTIFICATIONS: 'SET_NOTIFICATIONS',
-  SET_COURSES: 'SET_COURSES',
+  LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
+  TOGGLE_DRAWER: "TOGGLE_DRAWER",
+  MARK_NOTIFICATION_READ: "MARK_NOTIFICATION_READ",
+  SET_NOTIFICATIONS: "SET_NOTIFICATIONS",
+  SET_COURSES: "SET_COURSES",
 };
 
 export const initialState = {
-  displayDrawer: true, // required default
+  displayDrawer: true,
   user: {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     isLoggedIn: false,
   },
   notifications: [],
   courses: [],
 };
 
-export function appReducer(state = initialState, action = {}) {
+export function appReducer(state = initialState, action) {
   switch (action.type) {
-    case APP_ACTIONS.LOGIN: {
-      const { email = '', password = '' } = action.payload || {};
+    case APP_ACTIONS.LOGIN:
       return {
         ...state,
-        user: { email, password, isLoggedIn: true },
+        user: {
+          email: action.payload.email,
+          password: action.payload.password,
+          isLoggedIn: true,
+        },
       };
-    }
 
-    case APP_ACTIONS.LOGOUT: {
+    case APP_ACTIONS.LOGOUT:
       return {
         ...state,
-        user: { email: '', password: '', isLoggedIn: false },
-        courses: [], // keep UI consistent on logout
+        user: {
+          email: "",
+          password: "",
+          isLoggedIn: false,
+        },
       };
-    }
 
-    case APP_ACTIONS.TOGGLE_DRAWER: {
-      // If a boolean payload is provided, use it; otherwise toggle
-      const next =
-        typeof action.payload === 'boolean'
-          ? action.payload
-          : !state.displayDrawer;
-      return { ...state, displayDrawer: next };
-    }
-
-    case APP_ACTIONS.MARK_NOTIFICATION_READ: {
-      const id = Number(action.payload);
+    case APP_ACTIONS.TOGGLE_DRAWER:
       return {
         ...state,
-        notifications: (state.notifications || []).filter(
-          (n) => Number(n?.id) !== id
+        displayDrawer: !state.displayDrawer,
+      };
+
+    case APP_ACTIONS.MARK_NOTIFICATION_READ:
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (n) => n.id !== action.payload
         ),
       };
-    }
 
-    case APP_ACTIONS.SET_NOTIFICATIONS: {
-      const list = Array.isArray(action.payload) ? action.payload : [];
-      return { ...state, notifications: list };
-    }
+    case APP_ACTIONS.SET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: action.payload,
+      };
 
-    case APP_ACTIONS.SET_COURSES: {
-      const list = Array.isArray(action.payload) ? action.payload : [];
-      return { ...state, courses: list };
-    }
+    case APP_ACTIONS.SET_COURSES:
+      return {
+        ...state,
+        courses: action.payload,
+      };
 
     default:
       return state;

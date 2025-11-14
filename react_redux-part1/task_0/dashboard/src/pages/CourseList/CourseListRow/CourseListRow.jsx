@@ -1,43 +1,54 @@
-import React from "react";
+import PropTypes from 'prop-types';
+
+CourseListRow.propTypes = {
+  isHeader: PropTypes.bool.isRequired,
+  textFirstCell: PropTypes.string.isRequired,
+  textSecondCell: PropTypes.string,
+};
 
 export default function CourseListRow({
   isHeader = false,
-  textFirstCell = "",
+  textFirstCell = '',
   textSecondCell = null,
 }) {
-  // Couleur de fond avec opacité RGBA
-  const headerBg = "rgba(222, 181, 181, 0.66)"; // #deb5b5 + 66 %
-  const rowBg = "rgba(205, 205, 205, 0.45)";   // #CDCDCD + 45 %
-
-  const rowStyle = {
-    backgroundColor: isHeader ? headerBg : rowBg,
-  };
-
-  // Bordure grise, padding-left de 8px, texte noir
-  const cellClass = "border border-gray-400 pl-2 text-black";
-
-  if (isHeader) {
-    if (textSecondCell === null) {
-      return (
-        <tr style={rowStyle}>
-          <th colSpan="2" className={`${cellClass} font-bold`}>
-            {textFirstCell}
-          </th>
-        </tr>
-      );
-    }
-    return (
-      <tr style={rowStyle}>
-        <th className={`${cellClass} font-bold w-[70%]`}>{textFirstCell}</th>
-        <th className={`${cellClass} font-bold`}>{textSecondCell}</th>
-      </tr>
-    );
-  }
-
-  return (
-    <tr style={rowStyle}>
-      <td className={cellClass}>{textFirstCell}</td>
-      <td className={cellClass}>{textSecondCell}</td>
+  const cellStyle = isHeader 
+    ? { backgroundColor: 'var(--color-table-header)', opacity: 0.66 }
+    : { backgroundColor: 'var(--color-table-rows)', opacity: 0.45 };
+  
+  const cellClasses = 'border border-gray-400';
+  
+  return isHeader ? (
+    <tr>
+      <th 
+        colSpan={textSecondCell ? 1 : 2}
+        className={cellClasses}
+        style={cellStyle}
+      >
+        {textFirstCell}
+      </th>
+      {textSecondCell ? (
+        <th 
+          className={cellClasses}
+          style={cellStyle}
+        >
+          {textSecondCell}
+        </th>
+      ) : null}
+    </tr>
+  ) : (
+    <tr>
+      <td 
+        className={`${cellClasses} pl-2`}
+        style={cellStyle}
+      >
+        {textFirstCell}
+      </td>
+      <td 
+        className={`${cellClasses} pl-2`}
+        style={cellStyle}
+      >
+        {textSecondCell}
+      </td>
     </tr>
   );
 }

@@ -1,36 +1,33 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Footer from './Footer';
-import AppContext from '../Context/context';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { expect, test, jest } from "@jest/globals";
+import Footer from "./Footer.jsx";
+import React from "react";
 
-describe('Footer component (context consumer)', () => {
-  test('renders copyright with current year', () => {
-    render(<Footer />);
-    const year = new Date().getFullYear().toString();
+test("renders copyright text", () => {
+  const user = { email: "", password: "", isLoggedIn: false };
+  render(<Footer user={user} logOut={jest.fn()} />);
+  expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
+});
 
-    const p = screen.getByText(/copyright/i);
-    expect(p).toBeInTheDocument();
-    expect(p).toHaveTextContent(year);
-  });
+test('displays "Contact us" when user is logged out', () => {
+  const user = { email: "", password: "", isLoggedIn: false };
+  render(<Footer user={user} logOut={jest.fn()} />);
+  const contactLink = screen.getByText(/Contact us/i);
+  expect(contactLink).toBeInTheDocument();
+});
 
-  test('does not display “Contact us” when user is logged out', () => {
-    const contextValue = { user: { isLoggedIn: false } };
-    render(
-      <AppContext.Provider value={contextValue}>
-        <Footer />
-      </AppContext.Provider>
-    );
-    expect(screen.queryByText(/contact us/i)).toBeNull();
-  });
+test('displays welcome message and logout link when user is logged in', () => {
+  const user = { email: "user@test.com", password: "password123", isLoggedIn: true };
+  const logOutSpy = jest.fn();
 
-  test('displays “Contact us” when user is logged in', () => {
-    const contextValue = { user: { isLoggedIn: true } };
-    render(
-      <AppContext.Provider value={contextValue}>
-        <Footer />
-      </AppContext.Provider>
-    );
-    expect(screen.getByText(/contact us/i)).toBeInTheDocument();
-  });
+  render(<Footer user={user} logOut={logOutSpy} />);
+
+  const welcomeMessage = screen.getByText(/Welcome user@test.com/i);
+  const logoutLink = screen.getByText(/Logout/i);
+
+  expect(welcomeMessage).toBeInTheDocument();
+  expect(logoutLink).toBeInTheDocument();
+
+  fireEvent.click(logoutLink);
+  expect(logOutSpy).toHaveBeenCalled();
 });

@@ -1,61 +1,60 @@
-// task_5/dashboard/src/Login/Login.jsx
-import React from 'react';
-import WithLogging from '../HOC/WithLogging';
-import useLogin from '../hooks/useLogin';
+import React from "react";
+import WithLogging from "../../components/HOC/WithLogging";
+import useLogin from "../../hooks/useLogin";
 
-function Login({ logIn = () => {}, email = '', password = '' }) {
+function Login({ logIn }) {
   const {
-    email: emailValue,
-    password: passwordValue,
+    email,
+    password,
     enableSubmit,
     handleChangeEmail,
     handleChangePassword,
     handleSubmit,
-  } = useLogin(logIn, { email, password });
+  } = useLogin(logIn);
 
   return (
-    <div className="App-body p-[10px]">
-      <div className="border-t-[3px] border-[var(--main-color)] pt-2">
-        <p className="text-sm mb-2">Login to access the full dashboard</p>
+    <div className="App-login flex-1 text-left m-8 border-t-4 border-[var(--main-color)] pt-6">
+      <p className="text-lg font-semibold mb-2">
+        Login to access the full dashboard
+      </p>
 
-        <form
-          className="App-login inline-flex items-center gap-2 flex-wrap"
-          onSubmit={handleSubmit}
-        >
-          <label htmlFor="email" className="ml-4 mr-2">
-            Email
-          </label>
+      <form
+        className="flex flex-wrap items-center gap-4"
+        onSubmit={handleSubmit}
+      >
+        <label htmlFor="email" className="flex items-center gap-2">
+          Email
           <input
+            type="email"
             id="email"
             name="email"
-            type="email"
-            value={emailValue}
+            value={email}
             onChange={handleChangeEmail}
-            className="border border-gray-300 px-2 py-1 mr-2 rounded"
+            className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]"
           />
+        </label>
 
-          <label htmlFor="password" className="ml-4 mr-2">
-            Password
-          </label>
+        <label htmlFor="password" className="flex items-center gap-2">
+          Password
           <input
+            type="password"
             id="password"
             name="password"
-            type="password"
-            value={passwordValue}
+            value={password}
             onChange={handleChangePassword}
-            className="border border-gray-300 px-2 py-1 mr-2 rounded"
+            className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--main-color)]"
           />
+        </label>
 
-          <input
-            type="submit"
-            value="OK"
-            role="button"
-            disabled={!enableSubmit}
-            className="px-3 py-1 border rounded text-xs disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="OK"
-          />
-        </form>
-      </div>
+        <input
+          type="submit"
+          value="OK"
+          disabled={!enableSubmit}
+          className={`px-4 py-2 border border-gray-300 rounded bg-white hover:bg-gray-50 cursor-pointer transition ${
+            !enableSubmit ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        />
+      </form>
     </div>
   );
 }

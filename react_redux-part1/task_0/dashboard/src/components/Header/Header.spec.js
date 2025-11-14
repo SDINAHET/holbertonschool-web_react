@@ -1,78 +1,50 @@
-import React from 'react';
-import { render, screen, fireEvent  } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Header from './Header';
-import AppContext, { defaultUser } from '../Context/context';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { expect, test, jest } from "@jest/globals";
+import Header from "./Header.jsx";
 
-describe('Header', () => {
-  test('renders the title', () => {
-    render(<Header />);
-    expect(screen.getByRole('heading', { name: /school dashboard/i })).toBeInTheDocument();
-  });
+test("renders logo and header title", () => {
+  const user = { email: "", password: "", isLoggedIn: false };
+  render(<Header user={user} logOut={jest.fn()} />);
 
-  test('renders the Holberton logo with alt text', () => {
-    render(<Header />);
-    const img = screen.getByAltText(/holberton logo/i);
-    expect(img).toBeInTheDocument();
-    // optional: ensure it’s inside the correct container
-    expect(img.closest('.App-header')).toBeInTheDocument();
-  });
+  expect(screen.getByAltText(/holberton logo/i)).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { level: 1, name: /School dashboard/i })
+  ).toBeInTheDocument();
 });
 
-describe('Header (Task 3) - context / logout section', () => {
-  test('does NOT render logoutSection with default context value', () => {
-    // default context = user not logged in
-    render(
-      <AppContext.Provider value={{ user: defaultUser, logOut: () => {} }}>
-        <Header />
-      </AppContext.Provider>
-    );
+test("does not render logoutSection when user is not logged in", () => {
+  const user = { email: "", password: "", isLoggedIn: false };
+  render(<Header user={user} logOut={jest.fn()} />);
 
-    expect(screen.queryByText(/welcome/i)).toBeNull();
-    expect(screen.queryByText(/logout/i)).toBeNull();
-    // expect(screen.queryByTestId?.('logoutSection')).toBeUndefined(); // just in case
-    expect(screen.queryByTestId('logoutSection')).toBeNull();
-    expect(document.querySelector('#logoutSection')).toBeNull();
-  });
+  const logoutSection = screen.queryByText(/logout/i);
+  expect(logoutSection).not.toBeInTheDocument();
+});
 
-  test('renders logoutSection when user.isLoggedIn = true', () => {
-    const user = {
-      email: 'test@holberton.io',
-      password: 'whatever',
-      isLoggedIn: true,
-    };
+test("renders logoutSection when user is logged in", () => {
+  const user = {
+    email: "user@test.com",
+    password: "password123",
+    isLoggedIn: true,
+  };
+  render(<Header user={user} logOut={jest.fn()} />);
 
-    render(
-      <AppContext.Provider value={{ user, logOut: () => {} }}>
-        <Header />
-      </AppContext.Provider>
-    );
+  const logoutSection = screen.getByText(/logout/i);
+  expect(logoutSection).toBeInTheDocument();
+  expect(screen.getByText(/Welcome user@test.com/i)).toBeInTheDocument();
+});
 
-    const section = document.querySelector('#logoutSection');
-    expect(section).not.toBeNull();
-    // expect(screen.getByText(/welcome test@holberton.io/i)).toBeInTheDocument();
-    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
-    expect(screen.getByText('test@holberton.io')).toBeInTheDocument();
-    expect(screen.getByText(/\(logout\)/i)).toBeInTheDocument();
-  });
+test("clicking logout calls logOut function", () => {
+  const user = {
+    email: "user@test.com",
+    password: "password123",
+    isLoggedIn: true,
+  };
+  const logOutSpy = jest.fn();
 
-  test('clicking on "logout" calls the logOut function from context', () => {
-    const user = {
-      email: 'test@holberton.io',
-      password: 'whatever',
-      isLoggedIn: true,
-    };
-    const logOut = jest.fn();
+  render(<Header user={user} logOut={logOutSpy} />);
 
-    render(
-      <AppContext.Provider value={{ user, logOut }}>
-        <Header />
-      </AppContext.Provider>
-    );
+  const logoutLink = screen.getByText(/logout/i);
+  fireEvent.click(logoutLink);
 
-    const link = screen.getByText(/\(logout\)/i);
-    fireEvent.click(link);
-
-    expect(logOut).toHaveBeenCalledTimes(1);
-  });
+  expect(logOutSpy).toHaveBeenCalled();
 });

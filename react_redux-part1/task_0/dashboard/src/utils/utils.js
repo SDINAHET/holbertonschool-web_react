@@ -1,11 +1,17 @@
-// task_5/dashboard/src/utils/utils.js
-export const getCurrentYear = () => new Date().getFullYear();
+function getCurrentYear() {
+  return new Date().getFullYear();
+}
 
-export const getFooterCopy = (isIndex) =>
-  isIndex ? 'Holberton School' : 'Holberton School main dashboard';
+function getFooterCopy(isIndex) {
+  if (isIndex) {
+    return "Holberton School";
+  } else {
+    return "Holberton School main dashboard";
+  }
+}
 
-export const getLatestNotification = () =>
-  '<strong>Urgent requirement</strong> - complete by EOD';
+function getLatestNotification(){
+  return "<strong>Urgent requirement</strong> - complete by EOD";
+}
 
-// Optional alias so old code using getFullYear() still works
-export const getFullYear = getCurrentYear;
+export { getCurrentYear, getFooterCopy, getLatestNotification };
