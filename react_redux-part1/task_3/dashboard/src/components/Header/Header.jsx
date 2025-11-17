@@ -10,8 +10,7 @@ function Header() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
+  const handleLogout = () => {
     dispatch(logout());
   };
 
@@ -20,7 +19,6 @@ function Header() {
       <img src={holbertonLogo} className="App-logo" alt="Holberton logo" />
       <h1>School dashboard</h1>
 
-      {/* Section logout si isLoggedIn */}
       {isLoggedIn && user && (
         <section id="logoutSection">
           <p>
