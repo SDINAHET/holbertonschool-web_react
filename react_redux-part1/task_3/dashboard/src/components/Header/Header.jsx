@@ -1,7 +1,20 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authSlice"; // adapte le chemin si besoin
 import holbertonLogo from "../../assets/holberton-logo.jpg";
 
-function Header({ user, logOut }) {
+function Header() {
+  const dispatch = useDispatch();
+
+  // Récupération de l'état auth dans le store
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
+
   return (
     <header className="App-header flex items-center p-6">
       <img src={holbertonLogo} className="h-20 w-20" alt="Holberton logo" />
@@ -9,20 +22,18 @@ function Header({ user, logOut }) {
         School dashboard
       </h1>
 
-      {/* Section logout if isLoggedIn */}
-      {user?.isLoggedIn && (
+      {/* Section logout si isLoggedIn */}
+      {isLoggedIn && user && (
         <section id="logoutSection" className="ml-auto text-right">
           <p>
             Welcome {user.email} (
-            <span
-              onClick={(e) => {
-                e.preventDefault();
-                logOut();
-              }}
+            <a
+              href="#logout"
+              onClick={handleLogout}
               style={{ cursor: "pointer", color: "blue" }}
             >
               logout
-            </span>
+            </a>
             )
           </p>
         </section>
