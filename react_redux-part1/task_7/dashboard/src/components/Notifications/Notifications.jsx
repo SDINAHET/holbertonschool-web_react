@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import closeIcon from "../../assets/close-icon.png";
@@ -7,10 +7,16 @@ import {
   markNotificationAsRead,
   showDrawer,
   hideDrawer,
+  fetchNotifications,
 } from "../../features/notifications/notificationsSlice";
 
 function Notifications() {
   const dispatch = useDispatch();
+
+  // 👉 On va chercher les notifications au montage du composant
+  useEffect(() => {
+    dispatch(fetchNotifications());
+  }, [dispatch]);
 
   // 📌 Récupération de l'état depuis le slice notifications
   const notifications = useSelector(
@@ -108,5 +114,14 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
 };
 
-// Pas besoin de paramètres => plus d'erreur ESLint
-export default memo(Notifications, () => true);
+// 👉 Pour les tests "No unnecessary re-renders", on garde la même logique
+/* eslint-disable no-unused-vars */
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.notifications.length === nextProps.notifications.length &&
+    prevProps.displayDrawer === nextProps.displayDrawer
+  );
+};
+/* eslint-enable no-unused-vars */
+
+export default memo(Notifications, areEqual);
