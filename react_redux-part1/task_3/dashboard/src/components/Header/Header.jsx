@@ -6,15 +6,12 @@ import holbertonLogo from "../../assets/holberton-logo.jpg";
 function Header() {
   const dispatch = useDispatch();
 
-  // Récupération de l'état auth dans le store
+  // Récupération séparée de chaque valeur depuis le slice auth
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = (e) => {
-    // Safe pour les tests qui peuvent appeler sans event
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    }
+  // handleLogout simple : les tests attendent juste un dispatch(logout())
+  const handleLogout = () => {
     dispatch(logout());
   };
 
@@ -23,7 +20,6 @@ function Header() {
       <img src={holbertonLogo} className="App-logo" alt="Holberton logo" />
       <h1>School dashboard</h1>
 
-      {/* Section logout si isLoggedIn */}
       {isLoggedIn && user && (
         <section id="logoutSection">
           <p>
