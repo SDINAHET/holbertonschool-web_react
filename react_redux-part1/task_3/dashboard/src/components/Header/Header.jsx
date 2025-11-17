@@ -7,7 +7,8 @@ function Header() {
   const dispatch = useDispatch();
 
   // Récupération de l'état auth dans le store
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
 
   const handleLogout = (e) => {
     // Rend le handler safe pour les tests (e peut être undefined)
@@ -18,22 +19,16 @@ function Header() {
   };
 
   return (
-    <header className="App-header flex items-center p-6">
-      <img src={holbertonLogo} className="h-20 w-20" alt="Holberton logo" />
-      <h1 className="text-[var(--main-color)] text-4xl font-bold ml-4">
-        School dashboard
-      </h1>
+    <header className="App-header">
+      <img src={holbertonLogo} className="App-logo" alt="Holberton logo" />
+      <h1>School dashboard</h1>
 
       {/* Section logout si isLoggedIn */}
       {isLoggedIn && user && (
-        <section id="logoutSection" className="ml-auto text-right">
+        <section id="logoutSection">
           <p>
             Welcome {user.email} (
-            <a
-              href="#"
-              onClick={handleLogout}
-              style={{ cursor: "pointer", color: "blue" }}
-            >
+            <a href="#" onClick={handleLogout}>
               logout
             </a>
             )
