@@ -11,7 +11,7 @@ function Header() {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = (e) => {
-    // Rend le handler safe pour les tests (e peut être undefined)
+    // Safe pour les tests qui peuvent appeler sans event
     if (e && e.preventDefault) {
       e.preventDefault();
     }
