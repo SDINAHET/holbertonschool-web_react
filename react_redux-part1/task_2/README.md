@@ -1,6 +1,11 @@
 # react_redux-part1
 
+Holberton School project: React + Redux (part 1).
 
+This project includes creating a root reducer that combines:
+- auth reducer
+- notifications reducer
+- courses reducer
 
 ```bash
 src/
@@ -94,6 +99,6 @@ npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
 npm notice To update run: npm install -g npm@11.6.2
 npm notice
 root@UID7E:/mnt/d/Users/steph/Documents/5
-ème_trimestre/holbertonschool-web_react/react_redux-part1/task_0/dashboard#       
+ème_trimestre/holbertonschool-web_react/react_redux-part1/task_0/dashboard#
 ```
 
