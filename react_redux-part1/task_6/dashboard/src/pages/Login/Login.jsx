@@ -1,8 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import WithLogging from "../../components/HOC/WithLogging";
 import useLogin from "../../hooks/useLogin";
+import { login } from "../../features/auth/authSlice";
 
-function Login({ logIn }) {
+function Login() {
+  const dispatch = useDispatch();
+
+  // Callback utilisé par le hook useLogin quand le formulaire est soumis avec succès
+  const handleLogin = (email, password) => {
+    dispatch(
+      login({
+        email,
+        password,
+      })
+    );
+  };
+
   const {
     email,
     password,
@@ -10,7 +24,7 @@ function Login({ logIn }) {
     handleChangeEmail,
     handleChangePassword,
     handleSubmit,
-  } = useLogin(logIn);
+  } = useLogin(handleLogin);
 
   return (
     <div className="App-login flex-1 text-left m-8 border-t-4 border-[var(--main-color)] pt-6">
