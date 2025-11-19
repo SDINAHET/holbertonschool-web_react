@@ -1,11 +1,13 @@
+// task_1/dashboard/src/features/notifications/notificationsSlice.js
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getLatestNotification } from '../../utils/utils';
 
-// const API_BASE_URL = 'http://localhost:5173';
+const API_BASE_URL = 'http://localhost:5173';
 
-// const ENDPOINTS = {
-//   notifications: `${API_BASE_URL}/notifications.json`,
-// };
+const ENDPOINTS = {
+  notifications: `${API_BASE_URL}/notifications.json`,
+};
 
 const initialState = {
   notifications: [],
@@ -15,14 +17,13 @@ const initialState = {
 export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async () => {
-    // const response = await fetch(ENDPOINTS.notifications);
-    const response = await fetch("/notifications.json");
+    const response = await fetch(ENDPOINTS.notifications);
     const data = await response.json();
-    
-    return data.map((n) =>
+
+    const updatedNotifications = data.map((n) =>
       n.id === 3 ? { ...n, html: { __html: getLatestNotification() } } : n
     );
-    
+
     return updatedNotifications;
   }
 );
@@ -51,5 +52,7 @@ const notificationsSlice = createSlice({
   },
 });
 
-export const { markNotificationAsRead, showDrawer, hideDrawer } = notificationsSlice.actions;
+export const { markNotificationAsRead, showDrawer, hideDrawer } =
+  notificationsSlice.actions;
+
 export default notificationsSlice.reducer;

@@ -12,10 +12,10 @@ export default function CourseListRow({
   textSecondCell = null,
 }) {
   const cellStyle = isHeader 
-    ? { backgroundColor: 'white', opacity: 0.66 }
-    : { backgroundColor: 'white', opacity: 0.45 };
+    ? { backgroundColor: 'var(--color-table-header)', opacity: 0.66 }
+    : { backgroundColor: 'var(--color-table-rows)', opacity: 0.45 };
   
-  const cellClasses = 'border border-gray-800';
+  const cellClasses = 'border border-gray-400';
   
   return isHeader ? (
     <tr>

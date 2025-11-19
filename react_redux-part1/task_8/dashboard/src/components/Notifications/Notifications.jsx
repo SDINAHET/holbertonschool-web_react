@@ -1,23 +1,43 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import {
+  markNotificationAsRead,
   showDrawer,
   hideDrawer,
-  markNotificationAsRead,
+  fetchNotifications,
 } from "../../features/notifications/notificationsSlice";
 
 function Notifications() {
   const dispatch = useDispatch();
 
-  const { notifications, displayDrawer } = useSelector(
-    (state) => state.notifications
+  // 👉 On va chercher les notifications au montage du composant
+  useEffect(() => {
+    dispatch(fetchNotifications());
+  }, [dispatch]);
+
+  // 📌 Récupération de l'état depuis le slice notifications
+  const notifications = useSelector(
+    (state) => state.notifications.notifications
+  );
+  const displayDrawer = useSelector(
+    (state) => state.notifications.displayDrawer
   );
 
-  const handleDisplayDrawer = () => dispatch(showDrawer());
-  const handleHideDrawer = () => dispatch(hideDrawer());
-  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
+  // 📌 Handlers maintenant gérés ici et dispatch vers Redux
+  const handleDisplayDrawer = () => {
+    dispatch(showDrawer());
+  };
+
+  const handleHideDrawer = () => {
+    dispatch(hideDrawer());
+  };
+
+  const handleMarkAsRead = (id) => {
+    dispatch(markNotificationAsRead(id));
+  };
 
   // --- Styles ---
   const borderStyle = {
@@ -45,7 +65,10 @@ function Notifications() {
           data-testid="Notifications"
         >
           <button
-            onClick={handleHideDrawer}
+            onClick={() => {
+              console.log("Close button has been clicked");
+              handleHideDrawer();
+            }}
             aria-label="Close"
             className="absolute cursor-pointer right-3 top-3 bg-transparent border-none p-0"
           >
@@ -65,7 +88,6 @@ function Notifications() {
                     value={notification.value}
                     html={notification.html}
                     markAsRead={() => handleMarkAsRead(notification.id)}
-                    read={notification.read}
                   />
                 ))}
               </ul>
@@ -79,4 +101,27 @@ function Notifications() {
   );
 }
 
-export default memo(Notifications);
+// PropTypes facultatifs, mais ça ne gêne pas
+Notifications.propTypes = {
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      type: PropTypes.string,
+      value: PropTypes.string,
+      html: PropTypes.shape({ __html: PropTypes.string }),
+    })
+  ),
+  displayDrawer: PropTypes.bool,
+};
+
+// 👉 Pour les tests "No unnecessary re-renders", on garde la même logique
+/* eslint-disable no-unused-vars */
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.notifications.length === nextProps.notifications.length &&
+    prevProps.displayDrawer === nextProps.displayDrawer
+  );
+};
+/* eslint-enable no-unused-vars */
+
+export default memo(Notifications, areEqual);
