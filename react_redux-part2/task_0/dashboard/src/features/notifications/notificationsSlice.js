@@ -9,7 +9,7 @@ import { getLatestNotification } from '../../utils/utils';
 
 const initialState = {
   notifications: [],
-  displayDrawer: true,
+  // displayDrawer: true,
 };
 
 export const fetchNotifications = createAsyncThunk(
@@ -18,7 +18,7 @@ export const fetchNotifications = createAsyncThunk(
     // const response = await fetch(ENDPOINTS.notifications);
     const response = await fetch("/notifications.json");
     const data = await response.json();
-    
+
     return data.map((n) =>
       n.id === 3 ? { ...n, html: { __html: getLatestNotification() } } : n
     );
@@ -26,12 +26,32 @@ export const fetchNotifications = createAsyncThunk(
   }
 );
 
+// const notificationsSlice = createSlice({
+//   name: 'notifications',
+//   initialState,
+//   reducers: {
+//     markNotificationAsRead: (state, action) => {
+//       console.log(`Notification ${action.payload} has been marked as read`);
+//       state.notifications = state.notifications.filter(
+//         (notification) => notification.id !== action.payload
+//       );
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder.addCase(fetchNotifications.fulfilled, (state, action) => {
+//       state.notifications = action.payload;
+//     });
+//   },
+// });
+
+// export const { markNotificationAsRead, showDrawer, hideDrawer } = notificationsSlice.actions;
+// export default notificationsSlice.reducer;
+
 const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
   reducers: {
     markNotificationAsRead: (state, action) => {
-      console.log(`Notification ${action.payload} has been marked as read`);
       state.notifications = state.notifications.filter(
         (notification) => notification.id !== action.payload
       );
@@ -44,5 +64,5 @@ const notificationsSlice = createSlice({
   },
 });
 
-export const { markNotificationAsRead, showDrawer, hideDrawer } = notificationsSlice.actions;
+export const { markNotificationAsRead } = notificationsSlice.actions;
 export default notificationsSlice.reducer;
