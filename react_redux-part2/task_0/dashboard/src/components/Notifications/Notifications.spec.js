@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, test, expect, jest } from "@jest/globals";
+// import { describe, test, expect, jest } from "@jest/globals";
+import { describe, test, expect } from "@jest/globals";
 import Notifications from "./Notifications.jsx";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
@@ -18,7 +19,7 @@ function renderWithRedux(ui, { preloadedState, store = configureStore({ reducer:
 describe("Notifications Component", () => {
   test("renders menu item and notifications drawer correctly", () => {
     renderWithRedux(<Notifications />);
-    
+
     expect(screen.getByText(/Your notifications/i)).toBeInTheDocument();
 
     // Drawer should exist but initially hidden
@@ -44,7 +45,7 @@ describe("Notifications Component", () => {
 
   test("closes drawer when close button is clicked", () => {
     renderWithRedux(<Notifications />);
-    
+
     const menuItem = screen.getByText(/Your notifications/i);
     const drawer = screen.getByTestId("Notifications");
 
@@ -64,7 +65,7 @@ describe("Notifications Component", () => {
 
   test("calls markNotificationAsRead with correct id when NotificationItem is clicked", () => {
     renderWithRedux(<Notifications />, { preloadedState: { notifications: { notifications: notificationsList } } });
-    
+
     const firstNotif = screen.getByText("New course available");
     fireEvent.click(firstNotif);
   });
