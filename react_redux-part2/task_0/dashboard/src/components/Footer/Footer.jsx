@@ -1,11 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getCurrentYear, getFooterCopy } from "../../utils/utils";
+import { logout } from "../../features/auth/authSlice";
 
 function Footer() {
-  // Récupération de l'état auth dans le store Redux
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
   return (
     <footer className="App-footer text-center text-sm border-t-4 border-[var(--main-color)] mt-10 py-4 text-gray-600">
@@ -13,8 +18,19 @@ function Footer() {
         Copyright {getCurrentYear()} - {getFooterCopy(true)}
       </p>
 
-      {/* Afficher "Contact us" uniquement si l'utilisateur est connecté */}
-      {isLoggedIn && user && (
+      {isLoggedIn && user ? (
+        <p>
+          Welcome {user.email} (
+          <a
+            href="#logout"
+            onClick={handleLogout}
+            style={{ color: "blue", cursor: "pointer" }}
+          >
+            logout
+          </a>
+          )
+        </p>
+      ) : (
         <p>
           <a href="#contact">Contact us</a>
         </p>

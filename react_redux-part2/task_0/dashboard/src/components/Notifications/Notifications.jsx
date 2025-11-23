@@ -1,44 +1,29 @@
-// src/components/Notifications/Notifications.jsx
-import React, { useRef } from "react";
+import React, { memo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, css } from "aphrodite";
 import closeIcon from "../../assets/close-icon.png";
 import NotificationItem from "../NotificationItem/NotificationItem";
+import { StyleSheet, css } from "aphrodite";
 import { markNotificationAsRead } from "../../features/notifications/notificationsSlice";
 
 function Notifications() {
-  const drawerRef = useRef(null);
   const dispatch = useDispatch();
+  const { notifications } = useSelector((state) => state.notifications);
 
-  const notifications = useSelector(
-    (state) => state.notifications.notifications
-  );
+  const drawerRef = useRef(null);
 
   const handleToggleDrawer = () => {
-    const drawer = drawerRef.current;
-    if (!drawer) return;
+    if (!drawerRef.current) return;
 
-    const visibleClass = css(styles.visible);
-
-    // 👉 IMPORTANT POUR LE CHECKER : on ajoute/enlève la classe "visible"
-    if (drawer.classList.contains("visible")) {
-      drawer.classList.remove("visible");
-      drawer.classList.remove(visibleClass);
-    } else {
-      drawer.classList.add("visible");
-      drawer.classList.add(visibleClass);
-    }
+    drawerRef.current.classList.toggle(css(styles.visible));
   };
 
-  const handleMarkAsRead = (id) => {
-    dispatch(markNotificationAsRead(id));
-  };
+  const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
   return (
-    <div className="Notifications-wrapper">
+    <>
       <div
+        className="cursor-pointer"
         data-testid="menuItem"
-        className="menuItem"
         onClick={handleToggleDrawer}
       >
         Your notifications
@@ -46,62 +31,53 @@ function Notifications() {
 
       <div
         ref={drawerRef}
-        data-testid="Notifications"
         className={css(styles.drawer)}
+        data-testid="Notifications"
       >
         <button
-          aria-label="Close"
           onClick={handleToggleDrawer}
-          className={css(styles.closeBtn)}
+          aria-label="Close"
+          className="absolute cursor-pointer right-3 top-3 bg-transparent border-none p-0"
         >
-          <img src={closeIcon} alt="close icon" />
+          <img src={closeIcon} alt="close icon" className="w-5 h-5" />
         </button>
 
-        <p>Here is the list of notifications</p>
-
-        <ul>
-          {notifications.length === 0 && (
-            <NotificationItem value="No new notification for now" />
-          )}
-
-          {notifications.map((notif) => (
-            <NotificationItem
-              key={notif.id}
-              id={notif.id}
-              type={notif.type}
-              value={notif.value}
-              html={notif.html}
-              markAsRead={() => handleMarkAsRead(notif.id)}
-            />
-          ))}
-        </ul>
+        {notifications.length > 0 ? (
+          <>
+            <p className="font-bold mb-3">Here is the list of notifications</p>
+            <ul className="list-disc pl-6 space-y-1">
+              {notifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  {...notification}
+                  markAsRead={() => handleMarkAsRead(notification.id)}
+                />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="text-center">No new notification for now</p>
+        )}
       </div>
-    </div>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   drawer: {
+    border: "2px dashed var(--main-color)",
+    padding: "20px",
+    position: "relative",
+    float: "right",
+    marginRight: "20px",
     opacity: 0,
     visibility: "hidden",
-    transition: "opacity 0.3s ease-in-out",
-    border: "1px dashed #ccc",
-    padding: "1rem",
-    position: "relative",
-    marginTop: "1rem",
+    transition: "opacity .3s ease",
   },
   visible: {
     opacity: 1,
     visibility: "visible",
   },
-  closeBtn: {
-    position: "absolute",
-    top: "0.5rem",
-    right: "0.5rem",
-    background: "transparent",
-    border: "none",
-    cursor: "pointer",
-  },
 });
 
-export default Notifications;
+export default memo(Notifications);

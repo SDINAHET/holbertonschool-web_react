@@ -5,10 +5,7 @@ import holbertonLogo from "../../assets/holberton-logo.jpg";
 
 function Header() {
   const dispatch = useDispatch();
-
-  // Récupération de l'état auth dans le store
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -22,7 +19,6 @@ function Header() {
         School dashboard
       </h1>
 
-      {/* Section logout si isLoggedIn */}
       {isLoggedIn && user && (
         <section id="logoutSection" className="ml-auto text-right">
           <p>

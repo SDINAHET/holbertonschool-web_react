@@ -1,20 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { login } from "../../features/auth/authSlice";
 import WithLogging from "../../components/HOC/WithLogging";
 import useLogin from "../../hooks/useLogin";
-import { login } from "../../features/auth/authSlice";
 
 function Login() {
   const dispatch = useDispatch();
 
-  // Callback utilisé par le hook useLogin quand le formulaire est soumis avec succès
   const handleLogin = (email, password) => {
-    dispatch(
-      login({
-        email,
-        password,
-      })
-    );
+    dispatch(login({ email, password }));
   };
 
   const {
