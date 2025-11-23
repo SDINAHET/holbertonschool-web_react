@@ -20,6 +20,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.2.8",
     "@reduxjs/toolkit": "^2.10.1",
+    "aphrodite": "^2.4.0",
     "axios": "^1.13.2",
     "jest-mock-axios": "^4.9.0",
     "prop-types": "^15.8.1",
