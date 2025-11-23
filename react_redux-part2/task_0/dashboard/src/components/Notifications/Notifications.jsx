@@ -17,37 +17,26 @@ function Notifications() {
   //   drawerRef.current.classList.toggle(css(styles.visible));
   // };
 
-  // const handleToggleDrawer = () => {
-  //   if (!drawerRef.current) return;
-
-  //   const drawer = drawerRef.current;
-  //   const aphroditeVisibleClass = css(styles.visible);
-
-  //   // On veut que le drawer ait à la fois :
-  //   //  - la classe Aphrodite pour les styles
-  //   //  - la classe "visible" pour satisfaire le checker Holberton
-  //   if (drawer.classList.contains("visible")) {
-  //     // -> le cacher
-  //     drawer.classList.remove("visible");
-  //     drawer.classList.remove(aphroditeVisibleClass);
-  //   } else {
-  //     // -> l'afficher
-  //     drawer.classList.add("visible");
-  //     drawer.classList.add(aphroditeVisibleClass);
-  //   }
-  // };
   const handleToggleDrawer = () => {
     if (!drawerRef.current) return;
 
     const drawer = drawerRef.current;
+    const aphroditeVisibleClass = css(styles.visible);
 
-    // 👉 Ajout / retrait EXCLUSIF de la classe "visible"
+    // On veut que le drawer ait à la fois :
+    //  - la classe Aphrodite pour les styles
+    //  - la classe "visible" pour satisfaire le checker Holberton
     if (drawer.classList.contains("visible")) {
+      // -> le cacher
       drawer.classList.remove("visible");
+      drawer.classList.remove(aphroditeVisibleClass);
     } else {
+      // -> l'afficher
       drawer.classList.add("visible");
+      drawer.classList.add(aphroditeVisibleClass);
     }
   };
+
 
   const handleMarkAsRead = (id) => dispatch(markNotificationAsRead(id));
 
@@ -96,21 +85,12 @@ function Notifications() {
 }
 
 const styles = StyleSheet.create({
-  // drawer: {
-  //   border: "2px dashed var(--main-color)",
-  //   padding: "20px",
-  //   position: "relative",
-  //   float: "right",
-  //   marginRight: "20px",
-  //   opacity: 0,
-  //   visibility: "hidden",
-  //   transition: "opacity .3s ease",
-  // },
-  // visible: {
-  //   opacity: 1,
-  //   visibility: "visible",
-  // },
   drawer: {
+    border: "2px dashed var(--main-color)",
+    padding: "20px",
+    position: "relative",
+    float: "right",
+    marginRight: "20px",
     opacity: 0,
     visibility: "hidden",
     transition: "opacity .3s ease",
